@@ -18,14 +18,68 @@ CREATE SCHEMA IF NOT EXISTS `software_for_railway_transport` DEFAULT CHARACTER S
 USE `software_for_railway_transport` ;
 
 -- -----------------------------------------------------
+-- Table `software_for_railway_transport`.`route`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`route` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `software_for_railway_transport`.`train`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`train` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `id_route` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `train_route_id__fk` (`id_route` ASC) VISIBLE,
+  CONSTRAINT `train_route_id__fk`
+    FOREIGN KEY (`id_route`)
+    REFERENCES `software_for_railway_transport`.`route` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
 -- Table `software_for_railway_transport`.`carriage`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`carriage` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `number` INT(11) NOT NULL,
   `type` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`))
+  `id_train` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `carriage_train_id__fk` (`id_train` ASC) VISIBLE,
+  CONSTRAINT `carriage_train_id__fk`
+    FOREIGN KEY (`id_train`)
+    REFERENCES `software_for_railway_transport`.`train` (`id`))
 ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `software_for_railway_transport`.`city_time`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`city_time` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `city` VARCHAR(255) NOT NULL,
+  `timeDate` TIMESTAMP NOT NULL,
+  `id_route` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `cityTime_route_id__fk` (`id_route` ASC) VISIBLE,
+  CONSTRAINT `cityTime_route_id__fk`
+    FOREIGN KEY (`id_route`)
+    REFERENCES `software_for_railway_transport`.`route` (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -42,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`person` (
   `experience` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
