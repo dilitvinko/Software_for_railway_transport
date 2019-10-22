@@ -7,15 +7,15 @@ import java.util.Set;
 public class Route {
     private long id;
     private String name;
-    private Train train;
+    private Set<Train> trains;
     private Set<CityTime> setCityTimes;
 
     public Route() {
     }
 
-    public Route(String name, Train train, Set<CityTime> setCityTimes) {
+    public Route(String name, Set<Train> train, Set<CityTime> setCityTimes) {
         this.name = name;
-        this.train = train;
+        this.trains = train;
         this.setCityTimes = setCityTimes;
     }
 
@@ -35,12 +35,12 @@ public class Route {
         this.name = name;
     }
 
-    public Train getTrain() {
-        return train;
+    public Set<Train> getTrains() {
+        return trains;
     }
 
-    public void setTrain(Train train) {
-        this.train = train;
+    public void setTrains(Set<Train> trains) {
+        this.trains = trains;
     }
 
     public Set<CityTime> getSetCityTimes() {

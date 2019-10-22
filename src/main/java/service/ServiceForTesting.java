@@ -9,7 +9,7 @@ public class ServiceForTesting {
         this.daoForTesting = daoForTesting;
     }
 
-    public String testServicPlusDAO() {
+    public String testServicePlusDAO() {
         return daoForTesting.testDAO();
     }
 }

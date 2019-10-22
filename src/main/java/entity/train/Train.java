@@ -4,14 +4,14 @@ import java.util.Set;
 
 public class Train {
     private long id;
-    private int number;
+    private String name;
     private Set<Carriage> carriages;
 
     public Train() {
     }
 
-    public Train(int number, Set<Carriage> carriages) {
-        this.number = number;
+    public Train(String number, Set<Carriage> carriages) {
+        this.name = number;
         this.carriages = carriages;
     }
 
@@ -23,12 +23,12 @@ public class Train {
         this.id = id;
     }
 
-    public int getNumber() {
-        return number;
+    public String getName() {
+        return name;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Carriage> getCarriages() {

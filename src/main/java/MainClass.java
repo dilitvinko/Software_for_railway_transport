@@ -7,5 +7,7 @@ public class MainClass {
     public static void main(String[] args) {
         ControllerForTesting controllerForTesting = new ControllerForTesting(new ServiceForTesting(new DAOForTesting()));
         System.out.println(controllerForTesting.testControllerServiceDAO());
+        DAOForTesting daoForTesting = new DAOForTesting();
+        daoForTesting.testDate();
     }
 }

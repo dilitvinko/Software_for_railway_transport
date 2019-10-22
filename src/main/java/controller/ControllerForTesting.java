@@ -11,6 +11,6 @@ public class ControllerForTesting {
     }
 
     public String testControllerServiceDAO() {
-        return serviceForTesting.testServicPlusDAO();
+        return serviceForTesting.testServicePlusDAO();
     }
 }

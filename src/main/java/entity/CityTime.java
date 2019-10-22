@@ -1,16 +1,16 @@
 package entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class CityTime {
     private long id;
     private String city;
-    private Date timeDate;
+    private Timestamp timeDate;
 
     public CityTime() {
     }
 
-    public CityTime(String city, Date timeDate) {
+    public CityTime(String city, Timestamp timeDate) {
         this.city = city;
         this.timeDate = timeDate;
     }
@@ -31,11 +31,11 @@ public class CityTime {
         this.city = city;
     }
 
-    public Date getTimeDate() {
+    public Timestamp getTimeDate() {
         return timeDate;
     }
 
-    public void setTimeDate(Date timeDate) {
+    public void setTimeDate(Timestamp timeDate) {
         this.timeDate = timeDate;
     }
 }
