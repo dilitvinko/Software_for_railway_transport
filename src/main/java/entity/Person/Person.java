@@ -17,13 +17,33 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, String surname, String login, String password, Set<Role> roles, Set<Ticket> tickets, int experience) {
+    public Person(long id, String name, String surname, String login, String password, Set<Role> roles, Set<Ticket> tickets, int experience) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.login = login;
         this.password = password;
         this.roles = roles;
         this.tickets = tickets;
+        this.experience = experience;
+    }
+
+    public Person(String name, String surname, String login, String password, Set<Role> roles, int experience) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.roles = roles;
+        this.experience = experience;
+    }
+
+    public Person(long id, String name, String surname, String login, String password, int experience) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.roles = roles;
         this.experience = experience;
     }
 
@@ -89,5 +109,31 @@ public class Person {
 
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (id != person.id) return false;
+        if (experience != person.experience) return false;
+        if (name != null ? !name.equals(person.name) : person.name != null) return false;
+        if (surname != null ? !surname.equals(person.surname) : person.surname != null) return false;
+        if (login != null ? !login.equals(person.login) : person.login != null) return false;
+        return password != null ? password.equals(person.password) : person.password == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + experience;
+        return result;
     }
 }

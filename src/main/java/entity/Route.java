@@ -8,7 +8,7 @@ public class Route {
     private long id;
     private String name;
     private Set<Train> trains;
-    private Set<CityTime> setCityTimes;
+    private Set<CityTime> CityTimes;
 
     public Route() {
     }
@@ -16,7 +16,7 @@ public class Route {
     public Route(String name, Set<Train> train, Set<CityTime> setCityTimes) {
         this.name = name;
         this.trains = train;
-        this.setCityTimes = setCityTimes;
+        this.CityTimes = setCityTimes;
     }
 
     public long getId() {
@@ -43,11 +43,11 @@ public class Route {
         this.trains = trains;
     }
 
-    public Set<CityTime> getSetCityTimes() {
-        return setCityTimes;
+    public Set<CityTime> getCityTimes() {
+        return CityTimes;
     }
 
-    public void setSetCityTimes(Set<CityTime> setCityTimes) {
-        this.setCityTimes = setCityTimes;
+    public void setCityTimes(Set<CityTime> cityTimes) {
+        this.CityTimes = cityTimes;
     }
 }
