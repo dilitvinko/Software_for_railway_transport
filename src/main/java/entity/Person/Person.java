@@ -2,6 +2,7 @@ package entity.Person;
 
 import entity.Ticket;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Person {
@@ -120,10 +121,10 @@ public class Person {
 
         if (id != person.id) return false;
         if (experience != person.experience) return false;
-        if (name != null ? !name.equals(person.name) : person.name != null) return false;
-        if (surname != null ? !surname.equals(person.surname) : person.surname != null) return false;
-        if (login != null ? !login.equals(person.login) : person.login != null) return false;
-        return password != null ? password.equals(person.password) : person.password == null;
+        if (!Objects.equals(name, person.name)) return false;
+        if (!Objects.equals(surname, person.surname)) return false;
+        if (!Objects.equals(login, person.login)) return false;
+        return Objects.equals(password, person.password);
     }
 
     @Override
@@ -135,5 +136,19 @@ public class Person {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + experience;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", tickets=" + tickets +
+                ", experience=" + experience +
+                '}';
     }
 }

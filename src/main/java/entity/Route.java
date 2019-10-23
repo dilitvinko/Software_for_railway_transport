@@ -2,21 +2,22 @@ package entity;
 
 import entity.train.Train;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Route {
     private long id;
     private String name;
     private Set<Train> trains;
-    private Set<CityTime> CityTimes;
+    private LinkedHashSet<CityTime> cityTimes;
 
     public Route() {
     }
 
-    public Route(String name, Set<Train> train, Set<CityTime> setCityTimes) {
+    public Route(String name, Set<Train> train, LinkedHashSet<CityTime> setCityTimes) {
         this.name = name;
         this.trains = train;
-        this.CityTimes = setCityTimes;
+        this.cityTimes = setCityTimes;
     }
 
     public long getId() {
@@ -44,10 +45,10 @@ public class Route {
     }
 
     public Set<CityTime> getCityTimes() {
-        return CityTimes;
+        return cityTimes;
     }
 
-    public void setCityTimes(Set<CityTime> cityTimes) {
-        this.CityTimes = cityTimes;
+    public void setCityTimes(LinkedHashSet<CityTime> cityTimes) {
+        this.cityTimes = cityTimes;
     }
 }

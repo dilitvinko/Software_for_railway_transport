@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.*;
 
 public class PersonDAO implements CrudDAO<Person> {
-    private static final String url = "jdbc:mysql://localhost:3306/software_for_railway_transport";
+    private static final String url = "jdbc:mysql://localhost:3306/software_for_railway_transport?serverTimezone=UTC";
     private static final String user = "root";
     private static final String password = "root";
     public static final String SQL_SELECT_ALL_PERSON = "SELECT * FROM person\n" +

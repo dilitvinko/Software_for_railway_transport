@@ -3,7 +3,7 @@ package dao;
 import java.sql.*;
 
 public class DAOForTesting {
-    private static final String url = "jdbc:mysql://localhost:3306/software_for_railway_transport";
+    private static final String url = "jdbc:mysql://localhost:3306/software_for_railway_transport?serverTimezone=UTC";
     private static final String user = "root";
     private static final String password = "root";
     public static final String SELECT_FROM_TEST_ENTITY = "SELECT * FROM person";
