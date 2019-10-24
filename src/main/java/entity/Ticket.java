@@ -2,11 +2,13 @@ package entity;
 
 import entity.train.Carriage;
 import entity.train.Seat;
+import entity.train.Train;
 
 public class Ticket {
     private long id;
     private Seat seat;
     private Carriage carriage;
+    private Train train;
     private Route route;
     private CityTime out;
     private CityTime in;
@@ -14,9 +16,10 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Seat seat, Carriage carriage, Route route, CityTime out, CityTime in) {
+    public Ticket(Seat seat, Carriage carriage, Train train, Route route, CityTime out, CityTime in) {
         this.seat = seat;
         this.carriage = carriage;
+        this.train = train;
         this.route = route;
         this.out = out;
         this.in = in;
@@ -44,6 +47,14 @@ public class Ticket {
 
     public void setCarriage(Carriage carriage) {
         this.carriage = carriage;
+    }
+
+    public Train getTrain() {
+        return train;
+    }
+
+    public void setTrain(Train train) {
+        this.train = train;
     }
 
     public Route getRoute() {

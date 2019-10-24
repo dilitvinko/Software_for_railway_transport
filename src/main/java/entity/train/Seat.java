@@ -3,14 +3,12 @@ package entity.train;
 public class Seat {
     private long id;
     private int number;
-    private boolean isFree;
 
     public Seat() {
     }
 
-    public Seat(int number, boolean isFree) {
+    public Seat(int number) {
         this.number = number;
-        this.isFree = isFree;
     }
 
     public long getId() {
@@ -29,11 +27,5 @@ public class Seat {
         this.number = number;
     }
 
-    public boolean isFree() {
-        return isFree;
-    }
 
-    public void setFree(boolean free) {
-        isFree = free;
-    }
 }
