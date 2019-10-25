@@ -26,10 +26,11 @@ CREATE TABLE `ticket` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_seat` bigint(20) NOT NULL,
   `id_carriage` bigint(20) NOT NULL,
-  `id_route` bigint(20) NOT NULL,
+  `id_train` bigint(20) NOT NULL,
   `id_out_city_time` bigint(20) NOT NULL,
   `id_in_city_time` bigint(20) NOT NULL,
   `id_person` bigint(20) NOT NULL,
+  `id_route` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ticket_carriage_id_fk` (`id_carriage`),
   KEY `ticket_city_time_in_id__fk` (`id_in_city_time`),
@@ -37,12 +38,14 @@ CREATE TABLE `ticket` (
   KEY `ticket_route_id__fk` (`id_route`),
   KEY `ticket_seat_id__fk` (`id_seat`),
   KEY `ticket_person_id__fk` (`id_person`),
+  KEY `ticket_train_id__fk_idx` (`id_train`),
   CONSTRAINT `ticket_carriage_id_fk` FOREIGN KEY (`id_carriage`) REFERENCES `carriage` (`id`),
   CONSTRAINT `ticket_city_time_in_id__fk` FOREIGN KEY (`id_in_city_time`) REFERENCES `city_time` (`id`),
   CONSTRAINT `ticket_city_time_out_id__fk` FOREIGN KEY (`id_out_city_time`) REFERENCES `city_time` (`id`),
   CONSTRAINT `ticket_person_id__fk` FOREIGN KEY (`id_person`) REFERENCES `person` (`id`),
   CONSTRAINT `ticket_route_id__fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id`),
-  CONSTRAINT `ticket_seat_id__fk` FOREIGN KEY (`id_seat`) REFERENCES `seat` (`id`)
+  CONSTRAINT `ticket_seat_id__fk` FOREIGN KEY (`id_seat`) REFERENCES `seat` (`id`),
+  CONSTRAINT `ticket_train_id__fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,4 +67,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-23 19:20:15
+-- Dump completed on 2019-10-25 18:23:19

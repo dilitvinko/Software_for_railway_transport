@@ -1,12 +1,14 @@
-package entity;
+package entity.ticket;
 
+import entity.BaseEntity;
+import entity.ticket.CityTime;
 import entity.train.Train;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Route {
-    private long id;
+public class Route extends BaseEntity {
+
     private String name;
     private Set<Train> trains;
     private LinkedHashSet<CityTime> cityTimes;
@@ -14,18 +16,11 @@ public class Route {
     public Route() {
     }
 
-    public Route(String name, Set<Train> train, LinkedHashSet<CityTime> setCityTimes) {
+    public Route(long id, String name, Set<Train> trains, LinkedHashSet<CityTime> cityTimes) {
+        super(id);
         this.name = name;
-        this.trains = train;
-        this.cityTimes = setCityTimes;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.trains = trains;
+        this.cityTimes = cityTimes;
     }
 
     public String getName() {

@@ -1,10 +1,12 @@
 package entity.train;
 
 
+import entity.BaseEntity;
+
 import java.util.Set;
 
-public class Carriage {
-    private long id;
+public class Carriage extends BaseEntity {
+
     private int number;
     private TypeCarriage type;
     private Set<Seat> seats;
@@ -12,18 +14,11 @@ public class Carriage {
     public Carriage() {
     }
 
-    public Carriage(int number, TypeCarriage type, Set<Seat> seats) {
+    public Carriage(long id, int number, TypeCarriage type, Set<Seat> seats) {
+        super(id);
         this.number = number;
         this.type = type;
         this.seats = seats;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public int getNumber() {

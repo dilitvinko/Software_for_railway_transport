@@ -1,12 +1,12 @@
 package entity.Person;
 
-import entity.Ticket;
+import entity.BaseEntity;
+import entity.ticket.Ticket;
 
 import java.util.Objects;
 import java.util.Set;
 
-public class Person {
-    private long id;
+public class Person extends BaseEntity {
     private String name;
     private String surname;
     private String login;
@@ -19,7 +19,7 @@ public class Person {
     }
 
     public Person(long id, String name, String surname, String login, String password, Set<Role> roles, Set<Ticket> tickets, int experience) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.surname = surname;
         this.login = login;
@@ -27,33 +27,6 @@ public class Person {
         this.roles = roles;
         this.tickets = tickets;
         this.experience = experience;
-    }
-
-    public Person(String name, String surname, String login, String password, Set<Role> roles, int experience) {
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.password = password;
-        this.roles = roles;
-        this.experience = experience;
-    }
-
-    public Person(long id, String name, String surname, String login, String password, int experience) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.password = password;
-        this.roles = roles;
-        this.experience = experience;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -119,7 +92,7 @@ public class Person {
 
         Person person = (Person) o;
 
-        if (id != person.id) return false;
+        if (this.getId() != person.getId()) return false;
         if (experience != person.experience) return false;
         if (!Objects.equals(name, person.name)) return false;
         if (!Objects.equals(surname, person.surname)) return false;
@@ -129,7 +102,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = (int) (this.getId() ^ (this.getId() >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
@@ -141,7 +114,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + this.getId() +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", login='" + login + '\'' +

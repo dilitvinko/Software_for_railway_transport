@@ -30,7 +30,7 @@ CREATE TABLE `city_time` (
   PRIMARY KEY (`id`),
   KEY `cityTime_route_id__fk` (`id_route`),
   CONSTRAINT `cityTime_route_id__fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `city_time` (
 
 LOCK TABLES `city_time` WRITE;
 /*!40000 ALTER TABLE `city_time` DISABLE KEYS */;
-INSERT INTO `city_time` VALUES (5,'Minsk','2019-07-07 12:15:00',1),(6,'Minsk','2019-07-07 12:15:00',1),(7,'Minsk','2019-07-07 12:15:00',1);
+INSERT INTO `city_time` VALUES (5,'Minsk','2019-07-07 12:00:00',1),(6,'Bereza','2019-07-07 15:00:00',1),(7,'Brest','2019-07-07 16:00:00',1),(8,'Brest','2019-07-08 08:00:00',2),(9,'Bereza','2019-07-08 09:00:00',2),(10,'Baranovichi','2019-07-08 10:00:00',2),(11,'Minsk','2019-07-08 12:00:00',2),(12,'Brest','2019-07-10 08:00:00',3),(13,'Moskva','2019-07-08 19:00:00',3),(14,'Moskva','2019-07-08 08:00:00',4),(15,'Gomel','2019-07-08 12:00:00',4),(16,'Minsk','2019-07-08 14:00:00',4),(17,'Bereza','2019-07-08 17:00:00',4),(18,'Brest','2019-07-08 18:00:00',4),(19,'Minsk','2019-07-10 12:00:00',3);
 /*!40000 ALTER TABLE `city_time` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-23 19:20:15
+-- Dump completed on 2019-10-25 18:23:19

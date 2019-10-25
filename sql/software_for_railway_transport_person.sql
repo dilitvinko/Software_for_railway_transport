@@ -29,7 +29,8 @@ CREATE TABLE `person` (
   `login` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `experience` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login_UNIQUE` (`login`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,7 +40,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'AAAAAAAAA','Smith','BBBBBBBBBB','asd123123',0),(2,'Bob','Mulber','Bob123','bob32211',NULL),(6,'viktor','terty','test','qwe',15),(10,'asdda','asd','qwe','zxcz',9),(11,'Dima','Bobby','123qwe','321123',0),(12,'Stas','qwe','1qwdshtttwe','321sdgad123',0),(13,'Vikka','zxc','qwe','1234',0),(14,'Vikka','zxc','qwe','1234',0),(15,'Vikka','zxc','qwe','1234',0);
+INSERT INTO `person` VALUES (1,'AAAAAAAAA','Smith','BBBBBBBBBB','asd123123',0),(2,'Bob','Mulber','Bob123','bob32211',NULL),(6,'viktor','terty','test','qwe',15),(10,'asdda','asd','qwe1','zxcz',9),(11,'Dima','Bobby','123qwe','321123',0),(12,'Stas','qwe','1qwdshtttwe','321sdgad123',0),(13,'Vikka','zxc','qwe23','1234',0),(14,'Vikka','zxc','qwe123s','1234',0),(15,'Vikka','zxc','qwesada','1234',0);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-23 19:20:14
+-- Dump completed on 2019-10-25 18:23:18

@@ -11,7 +11,7 @@ public class PersonDAO implements CrudDAO<Person> {
     private static final String user = "root";
     private static final String password = "root";
     public static final String SQL_SELECT_ALL_PERSON = "SELECT * FROM person\n" +
-            "JOIN person_role ON person.id = person_role.id_person;";
+            "LEFT JOIN person_role ON person.id = person_role.id_person;";
     public static final String SQL_SELECT_USER_BY_ID = "SELECT * FROM person\n" +
             "JOIN person_role ON person.id = person_role.id_person\n" +
             "WHERE id = ?;";
@@ -35,22 +35,26 @@ public class PersonDAO implements CrudDAO<Person> {
             while (resultSet.next()) {
 
 
-                Person person = new Person(resultSet.getLong(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getInt(6));
-                if (users.contains(person)) {
-                    roles.add(Role.valueOf(resultSet.getString(8).toUpperCase()));
-                    person.setRoles(roles);
-                } else {
+                Person person = new Person();
+                person.setId(resultSet.getLong(1));
+                person.setName(resultSet.getString(2));
+                person.setSurname(resultSet.getString(3));
+                person.setLogin(resultSet.getString(4));
+                person.setPassword(resultSet.getString(5));
+                person.setExperience(resultSet.getInt(6));
+                if (!users.contains(person)) {
                     users.add(person);
                     roles = new HashSet<>();
+                }
+                if (resultSet.getString(8) != null) {
                     roles.add(Role.valueOf(resultSet.getString(8).toUpperCase()));
                     person.setRoles(roles);
                 }
+
+
             }
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,13 +73,13 @@ public class PersonDAO implements CrudDAO<Person> {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-//АДЕКВАТНО РЕАЛИЗОВАНО? (ДОБАВДЯТЬ ЛИ ТИКЕТЫ?)
-                    person = new Person(resultSet.getLong(1),
-                            resultSet.getString(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4),
-                            resultSet.getString(5),
-                            resultSet.getInt(6));
+                    person = new Person();
+                    person.setId(resultSet.getLong(1));
+                    person.setName(resultSet.getString(2));
+                    person.setSurname(resultSet.getString(3));
+                    person.setLogin(resultSet.getString(4));
+                    person.setPassword(resultSet.getString(5));
+                    person.setExperience(resultSet.getInt(6));
 
                     roles.add(Role.valueOf(resultSet.getString(8).toUpperCase()));
                     person.setRoles(roles);

@@ -1,11 +1,13 @@
-package entity;
+package entity.ticket;
 
+import entity.BaseEntity;
+import entity.ticket.CityTime;
+import entity.ticket.Route;
 import entity.train.Carriage;
 import entity.train.Seat;
 import entity.train.Train;
 
-public class Ticket {
-    private long id;
+public class Ticket extends BaseEntity {
     private Seat seat;
     private Carriage carriage;
     private Train train;
@@ -16,21 +18,14 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Seat seat, Carriage carriage, Train train, Route route, CityTime out, CityTime in) {
+    public Ticket(long id, Seat seat, Carriage carriage, Train train, Route route, CityTime out, CityTime in) {
+        super(id);
         this.seat = seat;
         this.carriage = carriage;
         this.train = train;
         this.route = route;
         this.out = out;
         this.in = in;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Seat getSeat() {

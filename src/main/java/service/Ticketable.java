@@ -1,6 +1,6 @@
 package service;
 
-import entity.Ticket;
+import entity.ticket.Ticket;
 
 public interface Ticketable {
     Ticket buyTicket(Ticket ticket);

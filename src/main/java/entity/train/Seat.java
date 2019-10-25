@@ -1,22 +1,17 @@
 package entity.train;
 
-public class Seat {
-    private long id;
+import entity.BaseEntity;
+
+public class Seat extends BaseEntity {
+
     private int number;
 
     public Seat() {
     }
 
-    public Seat(int number) {
+    public Seat(long id, int number) {
+        super(id);
         this.number = number;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public int getNumber() {

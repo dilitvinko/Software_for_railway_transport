@@ -1,26 +1,20 @@
-package entity;
+package entity.ticket;
+
+import entity.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class CityTime {
-    private long id;
+public class CityTime extends BaseEntity {
     private String city;
     private Timestamp timeDate;
 
     public CityTime() {
     }
 
-    public CityTime(String city, Timestamp timeDate) {
+    public CityTime(long id, String city, Timestamp timeDate) {
+        super(id);
         this.city = city;
         this.timeDate = timeDate;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCity() {

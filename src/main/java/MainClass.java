@@ -1,8 +1,10 @@
 import controller.ControllerForTesting;
 import dao.DAOForTesting;
 import dao.PersonDAO;
+import dao.TestDAO.TestClass_1DAO;
 import entity.Person.Person;
 import entity.Person.Role;
+import entity.TestFeauture.TestClass_1;
 import service.ServiceForTesting;
 
 import java.util.HashSet;
@@ -29,6 +31,12 @@ public class MainClass {
         for (Person person: personDAO.findAll()
              ) {
             System.out.println(person);
+        }
+        TestClass_1DAO testClass_1DAO = new TestClass_1DAO();
+        System.out.println("test class_1");
+        for (TestClass_1 testClass_1:
+             testClass_1DAO.findAll()) {
+            System.out.println(testClass_1);
         }
 
 
