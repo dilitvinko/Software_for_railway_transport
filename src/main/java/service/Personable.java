@@ -1,10 +1,10 @@
 package service;
 
-import entity.Person.Person;
+import entity.person.Person;
 
 public interface Personable {
-//    Person login (Person person);
-//    boolean logout (Person person);
+//    person login (person person);
+//    boolean logout (person person);
     boolean registration (Person person);
     Person changeRole (Person person);
     Person changePassword (String pass);

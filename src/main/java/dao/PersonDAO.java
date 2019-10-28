@@ -1,7 +1,7 @@
 package dao;
 
-import entity.Person.Person;
-import entity.Person.Role;
+import entity.person.Person;
+import entity.person.Role;
 
 import java.sql.*;
 import java.util.*;

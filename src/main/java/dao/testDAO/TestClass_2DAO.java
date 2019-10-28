@@ -1,8 +1,8 @@
-//package dao.TestDAO;
+//package dao.testDAO;
 //
 //import dao.CrudDAO;
-//import entity.Person.Person;
-//import entity.Person.Role;
+//import entity.person.person;
+//import entity.person.Role;
 //import entity.TestFeauture.TestClass_2;
 //
 //import java.sql.*;
@@ -40,7 +40,7 @@
 //            while (resultSet.next()) {
 //
 //
-//                Person person = new Person(resultSet.getLong(1),
+//                person person = new person(resultSet.getLong(1),
 //                        resultSet.getString(2),
 //                        resultSet.getString(3),
 //                        resultSet.getString(4),
@@ -67,7 +67,7 @@
 //    @Override
 //    public TestClass_2 findById(long id) {
 //        Set<Role> roles = new HashSet<>();
-//        Person person = null;
+//        person person = null;
 //        try (Connection connection = DriverManager.getConnection(url, user, password);
 //             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USER_BY_ID)
 //        ) {
@@ -75,7 +75,7 @@
 //            try (ResultSet resultSet = statement.executeQuery()) {
 //                while (resultSet.next()) {
 ////АДЕКВАТНО РЕАЛИЗОВАНО? (ДОБАВДЯТЬ ЛИ ТИКЕТЫ?)
-//                    person = new Person(resultSet.getLong(1),
+//                    person = new person(resultSet.getLong(1),
 //                            resultSet.getString(2),
 //                            resultSet.getString(3),
 //                            resultSet.getString(4),

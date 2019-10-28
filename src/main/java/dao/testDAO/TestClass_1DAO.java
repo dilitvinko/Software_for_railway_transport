@@ -1,8 +1,7 @@
-package dao.TestDAO;
+package dao.testDAO;
 
 import dao.CrudDAO;
-import entity.Person.Person;
-import entity.Person.Role;
+import entity.person.Role;
 import entity.TestFeauture.TestClass_1;
 
 import java.sql.*;
@@ -93,7 +92,7 @@ public class TestClass_1DAO implements CrudDAO<TestClass_1> {
 //    @Override
 //    public TestClass_1 findById(long id) {
 //        Set<Role> roles = new HashSet<>();
-//        Person person = null;
+//        person person = null;
 //        try (Connection connection = DriverManager.getConnection(url, user, password);
 //             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USER_BY_ID)
 //        ) {
@@ -101,7 +100,7 @@ public class TestClass_1DAO implements CrudDAO<TestClass_1> {
 //            try (ResultSet resultSet = statement.executeQuery()) {
 //                while (resultSet.next()) {
 ////АДЕКВАТНО РЕАЛИЗОВАНО? (ДОБАВДЯТЬ ЛИ ТИКЕТЫ?)
-//                    person = new Person(resultSet.getLong(1),
+//                    person = new person(resultSet.getLong(1),
 //                            resultSet.getString(2),
 //                            resultSet.getString(3),
 //                            resultSet.getString(4),

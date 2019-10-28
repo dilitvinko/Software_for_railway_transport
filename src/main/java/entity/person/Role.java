@@ -1,4 +1,4 @@
-package entity.Person;
+package entity.person;
 
 public enum Role {
     USER,

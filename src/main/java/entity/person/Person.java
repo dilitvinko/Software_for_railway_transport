@@ -1,4 +1,4 @@
-package entity.Person;
+package entity.person;
 
 import entity.BaseEntity;
 import entity.ticket.Ticket;
@@ -113,7 +113,7 @@ public class Person extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "person{" +
                 "id=" + this.getId() +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
