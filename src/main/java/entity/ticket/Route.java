@@ -46,4 +46,14 @@ public class Route extends BaseEntity {
     public void setCityTimes(LinkedHashSet<CityTime> cityTimes) {
         this.cityTimes = cityTimes;
     }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "id='" + getId() + '\'' +
+                "name='" + name +
+                ", trains=" + trains +
+                ", cityTimes=" + cityTimes +
+                '}';
+    }
 }

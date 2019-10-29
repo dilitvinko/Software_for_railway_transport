@@ -1,8 +1,17 @@
 package dao.testDAO.Reflex;
 
+import dao.RouteDAO;
 import dao.testDAO.t_test_Abstract_DAO;
+import entity.BaseEntity;
+import entity.person.Person;
+import entity.ticket.CityTime;
+import entity.ticket.Route;
+import entity.ticket.Ticket;
+import entity.train.Train;
 
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
+import java.util.*;
 
 
 public class UserInfo implements HashID {
@@ -82,7 +91,7 @@ public class UserInfo implements HashID {
     public static void main(String[] args) throws Exception {
 //Insert test
 // UserInfo info = new UserInfo();
-// info.setId(1024);
+// info.setId(1025);
 // info.setName("Liu Zhen");
 // info.setAge((short)80);
 // info.setSex((byte)1);
@@ -91,11 +100,57 @@ public class UserInfo implements HashID {
 // ORMUtils.doInsert(info);
 
 //Retrieval testing
-//        UserInfo info_2 = ORMUtils.doSelect(UserInfo.class, 1024);
+//        UserInfo info_2 = ORMUtils.doSelect(UserInfo.class, 1025);
 //        System.out.println(info_2);
 
+        Route route = new Route();
+        for (Field f : route.getClass().getDeclaredFields()) {
+            System.out.println(f.getType());
+            //System.out.println(f instanceof );
+
+
+        }
+
+        Person person = new Person();
+        System.out.println();
+        System.out.println(person instanceof BaseEntity);
+        System.out.println();
+
+
+        Ticket ticket = new Ticket();
+
+        Train train = new Train();
+
+        for (Field f : train.getClass().getDeclaredFields()) {
+
+            Class<?> type = f.getType();
+            System.out.println(type);
+            System.out.println(f.getClass());
+            //System.out.println(type.getClass().isInstance());
+            if(Collection.class.isAssignableFrom(f.getType())){
+                System.out.println("test");
+            }
+
+        }
+
         t_test_Abstract_DAO t_test_abstract_dao = new t_test_Abstract_DAO();
-        t_test_abstract_dao.deleteById(14);
+//        t_test_abstract_dao.deleteById(2);
+//        Route byId = t_test_abstract_dao.findById(2);
+//        System.out.println(byId);
+
+
+//        for (Route rout :
+//                t_test_abstract_dao.findAll()) {
+//            System.out.println(rout);
+//        }
+
+        Route tr = new Route();
+        tr.setId(8);
+        tr.setName("Test_11111");
+        System.out.println(t_test_abstract_dao.update(tr));
+
+
+
 
 // Modifying the test
 // info.setName("Liu Yuxuan");
