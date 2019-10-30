@@ -1,4 +1,4 @@
-package dao;
+package dao.interfece;
 
 import entity.BaseEntity;
 

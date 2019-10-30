@@ -1,6 +1,4 @@
 import dao.*;
-import entity.BaseEntity;
-import entity.person.Person;
 import entity.schedule.City;
 import entity.schedule.Schedule;
 import entity.ticket.Ticket;
@@ -9,9 +7,6 @@ import entity.train.Train;
 import entity.train.TypeCarriage;
 
 import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 
 public class MainClass {
@@ -19,12 +14,12 @@ public class MainClass {
     public static void main(String[] args) {
 
 
-        CarriageDAO carriageDAO = new CarriageDAO();
-        CityDAO cityDAO = new CityDAO();
-        ScheduleDAO scheduleDAO = new ScheduleDAO();
-        TicketDAO ticketDAO = new TicketDAO();
-        TrainDAO trainDAO = new TrainDAO();
-        TypeCarriageDAO typeCarriageDAO = new TypeCarriageDAO();
+        CarriageDAOImpl carriageDAO = new CarriageDAOImpl();
+        CityDAOImpl cityDAO = new CityDAOImpl();
+        ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
+        TicketDAOImpl ticketDAO = new TicketDAOImpl();
+        TrainDAOImpl trainDAO = new TrainDAOImpl();
+        TypeCarriageDAOImpl typeCarriageDAO = new TypeCarriageDAOImpl();
 
         System.out.println(carriageDAO.findAll());
         System.out.println(cityDAO.findAll());
@@ -143,7 +138,7 @@ public class MainClass {
         System.out.println(carriage_2);
 
 
-//        PersonDAO personDAO = new PersonDAO();
+//        PersonDAOImpl personDAO = new PersonDAOImpl();
 //        person person = personDAO.findById(1);
 //        System.out.println(person);
 //        System.out.println("");

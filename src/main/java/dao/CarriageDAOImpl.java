@@ -1,11 +1,11 @@
 package dao;
 
-import entity.BaseEntity;
+import dao.interfece.CarriageDAO;
 import entity.train.Carriage;
 
 import java.util.List;
 
-public class CarriageDAO extends AbstractDAODB<Carriage> {
+public class CarriageDAOImpl extends AbstractDAODB<Carriage> implements CarriageDAO {
     @Override
     protected Class getClazz() {
         return Carriage.class;
@@ -15,8 +15,8 @@ public class CarriageDAO extends AbstractDAODB<Carriage> {
     public Carriage findById(long id) {
         Carriage carriage = new Carriage();
         carriage = super.findById(id);
-        TypeCarriageDAO typeCarriageDAO = new TypeCarriageDAO();
-        TrainDAO trainDAO = new TrainDAO();
+        TypeCarriageDAOImpl typeCarriageDAO = new TypeCarriageDAOImpl();
+        TrainDAOImpl trainDAO = new TrainDAOImpl();
         carriage.setTypeCarriage(typeCarriageDAO.findById(carriage.getId_typeCarriage()));
         carriage.setTrain(trainDAO.findById(carriage.getId_train()));
         return carriage;
@@ -24,8 +24,8 @@ public class CarriageDAO extends AbstractDAODB<Carriage> {
 
     @Override
     public List<Carriage> findAll() {
-        TrainDAO trainDAO = new TrainDAO();
-        TypeCarriageDAO typeCarriageDAO = new TypeCarriageDAO();
+        TrainDAOImpl trainDAO = new TrainDAOImpl();
+        TypeCarriageDAOImpl typeCarriageDAO = new TypeCarriageDAOImpl();
         List<Carriage> carriages = super.findAll();
         for (Carriage carriage :
                 carriages) {

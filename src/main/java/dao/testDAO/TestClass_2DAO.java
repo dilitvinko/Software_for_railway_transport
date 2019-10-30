@@ -1,6 +1,6 @@
 //package dao.testDAO;
 //
-//import dao.CrudDAO;
+//import dao.interfece.CrudDAO;
 //import entity.person.person;
 //import entity.person.Role;
 //import entity.TestFeauture.TestClass_2;

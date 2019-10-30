@@ -1,12 +1,13 @@
 package dao;
 
+import dao.interfece.CrudDAO;
 import entity.person.Person;
 import entity.person.Role;
 
 import java.sql.*;
 import java.util.*;
 
-public class PersonDAO implements CrudDAO<Person> {
+public class PersonDAOImpl implements CrudDAO<Person> {
     private static final String url = "jdbc:mysql://localhost:3306/software_for_railway_transport?serverTimezone=UTC";
     private static final String user = "root";
     private static final String password = "root";

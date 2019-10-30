@@ -13,6 +13,7 @@ public class Ticket extends BaseEntity {
     private long id_carriage;
     private Train train;
     private long id_train;
+    //TODO Schedule entity
     private City outCity;
     private long id_out_city;
     private City inCity;
