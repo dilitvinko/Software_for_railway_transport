@@ -114,7 +114,7 @@ public class Person extends BaseEntity {
     @Override
     public String toString() {
         return "person{" +
-                "id=" + this.getId() +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", login='" + login + '\'' +

@@ -73,7 +73,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`carriage` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `number` INT(11) NOT NULL,
-  `type` VARCHAR(255) NOT NULL,
+  `typeCarriage` VARCHAR(255) NOT NULL,
   `id_train` BIGINT(20) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `carriage_train_id__fk` (`id_train` ASC) VISIBLE,
@@ -139,9 +139,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `software_for_railway_transport`.`seat`
+-- Table `software_for_railway_transport`.`numberSeat`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`seat` (
+CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`numberSeat` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `number` INT(11) NOT NULL,
   `isFree` TINYINT(1) NOT NULL,
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `software_for_railway_transport`.`ticket` (
     REFERENCES `software_for_railway_transport`.`route` (`id`),
   CONSTRAINT `ticket_seat_id__fk`
     FOREIGN KEY (`id_seat`)
-    REFERENCES `software_for_railway_transport`.`seat` (`id`),
+    REFERENCES `software_for_railway_transport`.`numberSeat` (`id`),
   CONSTRAINT `ticket_train_id__fk`
     FOREIGN KEY (`id_train`)
     REFERENCES `software_for_railway_transport`.`train` (`id`))

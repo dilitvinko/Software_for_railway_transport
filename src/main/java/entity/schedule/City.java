@@ -1,17 +1,14 @@
-package entity.train;
+package entity.schedule;
 
 import entity.BaseEntity;
 
-import java.util.Set;
-
-public class Train extends BaseEntity {
-
+public class City extends BaseEntity {
     private String name;
 
-    public Train() {
+    public City() {
     }
 
-    public Train(long id, String name) {
+    public City(long id, String name) {
         super(id);
         this.name = name;
     }
@@ -26,7 +23,7 @@ public class Train extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Train{" +
+        return "City{" +
                 "id=" + getId() +
                 ", name='" + name + '\'' +
                 '}';

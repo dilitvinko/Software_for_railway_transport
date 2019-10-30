@@ -1,4 +1,4 @@
-package dao.testDAO.Reflex;
+package dao.testDAO.reflex_test;
 
 public class dbpersondao_t extends abstractdaodb_t implements persondao_t {
     @Override

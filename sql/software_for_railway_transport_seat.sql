@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `seat`
+-- Table structure for table `numberSeat`
 --
 
-DROP TABLE IF EXISTS `seat`;
+DROP TABLE IF EXISTS `numberSeat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `seat` (
+CREATE TABLE `numberSeat` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `number` int(11) NOT NULL,
   `isFree` tinyint(1) NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE `seat` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `seat`
+-- Dumping data for table `numberSeat`
 --
 
-LOCK TABLES `seat` WRITE;
-/*!40000 ALTER TABLE `seat` DISABLE KEYS */;
-/*!40000 ALTER TABLE `seat` ENABLE KEYS */;
+LOCK TABLES `numberSeat` WRITE;
+/*!40000 ALTER TABLE `numberSeat` DISABLE KEYS */;
+/*!40000 ALTER TABLE `numberSeat` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

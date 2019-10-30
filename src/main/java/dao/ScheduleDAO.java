@@ -1,11 +1,11 @@
 package dao;
 
-import entity.ticket.Ticket;
+import entity.schedule.Schedule;
 
-public class TicketDAO extends AbstractDAODB<Ticket> {
+public class ScheduleDAO extends AbstractDAODB<Schedule> {
     @Override
     protected Class getClazz() {
-        return Ticket.class;
+        return Schedule.class;
     }
     //TODO same methods findById() findAll from CarriageDao
 }

@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `carriage`;
 CREATE TABLE `carriage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `number` int(11) NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `typeCarriage` varchar(255) NOT NULL,
   `id_train` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `carriage_train_id__fk` (`id_train`),

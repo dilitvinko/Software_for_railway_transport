@@ -44,7 +44,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `ticket_city_time_out_id__fk` FOREIGN KEY (`id_out_city_time`) REFERENCES `city_time` (`id`),
   CONSTRAINT `ticket_person_id__fk` FOREIGN KEY (`id_person`) REFERENCES `person` (`id`),
   CONSTRAINT `ticket_route_id__fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id`),
-  CONSTRAINT `ticket_seat_id__fk` FOREIGN KEY (`id_seat`) REFERENCES `seat` (`id`),
+  CONSTRAINT `ticket_seat_id__fk` FOREIGN KEY (`id_seat`) REFERENCES `numberSeat` (`id`),
   CONSTRAINT `ticket_train_id__fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

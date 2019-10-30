@@ -1,10 +1,7 @@
-package dao.testDAO;
+package dao;
 
 import dao.CrudDAO;
-import dao.testDAO.Reflex.HashID;
-import dao.testDAO.Reflex.Primarykey;
 import entity.BaseEntity;
-import entity.person.Person;
 
 import java.lang.reflect.Field;
 import java.sql.*;
@@ -81,6 +78,10 @@ public abstract class AbstractDAODB<T extends BaseEntity> implements CrudDAO {
                 field.set(data, result.getString(field.getName()));
             } else if (field.getType() == Timestamp.class){
                 field.set(data, result.getTimestamp(field.getName()));
+            } else if (field.getType() == Time.class){
+                field.set(data, result.getTime((field.getName())));
+            } else if (field.getType() == Date.class){
+                field.set(data, result.getDate((field.getName())));
             } else {
 //This column only supports the above types, if the need for new types increase disposal; generic processing can also support, because the time is limited, the generic type is more complex, here don't do processing, later will have the opportunity to send a generic processing
                 throw new RuntimeException("uns provided type:" + field.getType());
@@ -114,6 +115,10 @@ public abstract class AbstractDAODB<T extends BaseEntity> implements CrudDAO {
             } else if (field.getType() == String.class) {
                 statement.setString(index, field.get(data).toString());
             } else if (field.getType() == Timestamp.class){
+                statement.setObject(index, field.get(data));
+            } else if (field.getType() == Time.class){
+                statement.setObject(index, field.get(data));
+            } else if (field.getType() == Date.class){
                 statement.setObject(index, field.get(data));
             } else {
 //This column only supports the above types, if the need for new types increase disposal; generic processing can also support, because the time is limited, the generic type is more complex, here don't do processing, later will have the opportunity to send a generic processing

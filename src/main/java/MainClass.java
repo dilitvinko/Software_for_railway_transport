@@ -1,40 +1,146 @@
+import dao.*;
 import entity.BaseEntity;
 import entity.person.Person;
+import entity.schedule.City;
+import entity.schedule.Schedule;
+import entity.ticket.Ticket;
+import entity.train.Carriage;
+import entity.train.Train;
+import entity.train.TypeCarriage;
+
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 public class MainClass {
 
     public static void main(String[] args) {
 
 
-        Person person = new Person();
-        Class<? extends BaseEntity> personClass = person.getClass();
-        System.out.println(personClass.getSimpleName());
+        CarriageDAO carriageDAO = new CarriageDAO();
+        CityDAO cityDAO = new CityDAO();
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        TicketDAO ticketDAO = new TicketDAO();
+        TrainDAO trainDAO = new TrainDAO();
+        TypeCarriageDAO typeCarriageDAO = new TypeCarriageDAO();
 
-        //ControllerForTesting controllerForTesting = new ControllerForTesting(new ServiceForTesting(new DAOForTesting()));
-        //System.out.println(controllerForTesting.testControllerServiceDAO());
-        //DAOForTesting daoForTesting = new DAOForTesting();
-        //daoForTesting.testDate();
+        System.out.println(carriageDAO.findAll());
+        System.out.println(cityDAO.findAll());
+        System.out.println(scheduleDAO.findAll());
+        System.out.println(ticketDAO.findAll());
+        System.out.println(trainDAO.findAll());
+        System.out.println(typeCarriageDAO.findAll());
 
-//        List<T> findAll();
-//        T findById(long id);
-//        boolean deleteById(long id);
-//        boolean delete(T entity);
-//        T create(T entity);
-//        T update(T entity);
+        City city = new City();
+        city.setName("Grodno");
 
-//        PersonDAO personDAO = new PersonDAO();
-//        System.out.println("Все пользователи: ");
-//        for (person person: personDAO.findAll()
-//             ) {
-//            System.out.println(person);
+        Train train = new Train();
+        train.setName("V-321");
+
+        Ticket ticket = new Ticket();
+//        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String dateString = "2019-05-05";
+        Date date = new Date(2019,20,30);
+//        try {
+//            date = (Date) sdf.parse(dateString);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
 //        }
-//        TestClass_1DAO testClass_1DAO = new TestClass_1DAO();
-//        System.out.println("test class_1");
-//        for (TestClass_1 testClass_1:
-//             testClass_1DAO.findAll()) {
-//            System.out.println(testClass_1);
-//        }
+        ticket.setNumberSeat(10);
+        ticket.setOutTime(new Time(11,00,00));
+        ticket.setInTime(new Time(15,00,00));
+        ticket.setDate(date);
+        ticket.setPrice(33);
+        ticket.setOutCity(city);
+        ticket.setTrain(train);
 
+
+
+        Schedule schedule = new Schedule();
+        schedule.setOrder(1);
+        schedule.setTime(new Time(22,00,00));
+        schedule.setCity(city);
+        schedule.setTrain(train);
+
+        TypeCarriage typeCarriage = new TypeCarriage();
+        typeCarriage.setType("test");
+        typeCarriage.setAmountSeats(1);
+        typeCarriage.setCooffPrise(2.2);
+
+        Carriage carriage = new Carriage();
+        carriage.setNumber(11);
+        carriage.setTrain(train);
+        carriage.setTypeCarriage(typeCarriage);
+
+        System.out.println();
+        System.out.println();
+
+
+        System.out.println(trainDAO.create(train));
+        System.out.println(cityDAO.create(city));
+        System.out.println(typeCarriageDAO.create(typeCarriage));
+        carriage.setTrain(train);
+        carriage.setTypeCarriage(typeCarriage);
+        System.out.println(carriageDAO.create(carriage));
+        schedule.setTrain(train);
+        schedule.setCity(city);
+        System.out.println(scheduleDAO.create(schedule));
+        ticket.setCarriage(carriage);
+        ticket.setTrain(train);
+        ticket.setOutCity(city);
+        ticket.setInCity(city);
+        System.out.println(ticketDAO.create(ticket));
+
+        System.out.println();
+        System.out.println();
+
+        System.out.println(carriageDAO.findById(2));
+        System.out.println(cityDAO.findById(2));
+        System.out.println(scheduleDAO.findById(2));
+        System.out.println(ticketDAO.findById(2));
+        System.out.println(trainDAO.findById(2));
+        System.out.println(typeCarriageDAO.findById(2));
+
+        System.out.println();
+        System.out.println();
+
+        schedule.setOrder(11111);
+        schedule.setTime(new Time(00,00,00));
+        //System.out.println(scheduleDAO.deleteById(9));
+        System.out.println(scheduleDAO.update(schedule));
+
+        System.out.println();
+        System.out.println();
+
+        System.out.println(carriageDAO.findById(3));
+
+
+        Train train_2 = new Train();
+        train_2.setName("asd-123");
+        trainDAO.create(train_2);
+        TypeCarriage typeCarriage_2 = new TypeCarriage();
+
+        typeCarriage_2.setType("testtestqwe");
+        typeCarriage_2.setAmountSeats(999);
+        typeCarriage_2.setCooffPrise(111.11);
+        typeCarriageDAO.create(typeCarriage_2);
+
+        Carriage carriage_2 = new Carriage();
+        carriage_2.setTypeCarriage(typeCarriage_2);
+        carriage_2.setTrain(train_2);
+        carriage_2.setNumber(777);
+
+        System.out.println();
+        System.out.println();
+
+
+
+        carriageDAO.create(carriage_2);
+        System.out.println();
+        System.out.println();
+        System.out.println(carriage_2);
 
 
 //        PersonDAO personDAO = new PersonDAO();

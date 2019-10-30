@@ -1,6 +1,6 @@
 package entity;
 
-import dao.testDAO.Reflex.Primarykey;
+import dao.testDAO.reflex_test.Primarykey;
 
 public abstract class BaseEntity {
     @Primarykey

@@ -1,11 +1,8 @@
-package dao.testDAO.Reflex;
+package dao.testDAO.reflex_test;
 
-import dao.RouteDAO;
 import dao.testDAO.t_test_Abstract_DAO;
 import entity.BaseEntity;
 import entity.person.Person;
-import entity.ticket.CityTime;
-import entity.ticket.Route;
 import entity.ticket.Ticket;
 import entity.train.Train;
 
@@ -103,13 +100,7 @@ public class UserInfo implements HashID {
 //        UserInfo info_2 = ORMUtils.doSelect(UserInfo.class, 1025);
 //        System.out.println(info_2);
 
-        Route route = new Route();
-        for (Field f : route.getClass().getDeclaredFields()) {
-            System.out.println(f.getType());
-            //System.out.println(f instanceof );
 
-
-        }
 
         Person person = new Person();
         System.out.println();
@@ -134,6 +125,8 @@ public class UserInfo implements HashID {
         }
 
         t_test_Abstract_DAO t_test_abstract_dao = new t_test_Abstract_DAO();
+        train.setName("A-123");
+        t_test_abstract_dao.create(train);
 //        t_test_abstract_dao.deleteById(2);
 //        Route byId = t_test_abstract_dao.findById(2);
 //        System.out.println(byId);
@@ -144,10 +137,10 @@ public class UserInfo implements HashID {
 //            System.out.println(rout);
 //        }
 
-        Route tr = new Route();
-        tr.setId(8);
-        tr.setName("Test_11111");
-        System.out.println(t_test_abstract_dao.update(tr));
+//        Route tr = new Route();
+//        tr.setId(8);
+//        tr.setName("Test_11111");
+//        System.out.println(t_test_abstract_dao.update(tr));
 
 
 
