@@ -1,8 +1,7 @@
 package dao;
 
-import dao.interfece.ScheduleDAO;
+import dao.interfaces.ScheduleDAO;
 import entity.schedule.Schedule;
-import entity.train.Carriage;
 
 import java.util.List;
 

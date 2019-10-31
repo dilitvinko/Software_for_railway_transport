@@ -5,9 +5,15 @@ import entity.ticket.Ticket;
 import entity.train.Carriage;
 import entity.train.Train;
 import entity.train.TypeCarriage;
+import service.ScheduleServiceImpl;
+import service.TicketServiceImpl;
+import service.interfaces.ScheduleService;
+import service.interfaces.TicketService;
 
 import java.sql.Time;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainClass {
 
@@ -44,11 +50,8 @@ public class MainClass {
 //            e.printStackTrace();
 //        }
         ticket.setNumberSeat(10);
-        ticket.setOutTime(new Time(11,00,00));
-        ticket.setInTime(new Time(15,00,00));
         ticket.setDate(date);
         ticket.setPrice(33);
-        ticket.setOutCity(city);
         ticket.setTrain(train);
 
 
@@ -84,8 +87,8 @@ public class MainClass {
         System.out.println(scheduleDAO.create(schedule));
         ticket.setCarriage(carriage);
         ticket.setTrain(train);
-        ticket.setOutCity(city);
-        ticket.setInCity(city);
+        ticket.setOutSchedule(schedule);
+        ticket.setInSchedule(schedule);
         System.out.println(ticketDAO.create(ticket));
 
         System.out.println();
@@ -136,6 +139,19 @@ public class MainClass {
         System.out.println();
         System.out.println();
         System.out.println(carriage_2);
+
+        System.out.println();
+        System.out.println("Services");
+        TicketServiceImpl ticketService = new TicketServiceImpl();
+        ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
+
+        List<Ticket> tickets = new ArrayList<>();
+        tickets = ticketService.findAll();
+        for (Ticket tic :
+                tickets) {
+            System.out.println(tic);
+        }
+        scheduleService.create(tickets.get(2).getInSchedule());
 
 
 //        PersonDAOImpl personDAO = new PersonDAOImpl();

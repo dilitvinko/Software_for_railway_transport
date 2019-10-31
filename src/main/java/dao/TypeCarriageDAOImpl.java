@@ -1,6 +1,6 @@
 package dao;
 
-import dao.interfece.TypeCarriageDAO;
+import dao.interfaces.TypeCarriageDAO;
 import entity.train.TypeCarriage;
 
 public class TypeCarriageDAOImpl extends AbstractDAODB<TypeCarriage> implements TypeCarriageDAO {

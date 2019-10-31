@@ -1,6 +1,6 @@
 package dao.testDAO;
 
-import dao.interfece.CrudDAO;
+import dao.interfaces.CrudDAO;
 import entity.person.Role;
 import entity.TestFeauture.TestClass_1;
 

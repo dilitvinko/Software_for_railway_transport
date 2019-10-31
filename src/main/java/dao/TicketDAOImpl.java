@@ -1,8 +1,7 @@
 package dao;
 
-import dao.interfece.TicketDAO;
+import dao.interfaces.TicketDAO;
 import entity.ticket.Ticket;
-import entity.train.Carriage;
 
 import java.util.List;
 
@@ -17,14 +16,11 @@ public class TicketDAOImpl extends AbstractDAODB<Ticket> implements TicketDAO {
     public List<Ticket> findAll() {
         TrainDAOImpl trainDAO = new TrainDAOImpl();
         CarriageDAOImpl CarriageDAO = new CarriageDAOImpl();
-        CityDAOImpl cityDAO = new CityDAOImpl();
+        ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
         List<Ticket> tickets = super.findAll();
         for (Ticket ticket :
                 tickets) {
-            ticket.setTrain(trainDAO.findById(ticket.getId_train()));
-            ticket.setCarriage(CarriageDAO.findById(ticket.getId_carriage()));
-            ticket.setOutCity(cityDAO.findById(ticket.getId_out_city()));
-            ticket.setInCity(cityDAO.findById(ticket.getId_in_city()));
+            setTicket(ticket, trainDAO, CarriageDAO, scheduleDAO);
         }
         return tickets;
     }
@@ -35,11 +31,15 @@ public class TicketDAOImpl extends AbstractDAODB<Ticket> implements TicketDAO {
         ticket = super.findById(id);
         TrainDAOImpl trainDAO = new TrainDAOImpl();
         CarriageDAOImpl CarriageDAO = new CarriageDAOImpl();
-        CityDAOImpl cityDAO = new CityDAOImpl();
-        ticket.setTrain(trainDAO.findById(ticket.getId_train()));
-        ticket.setCarriage(CarriageDAO.findById(ticket.getId_carriage()));
-        ticket.setOutCity(cityDAO.findById(ticket.getId_out_city()));
-        ticket.setInCity(cityDAO.findById(ticket.getId_in_city()));
+        ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
+        setTicket(ticket, trainDAO, CarriageDAO, scheduleDAO);
         return ticket;
+    }
+
+    private void setTicket(Ticket ticket, TrainDAOImpl trainDAO, CarriageDAOImpl carriageDAO, ScheduleDAOImpl scheduleDAO) {
+        ticket.setTrain(trainDAO.findById(ticket.getId_train()));
+        ticket.setCarriage(carriageDAO.findById(ticket.getId_carriage()));
+        ticket.setOutSchedule(scheduleDAO.findById(ticket.getId_outSchedule()));
+        ticket.setInSchedule(scheduleDAO.findById(ticket.getId_inSchedule()));
     }
 }

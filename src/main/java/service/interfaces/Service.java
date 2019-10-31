@@ -1,8 +1,10 @@
-package service;
+package service.interfaces;
+
+import entity.BaseEntity;
 
 import java.util.List;
 
-public interface Serviceable<T extends Object> {
+public interface Service<T extends BaseEntity> {
     List<T> findAll();
     T findById(long id);
     boolean deleteById(long id);

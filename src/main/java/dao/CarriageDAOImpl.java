@@ -1,6 +1,6 @@
 package dao;
 
-import dao.interfece.CarriageDAO;
+import dao.interfaces.CarriageDAO;
 import entity.train.Carriage;
 
 import java.util.List;

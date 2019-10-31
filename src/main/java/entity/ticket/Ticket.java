@@ -2,6 +2,7 @@ package entity.ticket;
 
 import entity.BaseEntity;
 import entity.schedule.City;
+import entity.schedule.Schedule;
 import entity.train.*;
 
 import java.sql.Date;
@@ -13,32 +14,28 @@ public class Ticket extends BaseEntity {
     private long id_carriage;
     private Train train;
     private long id_train;
-    //TODO Schedule entity
-    private City outCity;
-    private long id_out_city;
-    private City inCity;
-    private long id_in_city;
-    private Time outTime;
-    private Time inTime;
+    private Schedule inSchedule;
+    private long id_inSchedule;
+    private Schedule outSchedule;
+    private long id_outSchedule;
     private Date date;
     private double price;
+
 
     public Ticket() {
     }
 
-    public Ticket(long id, int numberSeat, Carriage carriage, long id_carriage, Train train, long id_train, City outCity, long id_out_city, City inCity, long id_in_city, Time outTime, Time inTime, Date date, double price) {
+    public Ticket(long id, int numberSeat, Carriage carriage, long id_carriage, Train train, long id_train, Schedule inSchedule, long id_inSchedule, Schedule outSchedule, long id_outSchedule, Date date, double price) {
         super(id);
         this.numberSeat = numberSeat;
         this.carriage = carriage;
         this.id_carriage = id_carriage;
         this.train = train;
         this.id_train = id_train;
-        this.outCity = outCity;
-        this.id_out_city = id_out_city;
-        this.inCity = inCity;
-        this.id_in_city = id_in_city;
-        this.outTime = outTime;
-        this.inTime = inTime;
+        this.inSchedule = inSchedule;
+        this.id_inSchedule = id_inSchedule;
+        this.outSchedule = outSchedule;
+        this.id_outSchedule = id_outSchedule;
         this.date = date;
         this.price = price;
     }
@@ -69,40 +66,6 @@ public class Ticket extends BaseEntity {
         id_train = train.getId();
     }
 
-    public City getOutCity() {
-        return outCity;
-    }
-
-    public void setOutCity(City outCity) {
-        this.outCity = outCity;
-        id_out_city = outCity.getId();
-    }
-
-    public City getInCity() {
-        return inCity;
-    }
-
-    public void setInCity(City inCity) {
-        this.inCity = inCity;
-        id_in_city = inCity.getId();
-    }
-
-    public Time getOutTime() {
-        return outTime;
-    }
-
-    public void setOutTime(Time outTime) {
-        this.outTime = outTime;
-    }
-
-    public Time getInTime() {
-        return inTime;
-    }
-
-    public void setInTime(Time inTime) {
-        this.inTime = inTime;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -119,6 +82,24 @@ public class Ticket extends BaseEntity {
         this.price = price;
     }
 
+    public Schedule getInSchedule() {
+        return inSchedule;
+    }
+
+    public void setInSchedule(Schedule inSchedule) {
+        this.inSchedule = inSchedule;
+        id_inSchedule = inSchedule.getId();
+    }
+
+    public Schedule getOutSchedule() {
+        return outSchedule;
+    }
+
+    public void setOutSchedule(Schedule outSchedule) {
+        this.outSchedule = outSchedule;
+        id_outSchedule = outSchedule.getId();
+    }
+
     public long getId_carriage() {
         return id_carriage;
     }
@@ -127,13 +108,14 @@ public class Ticket extends BaseEntity {
         return id_train;
     }
 
-    public long getId_out_city() {
-        return id_out_city;
+    public long getId_inSchedule() {
+        return id_inSchedule;
     }
 
-    public long getId_in_city() {
-        return id_in_city;
+    public long getId_outSchedule() {
+        return id_outSchedule;
     }
+
 
     @Override
     public String toString() {
@@ -141,11 +123,13 @@ public class Ticket extends BaseEntity {
                 "id=" + getId() +
                 ", numberSeat=" + numberSeat +
                 ", carriage=" + carriage +
+                ", id_carriage=" + id_carriage +
                 ", train=" + train +
-                ", outCity=" + outCity +
-                ", inCity=" + inCity +
-                ", outTime=" + outTime +
-                ", inTime=" + inTime +
+                ", id_train=" + id_train +
+                ", inSchedule=" + inSchedule +
+                ", id_inSchedule=" + id_inSchedule +
+                ", outSchedule=" + outSchedule +
+                ", id_outSchedule=" + id_outSchedule +
                 ", date=" + date +
                 ", price=" + price +
                 '}';

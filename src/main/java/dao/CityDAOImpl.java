@@ -1,6 +1,6 @@
 package dao;
 
-import dao.interfece.CityDAO;
+import dao.interfaces.CityDAO;
 import entity.schedule.City;
 
 public class CityDAOImpl extends AbstractDAODB<City> implements CityDAO {

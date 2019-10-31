@@ -1,6 +1,6 @@
 package dao;
 
-import dao.interfece.CrudDAO;
+import dao.interfaces.CrudDAO;
 import entity.BaseEntity;
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -20,13 +20,13 @@ import java.util.List;
 public abstract class AbstractDAODB<T extends BaseEntity> implements CrudDAO {
 
   public static Connection getConn() throws Exception {
-    String driver = "com.mysql.jdbc.Driver";//MySQL driver, do not explain
+    String driver = "com.mysql.jdbc.Driver";
     //?serverTimezone=UTC
-    String url = "jdbc:mysql://localhost:3306/software_for_railway_transport?serverTimezone=UTC";//The MySQL connection URL, do not explain
-    String user = "root";//MySQL users
-    String password = "root";//MySQL password
-    Class.forName(driver); //Load the driver
-    return DriverManager.getConnection(url, user, password);//Get connected
+    String url = "jdbc:mysql://localhost:3306/software_for_railway_transport";
+    String user = "root";
+    String password = "root";
+    Class.forName(driver);
+    return DriverManager.getConnection(url, user, password);
   }
 
   private static void getAllField(List<Field> fieldList, Class<?> clazz) {
@@ -270,7 +270,7 @@ public abstract class AbstractDAODB<T extends BaseEntity> implements CrudDAO {
   }
 
   @Override
-  public BaseEntity create(BaseEntity entity) {
+  public T create(BaseEntity entity) {
 
     List<Field> fieldList = new LinkedList<>();
     getAllFieldNoId(fieldList, entity.getClass());
@@ -328,11 +328,11 @@ public abstract class AbstractDAODB<T extends BaseEntity> implements CrudDAO {
       e.printStackTrace();
     }
 
-    return entity;
+    return (T) entity;
   }
 
   @Override
-  public BaseEntity update(BaseEntity entity) {
+  public T update(BaseEntity entity) {
     List<Field> fieldList = new LinkedList<>();
     getAllField(fieldList, entity.getClass());
 
@@ -364,6 +364,6 @@ public abstract class AbstractDAODB<T extends BaseEntity> implements CrudDAO {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return entity;
+    return (T) entity;
   }
 }

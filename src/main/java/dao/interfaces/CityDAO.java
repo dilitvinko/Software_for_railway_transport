@@ -1,4 +1,4 @@
-package dao.interfece;
+package dao.interfaces;
 
 public interface CityDAO extends CrudDAO {
 }

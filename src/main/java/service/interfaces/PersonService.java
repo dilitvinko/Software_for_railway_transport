@@ -1,8 +1,8 @@
-package service;
+package service.interfaces;
 
 import entity.person.Person;
 
-public interface Personable {
+public interface PersonService {
 //    person login (person person);
 //    boolean logout (person person);
     boolean registration (Person person);

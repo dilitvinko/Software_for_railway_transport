@@ -1,6 +1,6 @@
 package dao;
 
-import dao.interfece.TrainDAO;
+import dao.interfaces.TrainDAO;
 import entity.train.Train;
 
 public class TrainDAOImpl extends AbstractDAODB<Train> implements TrainDAO {

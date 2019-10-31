@@ -1,6 +1,6 @@
 package dao;
 
-import dao.interfece.CrudDAO;
+import dao.interfaces.CrudDAO;
 import entity.person.Person;
 import entity.person.Role;
 
