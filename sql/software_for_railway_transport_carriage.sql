@@ -24,13 +24,15 @@ DROP TABLE IF EXISTS `carriage`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `carriage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `number` int(11) NOT NULL,
-  `typeCarriage` varchar(255) NOT NULL,
+  `number` int(11) DEFAULT NULL,
+  `id_typeCarriage` bigint(20) NOT NULL,
   `id_train` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `carriage_train_id__fk` (`id_train`),
-  CONSTRAINT `carriage_train_id__fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `carriage_train_id_fk` (`id_train`),
+  KEY `carriage_typecarriage_id_fk` (`id_typeCarriage`),
+  CONSTRAINT `carriage_train_id_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`),
+  CONSTRAINT `carriage_typecarriage_id_fk` FOREIGN KEY (`id_typeCarriage`) REFERENCES `typecarriage` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +41,7 @@ CREATE TABLE `carriage` (
 
 LOCK TABLES `carriage` WRITE;
 /*!40000 ALTER TABLE `carriage` DISABLE KEYS */;
+INSERT INTO `carriage` VALUES (1,11,1,1),(2,12,2,1),(3,22,2,2),(4,31,1,3),(5,32,1,3),(6,41,1,4),(7,42,1,4),(8,43,2,4),(9,51,1,5),(10,52,1,5);
 /*!40000 ALTER TABLE `carriage` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-25 18:23:18
+-- Dump completed on 2019-11-01 18:09:06

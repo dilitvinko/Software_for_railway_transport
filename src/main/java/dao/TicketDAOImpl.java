@@ -3,6 +3,8 @@ package dao;
 import dao.interfaces.TicketDAO;
 import entity.ticket.Ticket;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketDAOImpl extends AbstractDAODB<Ticket> implements TicketDAO {
@@ -10,7 +12,6 @@ public class TicketDAOImpl extends AbstractDAODB<Ticket> implements TicketDAO {
     protected Class getClazz() {
         return Ticket.class;
     }
-    //TODO same methods findById() findAll from CarriageDao
 
     @Override
     public List<Ticket> findAll() {
@@ -42,4 +43,19 @@ public class TicketDAOImpl extends AbstractDAODB<Ticket> implements TicketDAO {
         ticket.setOutSchedule(scheduleDAO.findById(ticket.getId_outSchedule()));
         ticket.setInSchedule(scheduleDAO.findById(ticket.getId_inSchedule()));
     }
+
+    //TODO жесткий костыльный метод переписать в JPA
+
+    public List<Ticket> findByTrainCarriageDate(long idTrain, long idCarriage, Date date) {
+        List<Ticket> tickets = findAll();
+        ArrayList<Ticket> resTickets = new ArrayList<>();
+        for (Ticket ticket :
+                tickets) {
+            if (ticket.getId_train() == idTrain && ticket.getId_carriage() == idCarriage && ticket.getDate().equals(date)) {
+                resTickets.add(ticket);
+            }
+        }
+        return resTickets;
+    }
+
 }

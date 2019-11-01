@@ -36,6 +36,5 @@ public class CarriageDAOImpl extends AbstractDAODB<Carriage> implements Carriage
     }
 
 
-//TODO same methods findById() findAll from CarriageDao
 
 }

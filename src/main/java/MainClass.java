@@ -12,133 +12,133 @@ import service.interfaces.TicketService;
 
 import java.sql.Time;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 public class MainClass {
 
     public static void main(String[] args) {
 
 
-        CarriageDAOImpl carriageDAO = new CarriageDAOImpl();
-        CityDAOImpl cityDAO = new CityDAOImpl();
-        ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
-        TicketDAOImpl ticketDAO = new TicketDAOImpl();
-        TrainDAOImpl trainDAO = new TrainDAOImpl();
-        TypeCarriageDAOImpl typeCarriageDAO = new TypeCarriageDAOImpl();
-
-        System.out.println(carriageDAO.findAll());
-        System.out.println(cityDAO.findAll());
-        System.out.println(scheduleDAO.findAll());
-        System.out.println(ticketDAO.findAll());
-        System.out.println(trainDAO.findAll());
-        System.out.println(typeCarriageDAO.findAll());
-
-        City city = new City();
-        city.setName("Grodno");
-
-        Train train = new Train();
-        train.setName("V-321");
-
-        Ticket ticket = new Ticket();
-//        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String dateString = "2019-05-05";
-        Date date = new Date(2019,20,30);
-//        try {
-//            date = (Date) sdf.parse(dateString);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-        ticket.setNumberSeat(10);
-        ticket.setDate(date);
-        ticket.setPrice(33);
-        ticket.setTrain(train);
-
-
-
-        Schedule schedule = new Schedule();
-        schedule.setOrder(1);
-        schedule.setTime(new Time(22,00,00));
-        schedule.setCity(city);
-        schedule.setTrain(train);
-
-        TypeCarriage typeCarriage = new TypeCarriage();
-        typeCarriage.setType("test");
-        typeCarriage.setAmountSeats(1);
-        typeCarriage.setCooffPrise(2.2);
-
-        Carriage carriage = new Carriage();
-        carriage.setNumber(11);
-        carriage.setTrain(train);
-        carriage.setTypeCarriage(typeCarriage);
-
-        System.out.println();
-        System.out.println();
-
-
-        System.out.println(trainDAO.create(train));
-        System.out.println(cityDAO.create(city));
-        System.out.println(typeCarriageDAO.create(typeCarriage));
-        carriage.setTrain(train);
-        carriage.setTypeCarriage(typeCarriage);
-        System.out.println(carriageDAO.create(carriage));
-        schedule.setTrain(train);
-        schedule.setCity(city);
-        System.out.println(scheduleDAO.create(schedule));
-        ticket.setCarriage(carriage);
-        ticket.setTrain(train);
-        ticket.setOutSchedule(schedule);
-        ticket.setInSchedule(schedule);
-        System.out.println(ticketDAO.create(ticket));
-
-        System.out.println();
-        System.out.println();
-
-        System.out.println(carriageDAO.findById(2));
-        System.out.println(cityDAO.findById(2));
-        System.out.println(scheduleDAO.findById(2));
-        System.out.println(ticketDAO.findById(2));
-        System.out.println(trainDAO.findById(2));
-        System.out.println(typeCarriageDAO.findById(2));
-
-        System.out.println();
-        System.out.println();
-
-        schedule.setOrder(11111);
-        schedule.setTime(new Time(00,00,00));
-        //System.out.println(scheduleDAO.deleteById(9));
-        System.out.println(scheduleDAO.update(schedule));
-
-        System.out.println();
-        System.out.println();
-
-        System.out.println(carriageDAO.findById(3));
-
-
-        Train train_2 = new Train();
-        train_2.setName("asd-123");
-        trainDAO.create(train_2);
-        TypeCarriage typeCarriage_2 = new TypeCarriage();
-
-        typeCarriage_2.setType("testtestqwe");
-        typeCarriage_2.setAmountSeats(999);
-        typeCarriage_2.setCooffPrise(111.11);
-        typeCarriageDAO.create(typeCarriage_2);
-
-        Carriage carriage_2 = new Carriage();
-        carriage_2.setTypeCarriage(typeCarriage_2);
-        carriage_2.setTrain(train_2);
-        carriage_2.setNumber(777);
-
-        System.out.println();
-        System.out.println();
-
-
-
-        carriageDAO.create(carriage_2);
-        System.out.println();
-        System.out.println();
-        System.out.println(carriage_2);
+//        CarriageDAOImpl carriageDAO = new CarriageDAOImpl();
+//        CityDAOImpl cityDAO = new CityDAOImpl();
+//        ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
+//        TicketDAOImpl ticketDAO = new TicketDAOImpl();
+//        TrainDAOImpl trainDAO = new TrainDAOImpl();
+//        TypeCarriageDAOImpl typeCarriageDAO = new TypeCarriageDAOImpl();
+//
+//        System.out.println(carriageDAO.findAll());
+//        System.out.println(cityDAO.findAll());
+//        System.out.println(scheduleDAO.findAll());
+//        System.out.println(ticketDAO.findAll());
+//        System.out.println(trainDAO.findAll());
+//        System.out.println(typeCarriageDAO.findAll());
+//
+//        City city = new City();
+//        city.setName("Grodno");
+//
+//        Train train = new Train();
+//        train.setName("V-321");
+//
+//        Ticket ticket = new Ticket();
+////        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+////        String dateString = "2019-05-05";
+//        Date date = new Date(2019,05,30);
+////        try {
+////            date = (Date) sdf.parse(dateString);
+////        } catch (ParseException e) {
+////            e.printStackTrace();
+////        }
+//        ticket.setNumberSeat(10);
+//        ticket.setDate(date);
+//        ticket.setPrice(33);
+//        ticket.setTrain(train);
+//
+//
+//
+//        Schedule schedule = new Schedule();
+//        schedule.setOrder(1);
+//        schedule.setTime(new Time(22,00,00));
+//        schedule.setCity(city);
+//        schedule.setTrain(train);
+//
+//        TypeCarriage typeCarriage = new TypeCarriage();
+//        typeCarriage.setType("test");
+//        typeCarriage.setAmountSeats(1);
+//        typeCarriage.setCooffPrise(2.2);
+//
+//        Carriage carriage = new Carriage();
+//        carriage.setNumber(11);
+//        carriage.setTrain(train);
+//        carriage.setTypeCarriage(typeCarriage);
+//
+//        System.out.println();
+//        System.out.println();
+//
+//
+//        System.out.println(trainDAO.create(train));
+//        System.out.println(cityDAO.create(city));
+//        System.out.println(typeCarriageDAO.create(typeCarriage));
+//        carriage.setTrain(train);
+//        carriage.setTypeCarriage(typeCarriage);
+//        System.out.println(carriageDAO.create(carriage));
+//        schedule.setTrain(train);
+//        schedule.setCity(city);
+//        System.out.println(scheduleDAO.create(schedule));
+//        ticket.setCarriage(carriage);
+//        ticket.setTrain(train);
+//        ticket.setOutSchedule(schedule);
+//        ticket.setInSchedule(schedule);
+//        System.out.println(ticketDAO.create(ticket));
+//
+//        System.out.println();
+//        System.out.println();
+//
+//        System.out.println(carriageDAO.findById(2));
+//        System.out.println(cityDAO.findById(2));
+//        System.out.println(scheduleDAO.findById(2));
+//        System.out.println(ticketDAO.findById(2));
+//        System.out.println(trainDAO.findById(2));
+//        System.out.println(typeCarriageDAO.findById(2));
+//
+//        System.out.println();
+//        System.out.println();
+//
+//        schedule.setOrder(11111);
+//        schedule.setTime(new Time(00,00,00));
+//        //System.out.println(scheduleDAO.deleteById(9));
+//        System.out.println(scheduleDAO.update(schedule));
+//
+//        System.out.println();
+//        System.out.println();
+//
+//        System.out.println(carriageDAO.findById(3));
+//
+//
+//        Train train_2 = new Train();
+//        train_2.setName("asd-123");
+//        trainDAO.create(train_2);
+//        TypeCarriage typeCarriage_2 = new TypeCarriage();
+//
+//        typeCarriage_2.setType("testtestqwe");
+//        typeCarriage_2.setAmountSeats(999);
+//        typeCarriage_2.setCooffPrise(111.11);
+//        typeCarriageDAO.create(typeCarriage_2);
+//
+//        Carriage carriage_2 = new Carriage();
+//        carriage_2.setTypeCarriage(typeCarriage_2);
+//        carriage_2.setTrain(train_2);
+//        carriage_2.setNumber(777);
+//
+//        System.out.println();
+//        System.out.println();
+//
+//
+//
+//        carriageDAO.create(carriage_2);
+//        System.out.println();
+//        System.out.println();
+//        System.out.println(carriage_2);
 
         System.out.println();
         System.out.println("Services");
@@ -151,7 +151,46 @@ public class MainClass {
                 tickets) {
             System.out.println(tic);
         }
-        scheduleService.create(tickets.get(2).getInSchedule());
+        System.out.println();
+        System.out.println();
+
+        List<Schedule> schedules = new ArrayList<>();
+        schedules = scheduleService.findAll();
+        for (Schedule sched :
+                schedules) {
+            System.out.println(sched);
+        }
+
+        ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
+        Date date = new Date(2019,05,30);
+        scheduleDAO.findAllTrainAtDateByCities(date, "Moscow", "Bereza");
+
+        System.out.println();
+        System.out.println();
+
+        TrainDAOImpl trainDAO = new TrainDAOImpl();
+        for (Train train :
+                trainDAO.findAll()) {
+            System.out.println(train);
+        }
+
+        LocalDate myDate3 = LocalDate.of(2019, 10, 20);
+        Date date_1 = Date.valueOf(myDate3);
+
+        System.out.println();
+        System.out.println();
+
+        TicketDAOImpl ticketDAO = new TicketDAOImpl();
+        for (Ticket tic :
+                ticketDAO.findByTrainCarriageDate(1,1, date_1)) {
+            System.out.println(tic);
+        }
+
+        for (Ticket tic :
+                ticketService.freeSeatsInCarriage(1,1,date_1,1,3)) {
+            System.out.println(tic);
+        }
+
 
 
 //        PersonDAOImpl personDAO = new PersonDAOImpl();

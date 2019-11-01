@@ -26,7 +26,7 @@ CREATE TABLE `city` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `city` (
 
 LOCK TABLES `city` WRITE;
 /*!40000 ALTER TABLE `city` DISABLE KEYS */;
-INSERT INTO `city` VALUES (1,'Moscow'),(2,'Minsk'),(3,'Bereza'),(4,'Brest'),(5,'Kiev'),(6,'Lvov'),(7,'Grodno'),(8,'Grodno'),(9,'Grodno'),(10,'Grodno'),(11,'Grodno'),(12,'Grodno'),(13,'Grodno'),(14,'Grodno'),(15,'Grodno'),(16,'Grodno'),(17,'Grodno'),(18,'Grodno'),(19,'Grodno'),(20,'Grodno'),(21,'Grodno'),(22,'Grodno'),(23,'Grodno'),(24,'Grodno'),(25,'Grodno'),(26,'Grodno'),(27,'Grodno'),(28,'Grodno'),(29,'Grodno'),(30,'Grodno'),(31,'Grodno'),(32,'Grodno'),(33,'Grodno'),(34,'Grodno'),(35,'Grodno'),(36,'Grodno'),(37,'Grodno'),(38,'Grodno'),(39,'Grodno'),(40,'Grodno'),(41,'Grodno');
+INSERT INTO `city` VALUES (1,'Moscow'),(2,'Minsk'),(3,'Bereza'),(4,'Brest'),(5,'Kiev'),(6,'Lvov'),(7,'Grodno');
 /*!40000 ALTER TABLE `city` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-30 19:27:20
+-- Dump completed on 2019-11-01 18:09:04

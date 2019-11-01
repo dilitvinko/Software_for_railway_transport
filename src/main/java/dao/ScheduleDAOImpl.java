@@ -1,8 +1,15 @@
 package dao;
 
+
+import com.ibm.icu.impl.Pair;
 import dao.interfaces.ScheduleDAO;
+import entity.schedule.City;
 import entity.schedule.Schedule;
 
+
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ScheduleDAOImpl extends AbstractDAODB<Schedule> implements ScheduleDAO {
@@ -10,7 +17,6 @@ public class ScheduleDAOImpl extends AbstractDAODB<Schedule> implements Schedule
     protected Class getClazz() {
         return Schedule.class;
     }
-    //TODO same methods findById() findAll from CarriageDao
 
     @Override
     public List<Schedule> findAll() {
@@ -34,5 +40,40 @@ public class ScheduleDAOImpl extends AbstractDAODB<Schedule> implements Schedule
         schedule.setCity(cityDAO.findById(schedule.getId_city()));
         schedule.setTrain(trainDAO.findById(schedule.getId_train()));
         return schedule;
+    }
+
+    //TODO Костыльный метод будет переписан нормально через JPA
+    public List<Pair<Schedule, Schedule>> findAllTrainAtDateByCities(Date date, String outCity, String inCity){
+        List<Pair<Schedule, Schedule>> pairList = new ArrayList<>();
+        CityDAOImpl cityDAO = new CityDAOImpl();
+        List<City> cities = new ArrayList<>();
+        cities = cityDAO.findAll();
+        long id_outCity = 0;
+        long id_inCity = 0;
+        for (City city :
+                cities) {
+            if (city.getName().equals(outCity)){
+                id_outCity = city.getId();
+            }
+            if (city.getName().equals(inCity)){
+                id_inCity = city.getId();
+            }
+        }
+
+        List<Schedule> schedules = new ArrayList<>();
+        schedules = findAll();
+        for (int i = 0; i < schedules.size(); i++) {
+            for (int j = 0; j < schedules.size(); j++) {
+                if (id_outCity == schedules.get(i).getCity().getId() &&
+                        id_inCity == schedules.get(j).getCity().getId()&&
+                        schedules.get(i).getTrain().getId() == schedules.get(j).getTrain().getId() &&
+                        schedules.get(i).getOrder() < schedules.get(j).getOrder()
+                ){
+                    pairList.add(Pair.of(schedules.get(i), schedules.get(j)));
+                }
+            }
+        }
+        return pairList;
+
     }
 }

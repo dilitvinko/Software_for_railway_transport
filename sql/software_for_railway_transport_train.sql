@@ -24,12 +24,9 @@ DROP TABLE IF EXISTS `train`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `train` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `id_route` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `train_route_id__fk` (`id_route`),
-  CONSTRAINT `train_route_id__fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +35,7 @@ CREATE TABLE `train` (
 
 LOCK TABLES `train` WRITE;
 /*!40000 ALTER TABLE `train` DISABLE KEYS */;
+INSERT INTO `train` VALUES (1,'A-123'),(2,'B-773'),(3,'V-321'),(4,'G-333'),(5,'D-111');
 /*!40000 ALTER TABLE `train` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-25 18:23:18
+-- Dump completed on 2019-11-01 18:09:06

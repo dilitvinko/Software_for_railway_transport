@@ -28,7 +28,7 @@ CREATE TABLE `typecarriage` (
   `amountSeats` int(11) DEFAULT NULL,
   `cooffPrise` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `typecarriage` (
 
 LOCK TABLES `typecarriage` WRITE;
 /*!40000 ALTER TABLE `typecarriage` DISABLE KEYS */;
-INSERT INTO `typecarriage` VALUES (1,'O',10,1),(2,'P',5,2),(3,'test',1,2.2),(4,'test',1,2.2),(5,'test',1,2.2),(6,'test',1,2.2),(7,'test',1,2.2),(8,'test',1,2.2),(9,'test',1,2.2),(10,'test',1,2.2),(11,'test',1,2.2),(12,'test',1,2.2),(13,'test',1,2.2),(14,'test',1,2.2),(15,'test',1,2.2),(16,'test',1,2.2),(17,'test',1,2.2),(18,'test',1,2.2),(19,'test',1,2.2),(20,'test',1,2.2),(21,'test',1,2.2),(22,'test',1,2.2),(23,'qwe',1,3.3),(24,'asd',1,4.4),(25,'test',1,2.2),(26,'test',1,2.2),(27,'test',1,2.2),(28,'test',1,2.2),(29,'test',1,2.2),(30,'test',1,2.2),(31,'test',1,2.2),(32,'test',1,2.2),(33,'test',1,2.2),(34,'test',1,2.2),(35,'test',1,2.2),(36,'test',1,2.2),(37,'test',1,2.2),(38,'testtestqwe',999,111.11);
+INSERT INTO `typecarriage` VALUES (1,'O',10,1),(2,'P',5,2),(3,'test',1,2.2);
 /*!40000 ALTER TABLE `typecarriage` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-30 19:27:21
+-- Dump completed on 2019-11-01 18:09:05

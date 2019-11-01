@@ -24,16 +24,16 @@ DROP TABLE IF EXISTS `schedule`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `schedule` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_city` bigint(20) DEFAULT NULL,
+  `id_city` bigint(20) NOT NULL,
   `order` int(11) DEFAULT NULL,
   `time` time DEFAULT NULL,
-  `id_train` bigint(20) DEFAULT NULL,
+  `id_train` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `schedule_city_id_fk` (`id_city`),
   KEY `schedule_train_id_fk` (`id_train`),
   CONSTRAINT `schedule_city_id_fk` FOREIGN KEY (`id_city`) REFERENCES `city` (`id`),
   CONSTRAINT `schedule_train_id_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,1,1,'12:00:00',1),(2,2,2,'16:00:00',1),(3,3,3,'18:00:00',1),(4,4,4,'19:00:00',1),(5,6,1,'11:00:00',2),(6,5,2,'17:00:00',2),(7,4,3,'20:00:00',2),(8,2,4,'23:00:00',2),(10,NULL,1,'22:00:00',NULL),(11,NULL,1,'22:00:00',NULL),(12,NULL,1,'22:00:00',NULL),(13,NULL,1,'22:00:00',NULL),(14,NULL,1,'22:00:00',NULL),(15,NULL,11111,'00:00:00',NULL),(16,NULL,11111,'00:00:00',NULL),(17,NULL,11111,'00:00:00',NULL),(18,NULL,11111,'00:00:00',NULL),(19,NULL,1,'22:00:00',NULL),(20,NULL,11111,'00:00:00',NULL),(21,NULL,11111,'00:00:00',NULL),(22,NULL,11111,'00:00:00',NULL),(23,NULL,11111,'00:00:00',NULL),(24,NULL,11111,'00:00:00',NULL),(25,NULL,11111,'00:00:00',NULL),(29,33,11111,'00:00:00',27),(30,34,11111,'00:00:00',32),(31,35,11111,'00:00:00',33),(32,36,11111,'00:00:00',34),(33,37,11111,'00:00:00',35),(34,38,11111,'00:00:00',36),(35,40,11111,'00:00:00',39),(36,41,11111,'00:00:00',41);
+INSERT INTO `schedule` VALUES (1,1,1,'12:00:00',1),(2,2,2,'16:00:00',1),(3,3,3,'18:00:00',1),(4,4,4,'19:00:00',1),(5,6,1,'11:00:00',2),(6,5,2,'17:00:00',2),(7,4,3,'20:00:00',2),(8,2,4,'23:00:00',2),(9,1,1,'15:00:00',3),(10,3,2,'23:00:00',3),(11,1,1,'10:00:00',4),(12,2,2,'14:00:00',4),(13,4,3,'17:00:00',4),(14,5,1,'01:00:00',5),(15,4,2,'06:00:00',5),(16,3,3,'07:00:00',5),(17,2,4,'10:00:00',5),(18,1,5,'15:00:00',5);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-30 19:27:21
+-- Dump completed on 2019-11-01 18:09:05

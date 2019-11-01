@@ -24,29 +24,23 @@ DROP TABLE IF EXISTS `ticket`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticket` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_seat` bigint(20) NOT NULL,
+  `numberSeat` int(11) DEFAULT NULL,
   `id_carriage` bigint(20) NOT NULL,
   `id_train` bigint(20) NOT NULL,
-  `id_out_city_time` bigint(20) NOT NULL,
-  `id_in_city_time` bigint(20) NOT NULL,
-  `id_person` bigint(20) NOT NULL,
-  `id_route` bigint(20) NOT NULL,
+  `id_outSchedule` bigint(20) NOT NULL,
+  `id_inSchedule` bigint(20) NOT NULL,
+  `date` date DEFAULT NULL,
+  `price` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ticket_carriage_id_fk` (`id_carriage`),
-  KEY `ticket_city_time_in_id__fk` (`id_in_city_time`),
-  KEY `ticket_city_time_out_id__fk` (`id_out_city_time`),
-  KEY `ticket_route_id__fk` (`id_route`),
-  KEY `ticket_seat_id__fk` (`id_seat`),
-  KEY `ticket_person_id__fk` (`id_person`),
-  KEY `ticket_train_id__fk_idx` (`id_train`),
+  KEY `ticket_schedule_id_fk` (`id_outSchedule`),
+  KEY `ticket_schedule_id_fk_2` (`id_inSchedule`),
+  KEY `ticket_train_id_fk` (`id_train`),
   CONSTRAINT `ticket_carriage_id_fk` FOREIGN KEY (`id_carriage`) REFERENCES `carriage` (`id`),
-  CONSTRAINT `ticket_city_time_in_id__fk` FOREIGN KEY (`id_in_city_time`) REFERENCES `city_time` (`id`),
-  CONSTRAINT `ticket_city_time_out_id__fk` FOREIGN KEY (`id_out_city_time`) REFERENCES `city_time` (`id`),
-  CONSTRAINT `ticket_person_id__fk` FOREIGN KEY (`id_person`) REFERENCES `person` (`id`),
-  CONSTRAINT `ticket_route_id__fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id`),
-  CONSTRAINT `ticket_seat_id__fk` FOREIGN KEY (`id_seat`) REFERENCES `numberSeat` (`id`),
-  CONSTRAINT `ticket_train_id__fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `ticket_schedule_id_fk` FOREIGN KEY (`id_outSchedule`) REFERENCES `schedule` (`id`),
+  CONSTRAINT `ticket_schedule_id_fk_2` FOREIGN KEY (`id_inSchedule`) REFERENCES `schedule` (`id`),
+  CONSTRAINT `ticket_train_id_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,6 +49,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (1,4,1,1,1,3,'2019-10-20',5),(2,3,1,1,2,4,'2019-10-20',4),(3,5,2,1,3,4,'2019-10-20',3),(4,5,3,2,6,8,'2019-10-20',7),(5,3,1,1,1,2,'2019-10-20',2),(6,1,1,1,2,4,'2019-10-20',34),(7,6,1,1,3,4,'2019-10-20',42),(8,4,1,1,1,4,'2019-10-20',12),(9,9,1,1,1,3,'2019-10-20',3),(10,3,1,1,2,4,'2019-10-20',2),(11,10,1,1,1,3,'2019-10-21',12);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -67,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-25 18:23:19
+-- Dump completed on 2019-11-01 18:09:07
