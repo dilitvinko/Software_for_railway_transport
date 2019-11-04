@@ -186,10 +186,14 @@ public class MainClass {
             System.out.println(tic);
         }
 
-        for (Ticket tic :
-                ticketService.freeSeatsInCarriage(1,1,date_1,1,3)) {
-            System.out.println(tic);
-        }
+        System.out.println();
+        System.out.println();
+
+
+        System.out.println(ticketService.freeSeatsInCarriage(1,1, 1, 3, date_1));
+
+        //System.out.println(ticketService.buyTicket(6,1,1,1,3,date_1));
+
 
 
 
