@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import dao.*;
 import entity.schedule.City;
 import entity.schedule.Schedule;
@@ -7,6 +8,7 @@ import entity.train.Train;
 import entity.train.TypeCarriage;
 import service.ScheduleServiceImpl;
 import service.TicketServiceImpl;
+import service.TrainServiceImpl;
 import service.interfaces.ScheduleService;
 import service.interfaces.TicketService;
 
@@ -193,6 +195,21 @@ public class MainClass {
         System.out.println(ticketService.freeSeatsInCarriage(1,1, 1, 3, date_1));
 
         //System.out.println(ticketService.buyTicket(6,1,1,1,3,date_1));
+
+        System.out.println();
+        System.out.println("GSON");
+        Gson gson = new Gson();
+
+        List<Train> trains = new TrainServiceImpl().findAll();
+        String JSON  = gson.toJson(trains);
+
+
+
+
+        System.out.println(JSON);
+
+
+
 
 
 

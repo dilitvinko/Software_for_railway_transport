@@ -40,7 +40,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `ticket_schedule_id_fk` FOREIGN KEY (`id_outSchedule`) REFERENCES `schedule` (`id`),
   CONSTRAINT `ticket_schedule_id_fk_2` FOREIGN KEY (`id_inSchedule`) REFERENCES `schedule` (`id`),
   CONSTRAINT `ticket_train_id_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,4,1,1,1,3,'2019-10-20',5),(2,3,1,1,2,4,'2019-10-20',4),(3,5,2,1,3,4,'2019-10-20',3),(4,5,3,2,6,8,'2019-10-20',7),(5,3,1,1,1,2,'2019-10-20',2),(6,1,1,1,2,4,'2019-10-20',34),(7,6,1,1,3,4,'2019-10-20',42),(8,4,1,1,1,4,'2019-10-20',12),(9,9,1,1,1,3,'2019-10-20',3),(10,3,1,1,2,4,'2019-10-20',2),(11,10,1,1,1,3,'2019-10-21',12);
+INSERT INTO `ticket` VALUES (1,4,1,1,1,3,'2019-10-20',5),(2,3,1,1,2,4,'2019-10-20',4),(3,5,2,1,3,4,'2019-10-20',3),(4,5,3,2,6,8,'2019-10-20',7),(5,3,1,1,1,2,'2019-10-20',2),(6,1,1,1,2,4,'2019-10-20',34),(7,6,1,1,3,4,'2019-10-20',42),(8,4,1,1,1,4,'2019-10-20',12),(9,9,1,1,1,3,'2019-10-20',3),(10,3,1,1,2,4,'2019-10-20',2),(11,10,1,1,1,3,'2019-10-21',12),(43,6,1,1,1,3,'2019-10-20',999);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-01 18:09:07
+-- Dump completed on 2019-11-06 19:20:20
