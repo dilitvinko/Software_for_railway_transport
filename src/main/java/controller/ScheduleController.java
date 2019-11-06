@@ -3,26 +3,21 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.ibm.icu.impl.Pair;
 import dto.DateCitiesDTO;
 import dto.ScheduleDTO;
-import entity.schedule.Schedule;
-import entity.train.Train;
-import service.ScheduleServiceImpl;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import service.ScheduleServiceImpl;
 
-@WebServlet("/chooseTrain")
-public class ChooseTrainController extends HttpServlet {
+@WebServlet("/Schedule")
+public class ScheduleController extends HttpServlet {
 
     private Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd").create();
@@ -36,17 +31,13 @@ public class ChooseTrainController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BufferedReader reader = request.getReader();
         PrintWriter writer = response.getWriter();
-//        ArrayList<DateCitiesDTO> dateCitiesDTOS = gson.fromJson(reader, new TypeToken<ArrayList<DateCitiesDTO>>() {
-//        }.getType());
+
         DateCitiesDTO dateCitiesDTO = gson.fromJson(reader, DateCitiesDTO.class);
         ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
         List<ScheduleDTO> pairs = scheduleService.findAllTrainAtDateByCities(dateCitiesDTO);
         String json = gson.toJson(pairs, new TypeToken<List<ScheduleDTO>>() {
-       }.getType());
+        }.getType());
         writer.println(json);
-
-
-
     }
 
     @Override

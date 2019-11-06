@@ -22,7 +22,7 @@ public abstract class AbstractDAODB<T extends BaseEntity> implements CrudDAO {
   public static Connection getConn() throws Exception {
     String driver = "com.mysql.jdbc.Driver";
     //?serverTimezone=UTC
-    String url = "jdbc:mysql://localhost:3306/software_for_railway_transport";
+    String url = "jdbc:mysql://localhost:3306/software_for_railway_transport?serverTimezone=UTC";
     String user = "root";
     String password = "root";
     Class.forName(driver);
