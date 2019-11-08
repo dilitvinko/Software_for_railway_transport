@@ -1,26 +1,21 @@
 import com.google.gson.Gson;
-import dao.*;
-import entity.schedule.City;
+import dao.ScheduleDAOImpl;
+import dao.TicketDAOImpl;
+import dao.TrainDAOImpl;
 import entity.schedule.Schedule;
 import entity.ticket.Ticket;
-import entity.train.Carriage;
 import entity.train.Train;
-import entity.train.TypeCarriage;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import service.ScheduleServiceImpl;
 import service.TicketServiceImpl;
 import service.TrainServiceImpl;
-import service.interfaces.ScheduleService;
-import service.interfaces.TicketService;
-
-import java.sql.Time;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.*;
 
 public class MainClass {
 
-    public static void main(String[] args) {
-
+  public static void main(String[] args) {
 
 //        CarriageDAOImpl carriageDAO = new CarriageDAOImpl();
 //        CityDAOImpl cityDAO = new CityDAOImpl();
@@ -142,77 +137,67 @@ public class MainClass {
 //        System.out.println();
 //        System.out.println(carriage_2);
 
-        System.out.println();
-        System.out.println("Services");
-        TicketServiceImpl ticketService = new TicketServiceImpl();
-        ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
+    System.out.println();
+    System.out.println("Services");
+    TicketServiceImpl ticketService = new TicketServiceImpl();
+    ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
 
-        List<Ticket> tickets = new ArrayList<>();
-        tickets = ticketService.findAll();
-        for (Ticket tic :
-                tickets) {
-            System.out.println(tic);
-        }
-        System.out.println();
-        System.out.println();
+    List<Ticket> tickets = new ArrayList<>();
+    tickets = ticketService.findAll();
+    for (Ticket tic :
+        tickets) {
+      System.out.println(tic);
+    }
+    System.out.println();
+    System.out.println();
 
-        List<Schedule> schedules = new ArrayList<>();
-        schedules = scheduleService.findAll();
-        for (Schedule sched :
-                schedules) {
-            System.out.println(sched);
-        }
+    List<Schedule> schedules = new ArrayList<>();
+    schedules = scheduleService.findAll();
+    for (Schedule sched :
+        schedules) {
+      System.out.println(sched);
+    }
 
-        ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
-        Date date = new Date(2019,05,30);
-        scheduleDAO.findAllTrainAtDateByCities(date, "Moscow", "Bereza");
+    ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
+    Date date = new Date(2019, 05, 30);
+    scheduleDAO.findAllTrainAtDateByCities(date, "Moscow", "Bereza");
 
-        System.out.println();
-        System.out.println();
+    System.out.println();
+    System.out.println();
 
-        TrainDAOImpl trainDAO = new TrainDAOImpl();
-        for (Train train :
-                trainDAO.findAll()) {
-            System.out.println(train);
-        }
+    TrainDAOImpl trainDAO = new TrainDAOImpl();
+    for (Train train :
+        trainDAO.findAll()) {
+      System.out.println(train);
+    }
 
-        LocalDate myDate3 = LocalDate.of(2019, 10, 20);
-        Date date_1 = Date.valueOf(myDate3);
+    LocalDate myDate3 = LocalDate.of(2019, 10, 20);
+    Date date_1 = Date.valueOf(myDate3);
 
-        System.out.println();
-        System.out.println();
+    System.out.println();
+    System.out.println();
 
-        TicketDAOImpl ticketDAO = new TicketDAOImpl();
-        for (Ticket tic :
-                ticketDAO.findByTrainCarriageDate(1,1, date_1)) {
-            System.out.println(tic);
-        }
+    TicketDAOImpl ticketDAO = new TicketDAOImpl();
+    for (Ticket tic :
+        ticketDAO.findByTrainCarriageDate(1, 1, date_1)) {
+      System.out.println(tic);
+    }
 
-        System.out.println();
-        System.out.println();
+    System.out.println();
+    System.out.println();
 
+    System.out.println(ticketService.freeSeatsInCarriage(1, 1, 1, 3, date_1));
 
-        System.out.println(ticketService.freeSeatsInCarriage(1,1, 1, 3, date_1));
+    //System.out.println(ticketService.buyTicket(6,1,1,1,3,date_1));
 
-        //System.out.println(ticketService.buyTicket(6,1,1,1,3,date_1));
+    System.out.println();
+    System.out.println("GSON");
+    Gson gson = new Gson();
 
-        System.out.println();
-        System.out.println("GSON");
-        Gson gson = new Gson();
+    List<Train> trains = new TrainServiceImpl().findAll();
+    String JSON = gson.toJson(trains);
 
-        List<Train> trains = new TrainServiceImpl().findAll();
-        String JSON  = gson.toJson(trains);
-
-
-
-
-        System.out.println(JSON);
-
-
-
-
-
-
+    System.out.println(JSON);
 
 //        PersonDAOImpl personDAO = new PersonDAOImpl();
 //        person person = personDAO.findById(1);
@@ -229,5 +214,5 @@ public class MainClass {
 //        person.setLogin("BBBBBBBBBB");
 //        personDAO.update(person);
 //        System.out.println();
-    }
+  }
 }

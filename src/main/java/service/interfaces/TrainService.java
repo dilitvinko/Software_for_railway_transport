@@ -1,4 +1,5 @@
 package service.interfaces;
 
-public interface TrainService extends  Service{
+public interface TrainService extends Service {
+
 }

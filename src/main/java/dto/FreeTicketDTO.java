@@ -3,6 +3,7 @@ package dto;
 import java.sql.Date;
 
 public class FreeTicketDTO {
+
   private long idCarriage;
   private long idTrain;
   private long idOutCity;

@@ -3,49 +3,50 @@ package dto;
 import java.util.Date;
 
 public class DateCitiesDTO {
-    private Date date;
-    private String outCity;
-    private String inCity;
 
-    public DateCitiesDTO() {
-    }
+  private Date date;
+  private String outCity;
+  private String inCity;
 
-    public DateCitiesDTO(Date date, String outCity, String inCity) {
-        this.date = date;
-        this.outCity = outCity;
-        this.inCity = inCity;
-    }
+  public DateCitiesDTO() {
+  }
 
-    public Date getDate() {
-        return date;
-    }
+  public DateCitiesDTO(Date date, String outCity, String inCity) {
+    this.date = date;
+    this.outCity = outCity;
+    this.inCity = inCity;
+  }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+  public Date getDate() {
+    return date;
+  }
 
-    public String getOutCity() {
-        return outCity;
-    }
+  public void setDate(Date date) {
+    this.date = date;
+  }
 
-    public void setOutCity(String outCity) {
-        this.outCity = outCity;
-    }
+  public String getOutCity() {
+    return outCity;
+  }
 
-    public String getInCity() {
-        return inCity;
-    }
+  public void setOutCity(String outCity) {
+    this.outCity = outCity;
+  }
 
-    public void setInCity(String inCity) {
-        this.inCity = inCity;
-    }
+  public String getInCity() {
+    return inCity;
+  }
 
-    @Override
-    public String toString() {
-        return "DateCitiesDTO{" +
-                "date=" + date +
-                ", outCity='" + outCity + '\'' +
-                ", inCity='" + inCity + '\'' +
-                '}';
-    }
+  public void setInCity(String inCity) {
+    this.inCity = inCity;
+  }
+
+  @Override
+  public String toString() {
+    return "DateCitiesDTO{" +
+        "date=" + date +
+        ", outCity='" + outCity + '\'' +
+        ", inCity='" + inCity + '\'' +
+        '}';
+  }
 }

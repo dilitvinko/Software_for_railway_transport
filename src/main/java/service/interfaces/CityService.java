@@ -1,4 +1,5 @@
 package service.interfaces;
 
-public interface CityService extends  Service {
+public interface CityService extends Service {
+
 }

@@ -3,51 +3,52 @@ package entity.train;
 import entity.BaseEntity;
 
 public class TypeCarriage extends BaseEntity {
-    private String type;
-    private int amountSeats;
-    private double cooffPrise;
 
-    public TypeCarriage() {
-    }
+  private String type;
+  private int amountSeats;
+  private double cooffPrise;
 
-    public TypeCarriage(long id, String type, int amountSeats, double cooffPrise) {
-        super(id);
-        this.type = type;
-        this.amountSeats = amountSeats;
-        this.cooffPrise = cooffPrise;
-    }
+  public TypeCarriage() {
+  }
 
-    public String getType() {
-        return type;
-    }
+  public TypeCarriage(long id, String type, int amountSeats, double cooffPrise) {
+    super(id);
+    this.type = type;
+    this.amountSeats = amountSeats;
+    this.cooffPrise = cooffPrise;
+  }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+  public String getType() {
+    return type;
+  }
 
-    public int getAmountSeats() {
-        return amountSeats;
-    }
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    public void setAmountSeats(int amountSeats) {
-        this.amountSeats = amountSeats;
-    }
+  public int getAmountSeats() {
+    return amountSeats;
+  }
 
-    public double getCooffPrise() {
-        return cooffPrise;
-    }
+  public void setAmountSeats(int amountSeats) {
+    this.amountSeats = amountSeats;
+  }
 
-    public void setCooffPrise(double cooffPrise) {
-        this.cooffPrise = cooffPrise;
-    }
+  public double getCooffPrise() {
+    return cooffPrise;
+  }
 
-    @Override
-    public String toString() {
-        return "TypeCarriage{" +
-                "id=" + getId() +
-                ", type='" + type + '\'' +
-                ", amountSeats=" + amountSeats +
-                ", cooffPrise=" + cooffPrise +
-                '}';
-    }
+  public void setCooffPrise(double cooffPrise) {
+    this.cooffPrise = cooffPrise;
+  }
+
+  @Override
+  public String toString() {
+    return "TypeCarriage{" +
+        "id=" + getId() +
+        ", type='" + type + '\'' +
+        ", amountSeats=" + amountSeats +
+        ", cooffPrise=" + cooffPrise +
+        '}';
+  }
 }

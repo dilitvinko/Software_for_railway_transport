@@ -1,4 +1,5 @@
 package service.interfaces;
 
-public interface CarriageService extends  Service {
+public interface CarriageService extends Service {
+
 }

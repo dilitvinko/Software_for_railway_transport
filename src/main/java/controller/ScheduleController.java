@@ -19,34 +19,38 @@ import service.ScheduleServiceImpl;
 @WebServlet("/Schedule")
 public class ScheduleController extends HttpServlet {
 
-    private Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd").create();
+  private Gson gson = new GsonBuilder()
+      .setDateFormat("yyyy-MM-dd").create();
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doGet(request, response);
-    }
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    super.doGet(request, response);
+  }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        BufferedReader reader = request.getReader();
-        PrintWriter writer = response.getWriter();
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws IOException {
+    BufferedReader reader = request.getReader();
+    PrintWriter writer = response.getWriter();
 
-        DateCitiesDTO dateCitiesDTO = gson.fromJson(reader, DateCitiesDTO.class);
-        ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
-        List<ScheduleDTO> pairs = scheduleService.findAllTrainAtDateByCities(dateCitiesDTO);
-        String json = gson.toJson(pairs, new TypeToken<List<ScheduleDTO>>() {
-        }.getType());
-        writer.println(json);
-    }
+    DateCitiesDTO dateCitiesDTO = gson.fromJson(reader, DateCitiesDTO.class);
+    ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
+    List<ScheduleDTO> pairs = scheduleService.findAllTrainAtDateByCities(dateCitiesDTO);
+    String json = gson.toJson(pairs, new TypeToken<List<ScheduleDTO>>() {
+    }.getType());
+    writer.println(json);
+  }
 
-    @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doGet(request, response);
-    }
+  @Override
+  protected void doPut(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    super.doGet(request, response);
+  }
 
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doGet(request, response);
-    }
+  @Override
+  protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    super.doGet(request, response);
+  }
 }

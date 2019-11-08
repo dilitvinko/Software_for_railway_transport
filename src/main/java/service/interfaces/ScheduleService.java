@@ -1,4 +1,5 @@
 package service.interfaces;
 
-public interface ScheduleService  extends  Service{
+public interface ScheduleService extends Service {
+
 }

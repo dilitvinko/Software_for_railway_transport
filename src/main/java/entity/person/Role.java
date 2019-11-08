@@ -1,7 +1,7 @@
 package entity.person;
 
 public enum Role {
-    USER,
-    ADMIN,
-    CREATERTIMETABLES
+  USER,
+  ADMIN,
+  CREATERTIMETABLES
 }

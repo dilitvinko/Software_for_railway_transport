@@ -4,11 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import dto.FreeTicketDTO;
-import dto.ScheduleDTO;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +33,7 @@ public class TicketController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+      throws IOException {
     BufferedReader reader = request.getReader();
     PrintWriter writer = response.getWriter();
 
@@ -50,8 +48,7 @@ public class TicketController extends HttpServlet {
   }
 
   @Override
-  protected void doPut(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  protected void doPut(HttpServletRequest request, HttpServletResponse response) {
 
     //BUY ticket
   }

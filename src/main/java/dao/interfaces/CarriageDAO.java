@@ -1,4 +1,5 @@
 package dao.interfaces;
 
-public interface CarriageDAO extends CrudDAO{
+public interface CarriageDAO extends CrudDAO {
+
 }
