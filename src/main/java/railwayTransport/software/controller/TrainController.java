@@ -1,36 +1,26 @@
 package railwayTransport.software.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import railwayTransport.software.daoJPA.repository.TrainRepository;
+import railwayTransport.software.entity.train.Train;
 
-@WebServlet("/Train")
-public class TrainController extends HttpServlet {
+@RestController
+@RequestMapping("/train")
+public class TrainController {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    super.doGet(request, response);
+  final private TrainRepository trainRepository;
+
+  public TrainController(TrainRepository trainRepository) {
+    this.trainRepository = trainRepository;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    super.doGet(request, response);
-  }
-
-  @Override
-  protected void doPut(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    super.doGet(request, response);
-  }
-
-  @Override
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    super.doGet(request, response);
+  @GetMapping(path = "/{id}")
+  public Train findTrainById(@PathVariable Long id) {
+    Train train = trainRepository.findFirstById(id);
+    Train train2 = trainRepository.getOne(id);
+    return trainRepository.getOne(id);
   }
 }

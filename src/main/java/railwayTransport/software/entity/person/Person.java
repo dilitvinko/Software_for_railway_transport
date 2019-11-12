@@ -1,32 +1,44 @@
 package railwayTransport.software.entity.person;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import railwayTransport.software.entity.BaseEntity;
 import railwayTransport.software.entity.ticket.Ticket;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 public class Person extends BaseEntity {
 
   private String name;
   private String surname;
   private String login;
   private String password;
+  @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+  @CollectionTable(name = "person_role", joinColumns = @JoinColumn(name = "person_id"))
+  @Enumerated(EnumType.STRING)
   private Set<Role> roles;
+  @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Ticket> tickets;
   private int experience;
 
   public Person() {
   }
 
-  public Person(long id, String name, String surname, String login, String password,
-      Set<Role> roles, Set<Ticket> tickets, int experience) {
-    super(id);
+  public Person(String name, String surname, String login, String password,
+      Set<Role> roles, int experience) {
     this.name = name;
     this.surname = surname;
     this.login = login;
     this.password = password;
     this.roles = roles;
-    this.tickets = tickets;
     this.experience = experience;
   }
 

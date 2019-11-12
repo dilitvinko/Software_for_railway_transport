@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `schedule`;
 CREATE TABLE `schedule` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_city` bigint(20) NOT NULL,
-  `order` int(11) DEFAULT NULL,
+  `drivingOrder` int(11) DEFAULT NULL,
   `time` time DEFAULT NULL,
   `id_train` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),

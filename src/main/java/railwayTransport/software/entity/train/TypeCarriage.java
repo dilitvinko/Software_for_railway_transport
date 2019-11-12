@@ -2,6 +2,9 @@ package railwayTransport.software.entity.train;
 
 import railwayTransport.software.entity.BaseEntity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class TypeCarriage extends BaseEntity {
 
   private String type;
@@ -11,8 +14,7 @@ public class TypeCarriage extends BaseEntity {
   public TypeCarriage() {
   }
 
-  public TypeCarriage(long id, String type, int amountSeats, double cooffPrise) {
-    super(id);
+  public TypeCarriage(String type, int amountSeats, double cooffPrise) {
     this.type = type;
     this.amountSeats = amountSeats;
     this.cooffPrise = cooffPrise;

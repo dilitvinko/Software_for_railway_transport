@@ -2,6 +2,9 @@ package railwayTransport.software.entity.schedule;
 
 import railwayTransport.software.entity.BaseEntity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class City extends BaseEntity {
 
   private String name;
@@ -9,8 +12,7 @@ public class City extends BaseEntity {
   public City() {
   }
 
-  public City(long id, String name) {
-    super(id);
+  public City(String name) {
     this.name = name;
   }
 
