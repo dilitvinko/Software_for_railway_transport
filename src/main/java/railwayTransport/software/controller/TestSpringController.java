@@ -51,7 +51,7 @@ public class TestSpringController {
   }
 
   @RequestMapping("/getString")
-  public Ticket getString() {
+  public Train getString() {
     TestEntity testEntity = new TestEntity("Bob", 25);
     testRepository.saveAndFlush(testEntity);
     TestEntity testEntity1 = new TestEntity("Aasd", 123);
@@ -69,8 +69,14 @@ public class TestSpringController {
 
     HashSet<Carriage> carriages = new HashSet<>();
     carriages.add(carriageRepository.getOne(Long.valueOf(1)));
+
     Train train = new Train("A-123", carriages);
     trainRepository.saveAndFlush(train);
+
+    Train train1 = trainRepository.getOne(Long.valueOf(1));
+
+    carriage = carriageRepository.getOne(Long.valueOf(1));
+    carriage.setTrain(train1);
 
     Schedule schedule = new Schedule(city, 1, new Time(12, 00, 00), train);
     scheduleRepository.saveAndFlush(schedule);
@@ -100,7 +106,7 @@ public class TestSpringController {
 
 
 
-    Train train1 = trainRepository.findFirstById(Long.valueOf(1));
+    Train train2 = trainRepository.findFirstById(Long.valueOf(1));
 
     Teste teste = new Teste(32, 98);
     testeRepository.saveAndFlush(teste);
@@ -110,6 +116,6 @@ public class TestSpringController {
     list.add(testEntity1);
     list.add(teste);
 
-    return ticket;
+    return train1;
   }
 }

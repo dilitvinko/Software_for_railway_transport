@@ -1,5 +1,8 @@
 package railwayTransport.software.service.interfaces;
 
-public interface ScheduleService extends Service {
+import railwayTransport.software.dto.ScheduleDto;
+import railwayTransport.software.entity.schedule.Schedule;
+
+public interface ScheduleService extends Service<ScheduleDto> {
 
 }

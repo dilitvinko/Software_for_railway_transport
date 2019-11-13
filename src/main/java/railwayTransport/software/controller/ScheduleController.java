@@ -4,7 +4,7 @@
 //import com.google.gson.GsonBuilder;
 //import com.google.gson.reflect.TypeToken;
 //import railwayTransport.software.dto.DateCitiesDTO;
-//import railwayTransport.software.dto.ScheduleDTO;
+//import railwayTransport.software.dto.PairScheduleDTO;
 //import java.io.BufferedReader;
 //import java.io.IOException;
 //import java.io.PrintWriter;
@@ -36,8 +36,8 @@
 //
 //    DateCitiesDTO dateCitiesDTO = gson.fromJson(reader, DateCitiesDTO.class);
 //    ScheduleServiceImpl scheduleService = new ScheduleServiceImpl();
-//    List<ScheduleDTO> pairs = scheduleService.findAllTrainAtDateByCities(dateCitiesDTO);
-//    String json = gson.toJson(pairs, new TypeToken<List<ScheduleDTO>>() {
+//    List<PairScheduleDTO> pairs = scheduleService.findAllTrainAtDateByCities(dateCitiesDTO);
+//    String json = gson.toJson(pairs, new TypeToken<List<PairScheduleDTO>>() {
 //    }.getType());
 //    writer.println(json);
 //  }

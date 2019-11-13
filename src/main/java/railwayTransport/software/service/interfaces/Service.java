@@ -1,9 +1,9 @@
 package railwayTransport.software.service.interfaces;
 
-import railwayTransport.software.entity.BaseEntity;
 import java.util.List;
+import railwayTransport.software.dto.AbstractDto;
 
-public interface Service<T extends BaseEntity> {
+public interface Service<T extends AbstractDto> {
 
   List<T> findAll();
 

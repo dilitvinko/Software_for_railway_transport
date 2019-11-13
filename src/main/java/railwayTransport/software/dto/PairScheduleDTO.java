@@ -7,7 +7,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScheduleDTO {
+public class PairScheduleDTO {
 
   private Train train;
   private long idInShedule;
@@ -15,10 +15,10 @@ public class ScheduleDTO {
   private Time outTime;
   private Time inTime;
 
-  public ScheduleDTO() {
+  public PairScheduleDTO() {
   }
 
-  public ScheduleDTO(Train train, long idInShedule, long idOutShedule, Time outTime, Time inTime) {
+  public PairScheduleDTO(Train train, long idInShedule, long idOutShedule, Time outTime, Time inTime) {
     this.train = train;
     this.idInShedule = idInShedule;
     this.idOutShedule = idOutShedule;
@@ -68,7 +68,7 @@ public class ScheduleDTO {
 
   @Override
   public String toString() {
-    return "ScheduleDTO{" +
+    return "PairScheduleDTO{" +
         "train=" + train +
         ", idInShedule=" + idInShedule +
         ", idOutShedule=" + idOutShedule +
@@ -77,19 +77,19 @@ public class ScheduleDTO {
         '}';
   }
 
-  public static List<ScheduleDTO> convertFromListPairsShedule(
+  public static List<PairScheduleDTO> convertFromListPairsShedule(
       List<Pair<Schedule, Schedule>> allTrainAtDateByCities) {
-    List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
+    List<PairScheduleDTO> pairScheduleDTOS = new ArrayList<>();
     for (Pair<Schedule, Schedule> pair :
         allTrainAtDateByCities) {
-      ScheduleDTO scheduleDTO = new ScheduleDTO();
-      scheduleDTO.setTrain(pair.first.getTrain());
-      scheduleDTO.setIdOutShedule(pair.first.getId());
-      scheduleDTO.setIdInShedule(pair.second.getId());
-      scheduleDTO.setOutTime(pair.first.getTime());
-      scheduleDTO.setInTime(pair.second.getTime());
-      scheduleDTOS.add(scheduleDTO);
+      PairScheduleDTO pairScheduleDTO = new PairScheduleDTO();
+      pairScheduleDTO.setTrain(pair.first.getTrain());
+      pairScheduleDTO.setIdOutShedule(pair.first.getId());
+      pairScheduleDTO.setIdInShedule(pair.second.getId());
+      pairScheduleDTO.setOutTime(pair.first.getTime());
+      pairScheduleDTO.setInTime(pair.second.getTime());
+      pairScheduleDTOS.add(pairScheduleDTO);
     }
-    return scheduleDTOS;
+    return pairScheduleDTOS;
   }
 }

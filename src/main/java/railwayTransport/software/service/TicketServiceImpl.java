@@ -16,7 +16,7 @@
 //public class TicketServiceImpl extends AbstractService implements TicketService {
 //
 //  public TicketServiceImpl() {
-//    abstractDAODB = new TicketDAOImpl();
+//    jpaRepository = new TicketDAOImpl();
 //  }
 //
 //

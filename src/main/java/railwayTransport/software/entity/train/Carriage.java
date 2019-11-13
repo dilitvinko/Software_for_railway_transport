@@ -1,6 +1,8 @@
 package railwayTransport.software.entity.train;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import railwayTransport.software.entity.BaseEntity;
 
 import javax.persistence.*;
@@ -12,17 +14,17 @@ public class Carriage extends BaseEntity {
   @ManyToOne
   @JoinColumn(name = "type_carriage_id")
   private TypeCarriage typeCarriage;
+  @JsonBackReference(value = "train-carriage")
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "train_id")
+  private Train train;
 
   public Carriage(int number, TypeCarriage typeCarriage) {
     this.number = number;
     this.typeCarriage = typeCarriage;
   }
 
-  //private long id_typeCarriage;
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  @JoinColumn(name = "train_id")
-  private Train train;
-  //private long id_train;
+
 
   public Carriage() {
   }

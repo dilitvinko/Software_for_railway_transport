@@ -1,5 +1,8 @@
 package railwayTransport.software.service.interfaces;
 
-public interface TrainService extends Service {
+import railwayTransport.software.dto.TrainDto;
+import railwayTransport.software.entity.train.Train;
+
+public interface TrainService extends Service<TrainDto> {
 
 }

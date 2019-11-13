@@ -1,5 +1,7 @@
 package railwayTransport.software.entity.train;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import railwayTransport.software.entity.BaseEntity;
 public class Train extends BaseEntity{
 
   private String name;
+  @JsonManagedReference(value = "train-carriage")
   @OneToMany(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Carriage> carriages;
 

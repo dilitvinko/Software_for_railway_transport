@@ -1,41 +1,64 @@
 //package railwayTransport.software.service;
 //
-//import railwayTransport.software.daoJDBC.AbstractDAODB;
+//import org.springframework.data.jpa.repository.JpaRepository;
 //import railwayTransport.software.entity.BaseEntity;
 //import java.util.List;
 //import railwayTransport.software.service.interfaces.Service;
 //
 //public abstract class AbstractService<T extends BaseEntity> implements Service {
 //
-//  AbstractDAODB<T> abstractDAODB;
+//  JpaRepository<T, Long> jpaRepository;
+//
+//  public AbstractService(
+//      JpaRepository<T, Long> jpaRepository) {
+//    this.jpaRepository = jpaRepository;
+//  }
+//
+//  public AbstractService() {
+//
+//  }
 //
 //  @Override
 //  public List<T> findAll() {
-//    return abstractDAODB.findAll();
+//    return jpaRepository.findAll();
 //  }
 //
 //  @Override
 //  public T findById(long id) {
-//    return abstractDAODB.findById(id);
+//    return jpaRepository.getOne(id);
 //  }
 //
 //  @Override
 //  public boolean deleteById(long id) {
-//    return abstractDAODB.deleteById(id);
+//    boolean flag = false;
+//    try{
+//    jpaRepository.deleteById(id);
+//      flag = true;
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//    return flag;
 //  }
 //
 //  @Override
 //  public boolean delete(BaseEntity entity) {
-//    return abstractDAODB.delete(entity);
+//    boolean flag = false;
+//    try{
+//      jpaRepository.delete((T) entity);
+//      flag = true;
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//    return flag;
 //  }
 //
 //  @Override
 //  public T create(BaseEntity entity) {
-//    return abstractDAODB.create(entity);
+//    return jpaRepository.saveAndFlush((T) entity);
 //  }
 //
 //  @Override
 //  public T update(BaseEntity entity) {
-//    return abstractDAODB.update(entity);
+//    return jpaRepository.saveAndFlush((T) entity);
 //  }
 //}
