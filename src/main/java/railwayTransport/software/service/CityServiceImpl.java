@@ -3,10 +3,12 @@ package railwayTransport.software.service;
 
 import java.util.List;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CityRepository;
 import railwayTransport.software.dto.CityDto;
 import railwayTransport.software.service.interfaces.CityService;
 
+@Service
 public class CityServiceImpl implements CityService {
 
   private final CityRepository cityRepository;

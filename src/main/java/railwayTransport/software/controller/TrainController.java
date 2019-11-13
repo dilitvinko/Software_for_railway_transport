@@ -8,64 +8,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import railwayTransport.software.daoJPA.repository.CarriageRepository;
-import railwayTransport.software.daoJPA.repository.TrainRepository;
-import railwayTransport.software.dto.CarriageDto;
 import railwayTransport.software.dto.TrainDto;
-import railwayTransport.software.entity.train.Carriage;
 import railwayTransport.software.entity.train.Train;
-import railwayTransport.software.service.CarriageServiceImpl;
+import railwayTransport.software.service.TrainServiceImpl;
 
 @RestController
 @RequestMapping("/train")
 public class TrainController {
 
-  final private TrainRepository trainRepository;
-  final private CarriageRepository carriageRepository;
-  final private CarriageServiceImpl carriageService;
+  final private TrainServiceImpl trainService;
 
-  public TrainController(TrainRepository trainRepository,
-      CarriageRepository carriageRepository,
-      CarriageServiceImpl carriageService) {
-    this.trainRepository = trainRepository;
-    this.carriageRepository = carriageRepository;
-    this.carriageService = carriageService;
+  public TrainController(TrainServiceImpl trainService) {
+    this.trainService = trainService;
   }
 
+
   @GetMapping("/all")
-  public List<Train> findAllTrains(){
-    return trainRepository.findAll();
+  public List<TrainDto> findAllTrains(){
+    return trainService.findAll();
   }
 
   @GetMapping("/{id}")
   public TrainDto findTrainById(@PathVariable Long id) {
-    Train train = trainRepository.findFirstById(id);
-    Train train2 = trainRepository.getOne(id);
-    ModelMapper modelMapper = new ModelMapper();
-    TrainDto trainDto = new TrainDto();
-    modelMapper.map(train2, trainDto);
-    return trainDto;
+    return trainService.findById(id);
   }
 
   @PostMapping
-  public Train addTrain(@RequestBody Train train){
-    return trainRepository.saveAndFlush(train);
+  public TrainDto addTrain(@RequestBody TrainDto trainDto){
+    return trainService.create(trainDto);
   }
 
-   @GetMapping("/carriages")
-  public List<CarriageDto> getCarriages(){
-    return carriageService.findAll();
-   }
 
-   @GetMapping("/carriage")
-  public CarriageDto getCarriage(){
-     return carriageService.findById(Long.valueOf(1));
-   }
-
-  @PostMapping("/createcarrriage")
-  public CarriageDto createCarriage(@RequestBody CarriageDto carriageDto){
-    return carriageService.create(carriageDto);
-  }
 
 
 }

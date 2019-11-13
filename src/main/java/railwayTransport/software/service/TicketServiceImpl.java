@@ -1,25 +1,88 @@
-//package railwayTransport.software.service;
-//
-//import railwayTransport.software.daoJDBC.CarriageDAOImpl;
-//import railwayTransport.software.daoJDBC.ScheduleDAOImpl;
-//import railwayTransport.software.daoJDBC.TicketDAOImpl;
-//import railwayTransport.software.daoJDBC.TrainDAOImpl;
-//import railwayTransport.software.daoJDBC.TypeCarriageDAOImpl;
-//import railwayTransport.software.entity.schedule.Schedule;
-//import railwayTransport.software.entity.ticket.Ticket;
-//import java.sql.Date;
-//import java.util.HashSet;
-//import java.util.List;
-//import java.util.Set;
-//import railwayTransport.software.service.interfaces.TicketService;
-//
-//public class TicketServiceImpl extends AbstractService implements TicketService {
-//
-//  public TicketServiceImpl() {
-//    jpaRepository = new TicketDAOImpl();
-//  }
-//
-//
+package railwayTransport.software.service;
+
+import java.util.List;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Service;
+import railwayTransport.software.daoJPA.repository.TicketRepository;
+import railwayTransport.software.dto.CarriageDto;
+import railwayTransport.software.dto.TicketDto;
+import railwayTransport.software.entity.ticket.Ticket;
+import railwayTransport.software.entity.train.Carriage;
+import railwayTransport.software.service.interfaces.TicketService;
+
+@Service
+public class TicketServiceImpl  implements TicketService {
+
+  private final TicketRepository ticketRepository;
+  private final ModelMapper modelMapper;
+
+  public TicketServiceImpl(
+      TicketRepository ticketRepository, ModelMapper modelMapper) {
+    this.ticketRepository = ticketRepository;
+    this.modelMapper = modelMapper;
+  }
+
+  @Override
+  public List<TicketDto> findAll() {
+    List<Ticket> tickets = ticketRepository.findAll();
+    List<TicketDto> dtoList = modelMapper.map(tickets, new TypeToken<List<TicketDto>>() {
+    }.getType());
+    return dtoList;
+  }
+
+  @Override
+  public TicketDto findById(long id) {
+    return modelMapper.map(ticketRepository.getOne(id), new TypeToken<TicketDto>() {
+    }.getType());
+  }
+
+  @Override
+  public boolean deleteById(long id) {
+    boolean flag = false;
+    try{
+      ticketRepository.deleteById(id);
+      flag = true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return flag;
+  }
+
+  @Override
+  public boolean delete(TicketDto entity) {
+    boolean flag = false;
+    Ticket ticket = modelMapper.map(entity, new TypeToken<TicketDto>() {
+    }.getType());
+    try{
+      ticketRepository.delete(ticket);
+      flag = true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return flag;
+  }
+
+  @Override
+  public TicketDto create(TicketDto entity) {
+    Ticket ticket = new Ticket();
+    modelMapper.map(entity, ticket);
+    ticketRepository.saveAndFlush(ticket);
+    entity = modelMapper.map(ticket, new TypeToken<TicketDto>() {
+    }.getType());
+    return entity;
+  }
+
+  @Override
+  public TicketDto update(TicketDto entity) {
+    Ticket ticket = new Ticket();
+    modelMapper.map(entity, ticket);
+    ticketRepository.saveAndFlush(ticket);
+    entity = modelMapper.map(ticket, new TypeToken<TicketDto>() {
+    }.getType());
+    return entity;
+  }
+
 //  //TODO Костыльный метод будет переписан нормально через JPA
 //  //МОЖЕТ ВОЗРАЩАТЬ seats ?? только
 //  public Set<Integer> freeSeatsInCarriage(long idCarriage, long idTrain, long idOutCity,
@@ -89,4 +152,4 @@
 //    return ticket;
 //
 //  }
-//}
+}
