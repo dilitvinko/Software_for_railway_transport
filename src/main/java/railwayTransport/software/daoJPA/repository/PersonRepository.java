@@ -5,6 +5,7 @@ import railwayTransport.software.entity.person.Person;
 import railwayTransport.software.entity.train.Train;
 
 
-public interface PersonRepository  extends JpaRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
+
   Person findFirstById(Long id);
 }

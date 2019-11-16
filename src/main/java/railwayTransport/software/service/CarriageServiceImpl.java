@@ -26,9 +26,8 @@ public class CarriageServiceImpl implements CarriageService {
   @Override
   public List<CarriageDto> findAll() {
     List<Carriage> carriages = carriageRepository.findAll();
-    List<CarriageDto> dtoList = modelMapper.map(carriages, new TypeToken<List<CarriageDto>>() {
+    return modelMapper.map(carriages, new TypeToken<List<CarriageDto>>() {
     }.getType());
-    return dtoList;
   }
 
   @Override

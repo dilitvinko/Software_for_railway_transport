@@ -84,7 +84,7 @@ public class Carriage extends BaseEntity {
 
   @Override
   public String toString() {
-    return "Carriage{" +
+    return "CarriageMapper{" +
         "id=" + getId() +
         ", number=" + number +
         ", typeCarriage=" + typeCarriage +

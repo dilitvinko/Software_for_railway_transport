@@ -1,4 +1,9 @@
-//package railwayTransport;
+package railwayTransport;
+
+import java.util.HashSet;
+import railwayTransport.software.entity.TestLom;
+import railwayTransport.software.entity.train.Train;
+
 //
 //import com.google.gson.Gson;
 //import railwayTransport.software.daoJDBC.ScheduleDAOImpl;
@@ -15,9 +20,9 @@
 //import railwayTransport.software.service.TicketServiceImpl;
 //import railwayTransport.software.service.TrainServiceImpl;
 //
-//public class MainClass {
+public class MainClass {
 //
-//  public static void main(String[] args) {
+  public static void main(String[] args) {
 //
 ////        CarriageDAOImpl carriageDAO = new CarriageDAOImpl();
 ////        CityDAOImpl cityDAO = new CityDAOImpl();
@@ -66,7 +71,7 @@
 ////        typeCarriage.setAmountSeats(1);
 ////        typeCarriage.setCooffPrise(2.2);
 ////
-////        Carriage carriage = new Carriage();
+////        CarriageMapper carriage = new CarriageMapper();
 ////        carriage.setNumber(11);
 ////        carriage.setTrain(train);
 ////        carriage.setTypeCarriage(typeCarriage);
@@ -124,7 +129,7 @@
 ////        typeCarriage_2.setCooffPrise(111.11);
 ////        typeCarriageDAO.create(typeCarriage_2);
 ////
-////        Carriage carriage_2 = new Carriage();
+////        CarriageMapper carriage_2 = new CarriageMapper();
 ////        carriage_2.setTypeCarriage(typeCarriage_2);
 ////        carriage_2.setTrain(train_2);
 ////        carriage_2.setNumber(777);
@@ -216,5 +221,10 @@
 ////        person.setLogin("BBBBBBBBBB");
 ////        personDAO.update(person);
 ////        System.out.println();
-//  }
-//}
+
+    //TestLom testLom = new TestLom("qwe", 31);
+    //Train train = new Train("qwe", new HashSet<>());
+
+
+  }
+}

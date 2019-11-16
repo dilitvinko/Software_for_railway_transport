@@ -26,9 +26,8 @@ public class TicketServiceImpl  implements TicketService {
   @Override
   public List<TicketDto> findAll() {
     List<Ticket> tickets = ticketRepository.findAll();
-    List<TicketDto> dtoList = modelMapper.map(tickets, new TypeToken<List<TicketDto>>() {
+    return modelMapper.map(tickets, new TypeToken<List<TicketDto>>() {
     }.getType());
-    return dtoList;
   }
 
   @Override

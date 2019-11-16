@@ -6,4 +6,5 @@ import railwayTransport.software.entity.schedule.Schedule;
 
 public interface ScheduleRepository  extends JpaRepository<Schedule, Long> {
 
+  Schedule findFirstById(Long id);
 }

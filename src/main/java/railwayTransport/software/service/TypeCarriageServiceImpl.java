@@ -2,6 +2,7 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -25,15 +26,18 @@ public class TypeCarriageServiceImpl implements TypeCarriageService {
   @Override
   public List<TypeCarriageDto> findAll() {
     List<TypeCarriage> typeCarriages = typeCarriageRepository.findAll();
-    List<TypeCarriageDto> dtoList = modelMapper
-        .map(typeCarriages, new TypeToken<List<TypeCarriageDto>>() {
-        }.getType());
-    return dtoList;
+    return modelMapper.map(typeCarriages, new TypeToken<List<TypeCarriageDto>>() {
+    }.getType());
   }
 
   @Override
   public TypeCarriageDto findById(long id) {
-    return modelMapper.map(typeCarriageRepository.getOne(id), new TypeToken<TypeCarriageDto>() {
+    TypeCarriage typeCarriage = typeCarriageRepository.findFirstById(id);
+    if (typeCarriage == null){
+      throw new EntityNotFoundException("typeCarriage not found");
+    }
+    System.out.println("qwreqwe");
+    return modelMapper.map(typeCarriage, new TypeToken<TypeCarriageDto>() {
     }.getType());
   }
 

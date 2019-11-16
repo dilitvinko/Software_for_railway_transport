@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TrainRepository;
 import railwayTransport.software.dto.CarriageDto;
 import railwayTransport.software.dto.TrainDto;
-import railwayTransport.software.entity.train.Carriage;
 import railwayTransport.software.entity.train.Train;
 import railwayTransport.software.service.interfaces.TrainService;
 
@@ -27,9 +26,8 @@ public class TrainServiceImpl implements TrainService {
   @Override
   public List<TrainDto> findAll() {
     List<Train> carriages = trainRepository.findAll();
-    List<TrainDto> dtoList = modelMapper.map(carriages, new TypeToken<List<TrainDto>>() {
+    return modelMapper.map(carriages, new TypeToken<List<TrainDto>>() {
     }.getType());
-    return dtoList;
   }
 
   @Override
@@ -41,7 +39,7 @@ public class TrainServiceImpl implements TrainService {
   @Override
   public boolean deleteById(long id) {
     boolean flag = false;
-    try{
+    try {
       trainRepository.deleteById(id);
       flag = true;
     } catch (Exception e) {
@@ -55,7 +53,7 @@ public class TrainServiceImpl implements TrainService {
     boolean flag = false;
     Train train = modelMapper.map(entity, new TypeToken<TrainDto>() {
     }.getType());
-    try{
+    try {
       trainRepository.delete(train);
       flag = true;
     } catch (Exception e) {
