@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TrainRepository;
 import railwayTransport.software.dto.CarriageDto;
 import railwayTransport.software.dto.TrainDto;
+import railwayTransport.software.dto.mapper.TrainMapper;
 import railwayTransport.software.entity.train.Train;
 import railwayTransport.software.service.interfaces.TrainService;
 
@@ -15,25 +16,22 @@ import railwayTransport.software.service.interfaces.TrainService;
 public class TrainServiceImpl implements TrainService {
 
   private final TrainRepository trainRepository;
-  private final ModelMapper modelMapper;
+  private final TrainMapper mapper;
 
   public TrainServiceImpl(
-      TrainRepository trainRepository, ModelMapper modelMapper) {
+      TrainRepository trainRepository, TrainMapper mapper) {
     this.trainRepository = trainRepository;
-    this.modelMapper = modelMapper;
+    this.mapper = mapper;
   }
 
   @Override
   public List<TrainDto> findAll() {
-    List<Train> carriages = trainRepository.findAll();
-    return modelMapper.map(carriages, new TypeToken<List<TrainDto>>() {
-    }.getType());
+    return mapper.listTrainToListTrainDto(trainRepository.findAll());
   }
 
   @Override
   public TrainDto findById(long id) {
-    return modelMapper.map(trainRepository.getOne(id), new TypeToken<CarriageDto>() {
-    }.getType());
+    return mapper.trainToTrainDto(trainRepository.getOne(id));
   }
 
   @Override
@@ -49,10 +47,9 @@ public class TrainServiceImpl implements TrainService {
   }
 
   @Override
-  public boolean delete(TrainDto entity) {
+  public boolean delete(TrainDto dto) {
     boolean flag = false;
-    Train train = modelMapper.map(entity, new TypeToken<TrainDto>() {
-    }.getType());
+    Train train = mapper.trainDtoToTrain(dto);
     try {
       trainRepository.delete(train);
       flag = true;
@@ -63,22 +60,18 @@ public class TrainServiceImpl implements TrainService {
   }
 
   @Override
-  public TrainDto create(TrainDto entity) {
-    Train train = new Train();
-    modelMapper.map(entity, train);
+  public TrainDto create(TrainDto dto) {
+    Train train = mapper.trainDtoToTrain(dto);
     trainRepository.saveAndFlush(train);
-    entity = modelMapper.map(train, new TypeToken<TrainDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.trainToTrainDto(train);
+    return dto;
   }
 
   @Override
-  public TrainDto update(TrainDto entity) {
-    Train train = new Train();
-    modelMapper.map(entity, train);
+  public TrainDto update(TrainDto dto) {
+    Train train = mapper.trainDtoToTrain(dto);
     trainRepository.saveAndFlush(train);
-    entity = modelMapper.map(train, new TypeToken<TrainDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.trainToTrainDto(train);
+    return dto;
   }
 }

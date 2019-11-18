@@ -6,6 +6,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.PersonRepository;
 import railwayTransport.software.dto.PersonDto;
+import railwayTransport.software.dto.mapper.PersonMapper;
 import railwayTransport.software.entity.person.Person;
 import railwayTransport.software.service.interfaces.PersonService;
 
@@ -13,25 +14,22 @@ import railwayTransport.software.service.interfaces.PersonService;
 public class PersonServiceImpl implements PersonService {
 
   private final PersonRepository personRepository;
-  private final ModelMapper modelMapper;
+  private final PersonMapper mapper;
 
   public PersonServiceImpl(
-      PersonRepository personRepository, ModelMapper modelMapper) {
+      PersonRepository personRepository, PersonMapper mapper) {
     this.personRepository = personRepository;
-    this.modelMapper = modelMapper;
+    this.mapper = mapper;
   }
 
   @Override
   public List<PersonDto> findAll() {
-    List<Person> persons = personRepository.findAll();
-    return modelMapper.map(persons, new TypeToken<List<PersonDto>>() {
-    }.getType());
+    return mapper.listPersonToListPersonDto(personRepository.findAll());
   }
 
   @Override
   public PersonDto findById(long id) {
-    return modelMapper.map(personRepository.getOne(id), new TypeToken<PersonDto>() {
-    }.getType());
+    return mapper.personToPersonDto(personRepository.getOne(id));
   }
 
   @Override
@@ -47,10 +45,9 @@ public class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public boolean delete(PersonDto entity) {
+  public boolean delete(PersonDto dto) {
     boolean flag = false;
-    Person person = modelMapper.map(entity, new TypeToken<PersonDto>() {
-    }.getType());
+    Person person = mapper.personDtoToPerson(dto);
     try{
       personRepository.delete(person);
       flag = true;
@@ -61,22 +58,18 @@ public class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public PersonDto create(PersonDto entity) {
-    Person person = new Person();
-    modelMapper.map(entity, person);
+  public PersonDto create(PersonDto dto) {
+    Person person = mapper.personDtoToPerson(dto);
     personRepository.saveAndFlush(person);
-    entity = modelMapper.map(person, new TypeToken<PersonDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.personToPersonDto(person);
+    return dto;
   }
 
   @Override
-  public PersonDto update(PersonDto entity) {
-    Person person = new Person();
-    modelMapper.map(entity, person);
+  public PersonDto update(PersonDto dto) {
+    Person person = mapper.personDtoToPerson(dto);
     personRepository.saveAndFlush(person);
-    entity = modelMapper.map(person, new TypeToken<PersonDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.personToPersonDto(person);
+    return dto;
   }
 }

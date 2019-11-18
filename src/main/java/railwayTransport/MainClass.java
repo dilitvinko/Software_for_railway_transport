@@ -222,7 +222,7 @@ public class MainClass {
 ////        personDAO.update(person);
 ////        System.out.println();
 
-    //TestLom testLom = new TestLom("qwe", 31);
+    TestLom testLom = new TestLom("qwe", 31);
     //Train train = new Train("qwe", new HashSet<>());
 
 

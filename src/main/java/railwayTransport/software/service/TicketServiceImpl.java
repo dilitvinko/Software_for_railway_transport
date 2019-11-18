@@ -5,35 +5,31 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TicketRepository;
-import railwayTransport.software.dto.CarriageDto;
 import railwayTransport.software.dto.TicketDto;
+import railwayTransport.software.dto.mapper.TicketMapper;
 import railwayTransport.software.entity.ticket.Ticket;
-import railwayTransport.software.entity.train.Carriage;
 import railwayTransport.software.service.interfaces.TicketService;
 
 @Service
 public class TicketServiceImpl  implements TicketService {
 
   private final TicketRepository ticketRepository;
-  private final ModelMapper modelMapper;
+  private final TicketMapper mapper;
 
   public TicketServiceImpl(
-      TicketRepository ticketRepository, ModelMapper modelMapper) {
+      TicketRepository ticketRepository, TicketMapper mapper) {
     this.ticketRepository = ticketRepository;
-    this.modelMapper = modelMapper;
+    this.mapper = mapper;
   }
 
   @Override
   public List<TicketDto> findAll() {
-    List<Ticket> tickets = ticketRepository.findAll();
-    return modelMapper.map(tickets, new TypeToken<List<TicketDto>>() {
-    }.getType());
+    return mapper.listTicketToListTicketDto(ticketRepository.findAll());
   }
 
   @Override
   public TicketDto findById(long id) {
-    return modelMapper.map(ticketRepository.getOne(id), new TypeToken<TicketDto>() {
-    }.getType());
+    return mapper.ticketToTicketDto(ticketRepository.getOne(id));
   }
 
   @Override
@@ -49,10 +45,9 @@ public class TicketServiceImpl  implements TicketService {
   }
 
   @Override
-  public boolean delete(TicketDto entity) {
+  public boolean delete(TicketDto dto) {
     boolean flag = false;
-    Ticket ticket = modelMapper.map(entity, new TypeToken<TicketDto>() {
-    }.getType());
+    Ticket ticket = mapper.ticketDtotoTicket(dto);
     try{
       ticketRepository.delete(ticket);
       flag = true;
@@ -63,23 +58,19 @@ public class TicketServiceImpl  implements TicketService {
   }
 
   @Override
-  public TicketDto create(TicketDto entity) {
-    Ticket ticket = new Ticket();
-    modelMapper.map(entity, ticket);
+  public TicketDto create(TicketDto dto) {
+    Ticket ticket = mapper.ticketDtotoTicket(dto);
     ticketRepository.saveAndFlush(ticket);
-    entity = modelMapper.map(ticket, new TypeToken<TicketDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.ticketToTicketDto(ticket);
+    return dto;
   }
 
   @Override
-  public TicketDto update(TicketDto entity) {
-    Ticket ticket = new Ticket();
-    modelMapper.map(entity, ticket);
+  public TicketDto update(TicketDto dto) {
+    Ticket ticket = mapper.ticketDtotoTicket(dto);
     ticketRepository.saveAndFlush(ticket);
-    entity = modelMapper.map(ticket, new TypeToken<TicketDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.ticketToTicketDto(ticket);
+    return dto;
   }
 
 //  //TODO Костыльный метод будет переписан нормально через JPA

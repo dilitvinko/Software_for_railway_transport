@@ -20,39 +20,38 @@ public class TypeCarriageController {
 
   private final TypeCarriageServiceImpl typeCarriageService;
 
-  public TypeCarriageController(
-      TypeCarriageServiceImpl typeCarriageService) {
+  public TypeCarriageController(TypeCarriageServiceImpl typeCarriageService) {
     this.typeCarriageService = typeCarriageService;
   }
 
 
   @GetMapping("/all")
-  public List<TypeCarriageDto> findAllTypeCarriages(){
+  public List<TypeCarriageDto> findAllTypeCarriages() {
     return typeCarriageService.findAll();
   }
 
   @GetMapping("/{id}")
-  public TypeCarriageDto getCarriage(@PathVariable Long id){
+  public TypeCarriageDto getCarriage(@PathVariable Long id) {
     return typeCarriageService.findById(id);
   }
 
   @PostMapping
-  public TypeCarriageDto createTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto){
+  public TypeCarriageDto createTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto) {
     return typeCarriageService.create(typeCarriageDto);
   }
 
   @DeleteMapping
-  public Boolean deleteTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto){
+  public Boolean deleteTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto) {
     return typeCarriageService.delete(typeCarriageDto);
   }
 
   @DeleteMapping("/{id}")
-  public Boolean deleteByIdTypeCarriages(@PathVariable Long id){
+  public Boolean deleteByIdTypeCarriages(@PathVariable Long id) {
     return typeCarriageService.deleteById(id);
   }
 
-  @PutMapping("/update")
-  public TypeCarriageDto updateTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto){
+  @PutMapping
+  public TypeCarriageDto updateTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto) {
     return typeCarriageService.update(typeCarriageDto);
   }
 

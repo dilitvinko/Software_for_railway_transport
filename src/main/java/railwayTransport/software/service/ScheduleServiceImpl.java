@@ -1,36 +1,39 @@
 package railwayTransport.software.service;
 
+import com.ibm.icu.impl.Pair;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.ScheduleRepository;
+import railwayTransport.software.dto.DateCitiesDTO;
+import railwayTransport.software.dto.PairScheduleDTO;
 import railwayTransport.software.dto.ScheduleDto;
+import railwayTransport.software.dto.mapper.ScheduleMapper;
 import railwayTransport.software.entity.schedule.Schedule;
 import railwayTransport.software.service.interfaces.ScheduleService;
 
+@Service
 public class ScheduleServiceImpl implements ScheduleService {
 
   private final ScheduleRepository scheduleRepository;
-  private final ModelMapper modelMapper;
+  private final ScheduleMapper mapper;
 
   public ScheduleServiceImpl(
-      ScheduleRepository scheduleRepository, ModelMapper modelMapper) {
+      ScheduleRepository scheduleRepository, ScheduleMapper mapper) {
     this.scheduleRepository = scheduleRepository;
-    this.modelMapper = modelMapper;
+    this.mapper = mapper;
   }
 
 
   @Override
   public List<ScheduleDto> findAll() {
-    List<Schedule> schedules = scheduleRepository.findAll();
-    return modelMapper.map(schedules, new TypeToken<List<ScheduleDto>>() {
-    }.getType());
+    return mapper.listScheduleToListScheduleDto(scheduleRepository.findAll());
   }
 
   @Override
   public ScheduleDto findById(long id) {
-    return modelMapper.map(scheduleRepository.getOne(id), new TypeToken<ScheduleDto>() {
-    }.getType());
+    return mapper.scheduleToScheduleDto(scheduleRepository.getOne(id));
   }
 
   @Override
@@ -46,10 +49,9 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public boolean delete(ScheduleDto entity) {
+  public boolean delete(ScheduleDto dto) {
     boolean flag = false;
-    Schedule schedule = modelMapper.map(entity, new TypeToken<ScheduleDto>() {
-    }.getType());
+    Schedule schedule = mapper.scheduleDtoToCarriage(dto);
     try{
       scheduleRepository.delete(schedule);
       flag = true;
@@ -60,23 +62,19 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public ScheduleDto create(ScheduleDto entity) {
-    Schedule schedule = new Schedule();
-    modelMapper.map(entity, schedule);
+  public ScheduleDto create(ScheduleDto dto) {
+    Schedule schedule = mapper.scheduleDtoToCarriage(dto);
     scheduleRepository.saveAndFlush(schedule);
-    entity = modelMapper.map(schedule, new TypeToken<ScheduleDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.scheduleToScheduleDto(schedule);
+    return dto;
   }
 
   @Override
-  public ScheduleDto update(ScheduleDto entity) {
-    Schedule schedule = new Schedule();
-    modelMapper.map(entity, schedule);
+  public ScheduleDto update(ScheduleDto dto) {
+    Schedule schedule = mapper.scheduleDtoToCarriage(dto);
     scheduleRepository.saveAndFlush(schedule);
-    entity = modelMapper.map(schedule, new TypeToken<ScheduleDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.scheduleToScheduleDto(schedule);
+    return dto;
   }
 
 //    public List<Pair<Schedule, Schedule>> findAllTrainAtDateByCities(DateCitiesDTO dateCitiesDTO) {

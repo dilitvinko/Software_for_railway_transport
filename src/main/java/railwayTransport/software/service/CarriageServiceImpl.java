@@ -7,6 +7,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CarriageRepository;
 import railwayTransport.software.dto.CarriageDto;
+import railwayTransport.software.dto.mapper.CarriageMapper;
 import railwayTransport.software.entity.train.Carriage;
 import railwayTransport.software.service.interfaces.CarriageService;
 
@@ -14,26 +15,23 @@ import railwayTransport.software.service.interfaces.CarriageService;
 public class CarriageServiceImpl implements CarriageService {
 
  private final CarriageRepository carriageRepository;
- private final ModelMapper modelMapper;
+ private final CarriageMapper mapper;
 
   public CarriageServiceImpl(
-      CarriageRepository carriageRepository, ModelMapper modelMapper) {
+      CarriageRepository carriageRepository, CarriageMapper mapper) {
     this.carriageRepository = carriageRepository;
-    this.modelMapper = modelMapper;
+    this.mapper = mapper;
   }
 
 
   @Override
   public List<CarriageDto> findAll() {
-    List<Carriage> carriages = carriageRepository.findAll();
-    return modelMapper.map(carriages, new TypeToken<List<CarriageDto>>() {
-    }.getType());
+    return mapper.listCarriageToListCarriageDto(carriageRepository.findAll());
   }
 
   @Override
   public CarriageDto findById(long id) {
-    return modelMapper.map(carriageRepository.getOne(id), new TypeToken<CarriageDto>() {
-    }.getType());
+    return mapper.carriageToCarriageDto(carriageRepository.getOne(id));
   }
 
   @Override
@@ -49,10 +47,9 @@ public class CarriageServiceImpl implements CarriageService {
   }
 
   @Override
-  public boolean delete(CarriageDto entity) {
+  public boolean delete(CarriageDto dto) {
     boolean flag = false;
-    Carriage carriage = modelMapper.map(entity, new TypeToken<CarriageDto>() {
-    }.getType());
+    Carriage carriage = mapper.carriageDtoToCarriage(dto);
     try{
       carriageRepository.delete(carriage);
       flag = true;
@@ -63,22 +60,18 @@ public class CarriageServiceImpl implements CarriageService {
   }
 
   @Override
-  public CarriageDto create(CarriageDto entity) {
-    Carriage carriage = new Carriage();
-    modelMapper.map(entity, carriage);
+  public CarriageDto create(CarriageDto dto) {
+    Carriage carriage = mapper.carriageDtoToCarriage(dto);
     carriageRepository.saveAndFlush(carriage);
-    entity = modelMapper.map(carriage, new TypeToken<CarriageDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.carriageToCarriageDto(carriage);
+    return dto;
   }
 
   @Override
-  public CarriageDto update(CarriageDto entity) {
-    Carriage carriage = new Carriage();
-    modelMapper.map(entity, carriage);
+  public CarriageDto update(CarriageDto dto) {
+    Carriage carriage = mapper.carriageDtoToCarriage(dto);
     carriageRepository.saveAndFlush(carriage);
-    entity = modelMapper.map(carriage, new TypeToken<CarriageDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.carriageToCarriageDto(carriage);
+    return dto;
   }
 }

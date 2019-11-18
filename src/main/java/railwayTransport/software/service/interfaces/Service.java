@@ -11,9 +11,9 @@ public interface Service<T extends AbstractDto> {
 
   boolean deleteById(long id);
 
-  boolean delete(T entity);
+  boolean delete(T dto);
 
-  T create(T entity);
+  T create(T dto);
 
-  T update(T entity);
+  T update(T dto);
 }

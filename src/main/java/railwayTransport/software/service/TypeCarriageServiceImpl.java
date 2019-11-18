@@ -8,6 +8,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TypeCarriageRepository;
 import railwayTransport.software.dto.TypeCarriageDto;
+import railwayTransport.software.dto.mapper.TypeCarriageMapper;
 import railwayTransport.software.entity.train.TypeCarriage;
 import railwayTransport.software.service.interfaces.TypeCarriageService;
 
@@ -15,30 +16,23 @@ import railwayTransport.software.service.interfaces.TypeCarriageService;
 public class TypeCarriageServiceImpl implements TypeCarriageService {
 
   private final TypeCarriageRepository typeCarriageRepository;
-  private final ModelMapper modelMapper;
+  private final TypeCarriageMapper mapper;
+
 
   public TypeCarriageServiceImpl(
-      TypeCarriageRepository typeCarriageRepository, ModelMapper modelMapper) {
+      TypeCarriageRepository typeCarriageRepository, TypeCarriageMapper mapper) {
     this.typeCarriageRepository = typeCarriageRepository;
-    this.modelMapper = modelMapper;
+    this.mapper = mapper;
   }
 
   @Override
   public List<TypeCarriageDto> findAll() {
-    List<TypeCarriage> typeCarriages = typeCarriageRepository.findAll();
-    return modelMapper.map(typeCarriages, new TypeToken<List<TypeCarriageDto>>() {
-    }.getType());
+    return mapper.listTypeCarriageToListTypeCarriageDto(typeCarriageRepository.findAll());
   }
 
   @Override
   public TypeCarriageDto findById(long id) {
-    TypeCarriage typeCarriage = typeCarriageRepository.findFirstById(id);
-    if (typeCarriage == null){
-      throw new EntityNotFoundException("typeCarriage not found");
-    }
-    System.out.println("qwreqwe");
-    return modelMapper.map(typeCarriage, new TypeToken<TypeCarriageDto>() {
-    }.getType());
+    return mapper.typeCcarriageToTypeCarriageDto(typeCarriageRepository.getOne(id));
   }
 
   @Override
@@ -54,10 +48,9 @@ public class TypeCarriageServiceImpl implements TypeCarriageService {
   }
 
   @Override
-  public boolean delete(TypeCarriageDto entity) {
+  public boolean delete(TypeCarriageDto dto) {
     boolean flag = false;
-    TypeCarriage typeCarriage = modelMapper.map(entity, new TypeToken<TypeCarriageDto>() {
-    }.getType());
+    TypeCarriage typeCarriage = mapper.typeCarriageDtoToTypeCarriage(dto);
     try {
       typeCarriageRepository.delete(typeCarriage);
       flag = true;
@@ -68,22 +61,18 @@ public class TypeCarriageServiceImpl implements TypeCarriageService {
   }
 
   @Override
-  public TypeCarriageDto create(TypeCarriageDto entity) {
-    TypeCarriage typeCarriage = new TypeCarriage();
-    modelMapper.map(entity, typeCarriage);
+  public TypeCarriageDto create(TypeCarriageDto dto) {
+    TypeCarriage typeCarriage = mapper.typeCarriageDtoToTypeCarriage(dto);
     typeCarriageRepository.saveAndFlush(typeCarriage);
-    entity = modelMapper.map(typeCarriage, new TypeToken<TypeCarriageDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.typeCcarriageToTypeCarriageDto(typeCarriage);
+    return dto;
   }
 
   @Override
-  public TypeCarriageDto update(TypeCarriageDto entity) {
-    TypeCarriage typeCarriage = new TypeCarriage();
-    modelMapper.map(entity, typeCarriage);
+  public TypeCarriageDto update(TypeCarriageDto dto) {
+    TypeCarriage typeCarriage = mapper.typeCarriageDtoToTypeCarriage(dto);
     typeCarriageRepository.saveAndFlush(typeCarriage);
-    entity = modelMapper.map(typeCarriage, new TypeToken<TypeCarriageDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.typeCcarriageToTypeCarriageDto(typeCarriage);
+    return dto;
   }
 }

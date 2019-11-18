@@ -2,9 +2,6 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
-import org.mapstruct.factory.Mappers;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CityRepository;
 import railwayTransport.software.dto.CityDto;
@@ -16,21 +13,17 @@ import railwayTransport.software.service.interfaces.CityService;
 public class CityServiceImpl implements CityService {
 
   private final CityRepository cityRepository;
-  private final ModelMapper modelMapper;
-  private CityMapper mapper
-      = Mappers.getMapper(CityMapper.class);
+  private final CityMapper mapper;
 
-  public CityServiceImpl(CityRepository cityRepository, ModelMapper modelMapper) {
+  public CityServiceImpl(CityRepository cityRepository, CityMapper mapper) {
     this.cityRepository = cityRepository;
-    this.modelMapper = modelMapper;
+    this.mapper = mapper;
   }
 
 
   @Override
   public List<CityDto> findAll() {
-    List<City> cities = cityRepository.findAll();
-    return modelMapper.map(cities, new TypeToken<List<CityDto>>() {
-    }.getType());
+    return mapper.listCityToListCityDto(cityRepository.findAll());
   }
 
   @Override
@@ -53,10 +46,9 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
-  public boolean delete(CityDto entity) {
+  public boolean delete(CityDto dto) {
     boolean flag = false;
-    City city = modelMapper.map(entity, new TypeToken<CityDto>() {
-    }.getType());
+    City city = mapper.cityDtoToCity(dto);
     try{
       cityRepository.delete(city);
       flag = true;
@@ -67,22 +59,18 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
-  public CityDto create(CityDto entity) {
-    City city = new City();
-    modelMapper.map(entity, city);
+  public CityDto create(CityDto dto) {
+    City city = mapper.cityDtoToCity(dto);
     cityRepository.saveAndFlush(city);
-    entity = modelMapper.map(city, new TypeToken<CityDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.cityToCityDto(city);
+    return dto;
   }
 
   @Override
-  public CityDto update(CityDto entity) {
-    City city = new City();
-    modelMapper.map(entity, city);
+  public CityDto update(CityDto dto) {
+    City city = mapper.cityDtoToCity(dto);
     cityRepository.saveAndFlush(city);
-    entity = modelMapper.map(city, new TypeToken<CityDto>() {
-    }.getType());
-    return entity;
+    dto = mapper.cityToCityDto(city);
+    return dto;
   }
 }
