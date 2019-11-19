@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PairScheduleDTO {
 
-  private Train train;
+  private TrainDto trainDto;
   private ScheduleDto outScheduleDto;
   private ScheduleDto inScheduleDto;
   private Time outTime;
@@ -25,19 +25,19 @@ public class PairScheduleDTO {
 
 
 
-  public static List<PairScheduleDTO> convertFromListPairsShedule(
-      List<Pair<Schedule, Schedule>> allTrainAtDateByCities) {
-    List<PairScheduleDTO> pairScheduleDTOS = new ArrayList<>();
-    for (Pair<Schedule, Schedule> pair :
-        allTrainAtDateByCities) {
-      PairScheduleDTO pairScheduleDTO = new PairScheduleDTO();
-      pairScheduleDTO.setTrain(pair.first.getTrain());
-//      pairScheduleDTO.setIdOutShedule(pair.first.getId());
-//      pairScheduleDTO.setIdInShedule(pair.second.getId());
-      pairScheduleDTO.setOutTime(pair.first.getTime());
-      pairScheduleDTO.setInTime(pair.second.getTime());
-      pairScheduleDTOS.add(pairScheduleDTO);
-    }
-    return pairScheduleDTOS;
-  }
+//  public static List<PairScheduleDTO> convertFromListPairsShedule(
+//      List<Pair<Schedule, Schedule>> allTrainAtDateByCities) {
+//    List<PairScheduleDTO> pairScheduleDTOS = new ArrayList<>();
+//    for (Pair<Schedule, Schedule> pair :
+//        allTrainAtDateByCities) {
+//      PairScheduleDTO pairScheduleDTO = new PairScheduleDTO();
+//      pairScheduleDTO.setTrainDto(pair.first.getTrain());
+////      pairScheduleDTO.setIdOutShedule(pair.first.getId());
+////      pairScheduleDTO.setIdInShedule(pair.second.getId());
+//      pairScheduleDTO.setOutTime(pair.first.getTime());
+//      pairScheduleDTO.setInTime(pair.second.getTime());
+//      pairScheduleDTOS.add(pairScheduleDTO);
+//    }
+//    return pairScheduleDTOS;
+//  }
 }

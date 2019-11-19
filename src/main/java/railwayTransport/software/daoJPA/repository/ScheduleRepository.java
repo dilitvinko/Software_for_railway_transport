@@ -12,4 +12,5 @@ public interface ScheduleRepository  extends JpaRepository<Schedule, Long> {
 
   //@Query("SELECT u FROM User u WHERE u.status = ?1 and u.name = ?2")
   List<Schedule> findSchedulesByCityIdOrCityId(long id1, long id2);
+  Schedule findScheduleByTrainIdAndCityId(long trainId, long cityId);
 }

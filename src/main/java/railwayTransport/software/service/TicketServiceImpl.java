@@ -1,13 +1,22 @@
 package railwayTransport.software.service;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import java.util.Set;
 import org.springframework.stereotype.Service;
+import railwayTransport.software.daoJPA.repository.CarriageRepository;
+import railwayTransport.software.daoJPA.repository.ScheduleRepository;
 import railwayTransport.software.daoJPA.repository.TicketRepository;
+import railwayTransport.software.dto.CarriageDto;
+import railwayTransport.software.dto.ScheduleDto;
 import railwayTransport.software.dto.TicketDto;
 import railwayTransport.software.dto.mapper.TicketMapper;
 import railwayTransport.software.entity.ticket.Ticket;
+import railwayTransport.software.entity.train.Carriage;
 import railwayTransport.software.service.interfaces.TicketService;
 
 @Service
@@ -15,11 +24,20 @@ public class TicketServiceImpl  implements TicketService {
 
   private final TicketRepository ticketRepository;
   private final TicketMapper mapper;
+  private final CarriageRepository carriageRepository;
+  private final CarriageServiceImpl carriageService;
+  private final ScheduleRepository scheduleRepository;
 
   public TicketServiceImpl(
-      TicketRepository ticketRepository, TicketMapper mapper) {
+      TicketRepository ticketRepository, TicketMapper mapper,
+      CarriageRepository carriageRepository,
+      CarriageServiceImpl carriageService,
+      ScheduleRepository scheduleRepository) {
     this.ticketRepository = ticketRepository;
     this.mapper = mapper;
+    this.carriageRepository = carriageRepository;
+    this.carriageService = carriageService;
+    this.scheduleRepository = scheduleRepository;
   }
 
   @Override
@@ -73,73 +91,45 @@ public class TicketServiceImpl  implements TicketService {
     return dto;
   }
 
-//  //TODO Костыльный метод будет переписан нормально через JPA
-//  //МОЖЕТ ВОЗРАЩАТЬ seats ?? только
-//  public Set<Integer> freeSeatsInCarriage(long idCarriage, long idTrain, long idOutCity,
-//      long idInCity, Date date) {
-//    TicketDAOImpl ticketDAO = new TicketDAOImpl();
-//    List<Ticket> reservedTickets = ticketDAO.findByTrainCarriageDate(idTrain, idCarriage, date);
-//    CarriageDAOImpl carriageDAO = new CarriageDAOImpl();
-//    long idTypeCarriage = carriageDAO.findById(idCarriage).getId_typeCarriage();
-//    TypeCarriageDAOImpl typeCarriageDAO = new TypeCarriageDAOImpl();
-//    Set<Integer> seats = new HashSet<>();
-//    for (int i = 1; i <= typeCarriageDAO.findById(idTypeCarriage).getAmountSeats(); i++) {
-//      seats.add(i);
-//    }
-//    // TODO метод c ORDER long idOutCity, long idInCity и для тикета доставать Order
-//    int idOrderOutCity = 1;
-//    int idOrderInCity = 3;
-//    for (Ticket ticket :
-//        reservedTickets) {
-//      if (!((idOrderOutCity >= ticket.getId_inSchedule() && idOrderOutCity >= ticket
-//          .getId_inSchedule()) ||
-//          (idOrderOutCity <= ticket.getId_outSchedule() && idOrderInCity <= ticket
-//              .getId_outSchedule()))) {
-//        seats.remove(ticket.getNumberSeat());
-//      }
-//    }
-//    return seats;
-//  }
-//
-//  //TODO Костыльный метод будет переписан нормально через JPA
-//  public Ticket buyTicket(int numberSeat, long idCarriage, long idTrain, long idOutCity,
-//      long idInCity, Date date) {
-//    ScheduleDAOImpl scheduleDAO = new ScheduleDAOImpl();
-//    List<Schedule> schedules = scheduleDAO.findAll();
-//    long idOutSchedule = 0;
-//    long idInSchedule = 0;
-//    for (Schedule schedule :
-//        schedules) {
-//      if (schedule.getTrain().getId() == idTrain) {
-//        if (schedule.getId_city() == idOutCity) {
-//          idOutSchedule = schedule.getId();
-//        }
-//        if (schedule.getId_city() == idInCity) {
-//          idInSchedule = schedule.getId();
-//        }
-//      }
-//    }
-//
-//    //TODO метод чтобы достать время и посчитать разность, достать кооэф вагона и перемножить
-//
-//    double price = 999;
-//
-//    CarriageDAOImpl carriageDAO = new CarriageDAOImpl();
-//    TrainDAOImpl trainDAO = new TrainDAOImpl();
-//
-//    TicketDAOImpl ticketDAO = new TicketDAOImpl();
-//    Ticket ticket = new Ticket();
-//    ticket.setNumberSeat(numberSeat);
-//    ticket.setCarriage(carriageDAO.findById(idCarriage));
-//    ticket.setTrain(trainDAO.findById(idTrain));
-//    ticket.setOutSchedule(scheduleDAO.findById(idOutSchedule));
-//    ticket.setInSchedule(scheduleDAO.findById(idInSchedule));
-//    ticket.setDate(date);
-//    ticket.setPrice(price);
-//
-//    ticketDAO.create(ticket);
-//
-//    return ticket;
-//
-//  }
+  public Set<Integer> freeSeatsInCarriage(CarriageDto carriageDto, ScheduleDto scheduleOutDto, ScheduleDto scheduleInDto, Date date) {
+    carriageDto = carriageService.findById(carriageDto.getId());
+    List<Ticket> reservedTickets = ticketRepository.findAllByTrainIdAndCarriageIdAndDate(carriageDto.getTrainId(), carriageDto.getId(), date);
+
+
+    Set<Integer> seats = new HashSet<>();
+    for (int i = 1; i <= carriageDto.getTypeCarriage().getAmountSeats(); i++) {
+      seats.add(i);
+    }
+
+    int idOrderOutCity = scheduleOutDto.getDrivingOrder();
+    int idOrderInCity = scheduleInDto.getDrivingOrder();
+    for (Ticket ticket :
+        reservedTickets) {
+      if (!((idOrderOutCity >= ticket.getInSchedule().getId() && idOrderOutCity >= ticket.getInSchedule().getId()) ||
+          (idOrderOutCity <= ticket.getOutSchedule().getId() && idOrderInCity <= ticket.getOutSchedule().getId()))) {
+        seats.remove(ticket.getNumberSeat());
+      }
+    }
+    return seats;
+  }
+
+  public double calculatePrice(long idOutScheduleDto, long idInScheduleDto, long idCarriageDto){
+
+    LocalTime outTime = scheduleRepository.getOne(idOutScheduleDto).getTime().toLocalTime();
+    LocalTime inTime = scheduleRepository.getOne(idInScheduleDto).getTime().toLocalTime();
+    long minutes = Duration.between(outTime, inTime).toMinutes();
+
+    Carriage carriage = carriageRepository.getOne(idCarriageDto);
+
+    double price = carriage.getTypeCarriage().getCooffPrise() * minutes;
+
+    return price;
+
+  }
+//  WITH
+//  t1 AS (SELECT time FROM schedule where id =104),
+//  t2 AS (SELECT time FROM schedule where id = 103)
+//  SELECT timediff(t1.time, t2.time) from t1,t2;
+
+
 }

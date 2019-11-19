@@ -1,6 +1,5 @@
 package railwayTransport.software.service;
 
-import com.ibm.icu.impl.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,7 @@ import railwayTransport.software.dto.DateCitiesDTO;
 import railwayTransport.software.dto.PairScheduleDTO;
 import railwayTransport.software.dto.ScheduleDto;
 import railwayTransport.software.dto.mapper.ScheduleMapper;
+import railwayTransport.software.dto.mapper.TrainMapper;
 import railwayTransport.software.entity.schedule.Schedule;
 import railwayTransport.software.service.interfaces.ScheduleService;
 
@@ -17,26 +17,28 @@ import railwayTransport.software.service.interfaces.ScheduleService;
 public class ScheduleServiceImpl implements ScheduleService {
 
   private final ScheduleRepository scheduleRepository;
-  private final ScheduleMapper mapper;
+  private final ScheduleMapper scheduleMapper;
   private final CityRepository cityRepository;
+  private final TrainMapper trainMapper;
 
   public ScheduleServiceImpl(
-      ScheduleRepository scheduleRepository, ScheduleMapper mapper,
-      CityRepository cityRepository) {
+      ScheduleRepository scheduleRepository, ScheduleMapper scheduleMapper,
+      CityRepository cityRepository, TrainMapper trainMapper) {
     this.scheduleRepository = scheduleRepository;
-    this.mapper = mapper;
+    this.scheduleMapper = scheduleMapper;
     this.cityRepository = cityRepository;
+    this.trainMapper = trainMapper;
   }
 
 
   @Override
   public List<ScheduleDto> findAll() {
-    return mapper.listScheduleToListScheduleDto(scheduleRepository.findAll());
+    return scheduleMapper.listScheduleToListScheduleDto(scheduleRepository.findAll());
   }
 
   @Override
   public ScheduleDto findById(long id) {
-    return mapper.scheduleToScheduleDto(scheduleRepository.getOne(id));
+    return scheduleMapper.scheduleToScheduleDto(scheduleRepository.getOne(id));
   }
 
   @Override
@@ -54,7 +56,7 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Override
   public boolean delete(ScheduleDto dto) {
     boolean flag = false;
-    Schedule schedule = mapper.scheduleDtoToSchedule(dto);
+    Schedule schedule = scheduleMapper.scheduleDtoToSchedule(dto);
     try {
       scheduleRepository.delete(schedule);
       flag = true;
@@ -66,17 +68,17 @@ public class ScheduleServiceImpl implements ScheduleService {
 
   @Override
   public ScheduleDto create(ScheduleDto dto) {
-    Schedule schedule = mapper.scheduleDtoToSchedule(dto);
+    Schedule schedule = scheduleMapper.scheduleDtoToSchedule(dto);
     scheduleRepository.saveAndFlush(schedule);
-    dto = mapper.scheduleToScheduleDto(schedule);
+    dto = scheduleMapper.scheduleToScheduleDto(schedule);
     return dto;
   }
 
   @Override
   public ScheduleDto update(ScheduleDto dto) {
-    Schedule schedule = mapper.scheduleDtoToSchedule(dto);
+    Schedule schedule = scheduleMapper.scheduleDtoToSchedule(dto);
     scheduleRepository.saveAndFlush(schedule);
-    dto = mapper.scheduleToScheduleDto(schedule);
+    dto = scheduleMapper.scheduleToScheduleDto(schedule);
     return dto;
   }
 
@@ -102,15 +104,19 @@ public class ScheduleServiceImpl implements ScheduleService {
             schedules.get(i).getDrivingOrder() < schedules.get(j).getDrivingOrder()
         ) {
           PairScheduleDTO pairScheduleDTO = new PairScheduleDTO();
-          pairScheduleDTO.setTrain(schedules.get(i).getTrain());
-          pairScheduleDTO.setOutScheduleDto(mapper.scheduleToScheduleDto(schedules.get(i)));
-          pairScheduleDTO.setInScheduleDto(mapper.scheduleToScheduleDto(schedules.get(j)));
+          pairScheduleDTO.setTrainDto(trainMapper.trainToTrainDto(schedules.get(i).getTrain()));
+          pairScheduleDTO.setOutScheduleDto(scheduleMapper.scheduleToScheduleDto(schedules.get(i)));
+          pairScheduleDTO.setInScheduleDto(scheduleMapper.scheduleToScheduleDto(schedules.get(j)));
           pairScheduleDTOS.add(pairScheduleDTO);
         }
       }
     }
 
     return pairScheduleDTOS;//new ScheduleDAOImpl().findAllTrainAtDateByCities(dateCitiesDTO.getDate(), dateCitiesDTO.getOutCity(), dateCitiesDTO.getInCity());
+  }
+
+  public ScheduleDto findScheduleByTrainIdAndCityId(long trainId, long cityId){
+    return scheduleMapper.scheduleToScheduleDto(scheduleRepository.findScheduleByTrainIdAndCityId(trainId, cityId));
   }
 
 //    public List<Pair<Schedule, Schedule>> findAllTrainAtDateByCities(DateCitiesDTO dateCitiesDTO) {

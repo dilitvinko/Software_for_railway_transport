@@ -17,7 +17,7 @@ import lombok.Setter;
 public class TrainDto extends AbstractDto {
 
   private String name;
-  @JsonManagedReference(value = "train-carriage")
+  //@JsonManagedReference(value = "train-carriage")
   private Set<CarriageDto> carriages;
 
 
