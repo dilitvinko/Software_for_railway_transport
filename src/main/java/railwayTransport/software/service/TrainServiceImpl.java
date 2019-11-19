@@ -2,6 +2,7 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,11 @@ public class TrainServiceImpl implements TrainService {
 
   @Override
   public TrainDto findById(long id) {
-    return mapper.trainToTrainDto(trainRepository.getOne(id));
+    Train train = trainRepository.findFirstById(id);
+    if (train == null){
+      throw new EntityNotFoundException("train not found");
+    }
+    return mapper.trainToTrainDto(train);
   }
 
   @Override

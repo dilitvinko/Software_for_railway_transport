@@ -1,4 +1,4 @@
-package railwayTransport.software.controller;
+package railwayTransport.software.controller.util;
 
 import java.sql.Date;
 import javax.servlet.http.Cookie;

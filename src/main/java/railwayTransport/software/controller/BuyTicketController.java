@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import railwayTransport.software.controller.util.CookieManager;
 import railwayTransport.software.dto.CarriageDto;
 import railwayTransport.software.dto.DateCitiesDTO;
 import railwayTransport.software.dto.PairScheduleDTO;
@@ -46,7 +47,7 @@ public class BuyTicketController {
   @PostMapping("/test")
   public TrainDto test(@RequestBody TrainDto trainDto){
 
-    return new TrainDto();
+    return trainService.findById(7);
   }
 
   @PostMapping("/schedule")
@@ -123,7 +124,7 @@ public class BuyTicketController {
     ticketDto.setOutSchedule(scheduleService.findById(idOutSchedule));
     ticketDto.setInSchedule(scheduleService.findById(idInSchedule));
     ticketDto.setTrain(trainService.findById(CookieManager.getIdValueOfCookie(cookies, "idTrain")));
-    ticketDto.setPrice(ticketService.calculatePrice(1, 3, 2));
+    ticketDto.setPrice(ticketService.calculatePrice(idOutSchedule, idInSchedule, idCarriage));
     //ticketDto.setPerson();
 
     return ticketService.create(ticketDto);
