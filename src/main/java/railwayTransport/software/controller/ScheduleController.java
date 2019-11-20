@@ -34,22 +34,22 @@ public class ScheduleController {
   }
 
   @PostMapping
-  public ScheduleDto createSchedules(@RequestBody ScheduleDto scheduleDto) {
+  public ScheduleDto createSchedule(@RequestBody ScheduleDto scheduleDto) {
     return scheduleService.create(scheduleDto);
   }
 
   @DeleteMapping
-  public Boolean deleteSchedules(@RequestBody ScheduleDto scheduleDto) {
+  public Boolean deleteSchedule(@RequestBody ScheduleDto scheduleDto) {
     return scheduleService.delete(scheduleDto);
   }
 
   @DeleteMapping("/{id}")
-  public Boolean deleteByIdSchedules(@PathVariable Long id) {
+  public Boolean deleteByIdSchedule(@PathVariable Long id) {
     return scheduleService.deleteById(id);
   }
 
   @PutMapping
-  public ScheduleDto updateSchedules(@RequestBody ScheduleDto scheduleDto) {
+  public ScheduleDto updateSchedule(@RequestBody ScheduleDto scheduleDto) {
     return scheduleService.update(scheduleDto);
   }
 

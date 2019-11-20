@@ -29,27 +29,27 @@ public class TrainController {
   }
 
   @GetMapping("/{id}")
-  public TrainDto getCarriage(@PathVariable Long id) {
+  public TrainDto getTrain(@PathVariable Long id) {
     return trainService.findById(id);
   }
 
   @PostMapping
-  public TrainDto createTrains(@RequestBody TrainDto trainDto) {
+  public TrainDto createTrain(@RequestBody TrainDto trainDto) {
     return trainService.create(trainDto);
   }
 
   @DeleteMapping
-  public Boolean deleteTrains(@RequestBody TrainDto trainDto) {
+  public Boolean deleteTrain(@RequestBody TrainDto trainDto) {
     return trainService.delete(trainDto);
   }
 
   @DeleteMapping("/{id}")
-  public Boolean deleteByIdTrains(@PathVariable Long id) {
+  public Boolean deleteByIdTrain(@PathVariable Long id) {
     return trainService.deleteById(id);
   }
 
   @PutMapping
-  public TrainDto updateTrains(@RequestBody TrainDto trainDto) {
+  public TrainDto updateTrain(@RequestBody TrainDto trainDto) {
     return trainService.update(trainDto);
   }
 

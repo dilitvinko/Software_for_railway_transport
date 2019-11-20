@@ -31,27 +31,27 @@ public class TypeCarriageController {
   }
 
   @GetMapping("/{id}")
-  public TypeCarriageDto getCarriage(@PathVariable Long id) {
+  public TypeCarriageDto getTypeCarriage(@PathVariable Long id) {
     return typeCarriageService.findById(id);
   }
 
   @PostMapping
-  public TypeCarriageDto createTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto) {
+  public TypeCarriageDto createTypeCarriage(@RequestBody TypeCarriageDto typeCarriageDto) {
     return typeCarriageService.create(typeCarriageDto);
   }
 
   @DeleteMapping
-  public Boolean deleteTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto) {
+  public Boolean deleteTypeCarriage(@RequestBody TypeCarriageDto typeCarriageDto) {
     return typeCarriageService.delete(typeCarriageDto);
   }
 
   @DeleteMapping("/{id}")
-  public Boolean deleteByIdTypeCarriages(@PathVariable Long id) {
+  public Boolean deleteByIdTypeCarriage(@PathVariable Long id) {
     return typeCarriageService.deleteById(id);
   }
 
   @PutMapping
-  public TypeCarriageDto updateTypeCarriages(@RequestBody TypeCarriageDto typeCarriageDto) {
+  public TypeCarriageDto updateTypeCarriage(@RequestBody TypeCarriageDto typeCarriageDto) {
     return typeCarriageService.update(typeCarriageDto);
   }
 

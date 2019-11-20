@@ -41,17 +41,17 @@ public class CarriageController {
   }
 
   @DeleteMapping
-  public Boolean deleteCarriages(@RequestBody CarriageDto carriageDto) {
+  public Boolean deleteCarriage(@RequestBody CarriageDto carriageDto) {
     return carriageService.delete(carriageDto);
   }
 
   @DeleteMapping("/{id}")
-  public Boolean deleteByIdCarriages(@PathVariable Long id) {
+  public Boolean deleteByIdCarriage(@PathVariable Long id) {
     return carriageService.deleteById(id);
   }
 
   @PutMapping
-  public CarriageDto updateCarriages(@RequestBody CarriageDto carriageDto) {
+  public CarriageDto updateCarriage(@RequestBody CarriageDto carriageDto) {
     return carriageService.update(carriageDto);
   }
 

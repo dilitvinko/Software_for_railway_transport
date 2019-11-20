@@ -36,22 +36,22 @@ public class TicketController  {
   }
 
   @PostMapping
-  public TicketDto createTickets(@RequestBody TicketDto ticketDto) {
+  public TicketDto createTicket(@RequestBody TicketDto ticketDto) {
     return ticketService.create(ticketDto);
   }
 
   @DeleteMapping
-  public Boolean deleteTickets(@RequestBody TicketDto ticketDto) {
+  public Boolean deleteTicket(@RequestBody TicketDto ticketDto) {
     return ticketService.delete(ticketDto);
   }
 
   @DeleteMapping("/{id}")
-  public Boolean deleteByIdTickets(@PathVariable Long id) {
+  public Boolean deleteByIdTicket(@PathVariable Long id) {
     return ticketService.deleteById(id);
   }
 
   @PutMapping
-  public TicketDto updateTickets(@RequestBody TicketDto ticketDto) {
+  public TicketDto updateTicket(@RequestBody TicketDto ticketDto) {
     return ticketService.update(ticketDto);
   }
 

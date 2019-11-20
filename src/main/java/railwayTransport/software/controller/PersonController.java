@@ -34,22 +34,22 @@ public class PersonController {
   }
 
   @PostMapping
-  public PersonDto createPersons(@RequestBody PersonDto personDto) {
+  public PersonDto createPerson(@RequestBody PersonDto personDto) {
     return personService.create(personDto);
   }
 
   @DeleteMapping
-  public Boolean deletePersons(@RequestBody PersonDto personDto) {
+  public Boolean deletePerson(@RequestBody PersonDto personDto) {
     return personService.delete(personDto);
   }
 
   @DeleteMapping("/{id}")
-  public Boolean deleteByIdPersons(@PathVariable Long id) {
+  public Boolean deleteByIdPerson(@PathVariable Long id) {
     return personService.deleteById(id);
   }
 
   @PutMapping
-  public PersonDto updatePersons(@RequestBody PersonDto personDto) {
+  public PersonDto updatePerson(@RequestBody PersonDto personDto) {
     return personService.update(personDto);
   }
 
