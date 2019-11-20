@@ -1,26 +1,26 @@
 package railwayTransport.software.entity.ticket;
 
+import java.sql.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import railwayTransport.software.entity.BaseEntity;
 import railwayTransport.software.entity.person.Person;
 import railwayTransport.software.entity.schedule.Schedule;
 import railwayTransport.software.entity.train.Carriage;
 import railwayTransport.software.entity.train.Train;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.sql.Date;
-
 @Entity
 @Getter
 @Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ticket extends BaseEntity {
@@ -43,7 +43,5 @@ public class Ticket extends BaseEntity {
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "person_id")
   private Person person;
-
-
 
 }

@@ -2,9 +2,6 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
-import javax.persistence.EntityNotFoundException;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TypeCarriageRepository;
 import railwayTransport.software.dto.TypeCarriageDto;
@@ -36,28 +33,14 @@ public class TypeCarriageServiceImpl implements TypeCarriageService {
   }
 
   @Override
-  public boolean deleteById(long id) {
-    boolean flag = false;
-    try {
-      typeCarriageRepository.deleteById(id);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+  public void deleteById(long id) {
+    typeCarriageRepository.deleteById(id);
   }
 
   @Override
-  public boolean delete(TypeCarriageDto dto) {
-    boolean flag = false;
+  public void delete(TypeCarriageDto dto) {
     TypeCarriage typeCarriage = mapper.typeCarriageDtoToTypeCarriage(dto);
-    try {
-      typeCarriageRepository.delete(typeCarriage);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+    typeCarriageRepository.delete(typeCarriage);
   }
 
   @Override

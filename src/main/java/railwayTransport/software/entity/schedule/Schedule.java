@@ -1,18 +1,19 @@
 package railwayTransport.software.entity.schedule;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import railwayTransport.software.entity.BaseEntity;
-import railwayTransport.software.entity.train.Train;
-
+import java.sql.Time;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.sql.Time;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import railwayTransport.software.entity.BaseEntity;
+import railwayTransport.software.entity.train.Train;
 
 @Entity
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Schedule extends BaseEntity {

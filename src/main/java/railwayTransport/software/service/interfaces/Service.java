@@ -9,9 +9,9 @@ public interface Service<T extends AbstractDto> {
 
   T findById(long id);
 
-  boolean deleteById(long id);
+  void deleteById(long id);
 
-  boolean delete(T dto);
+  void delete(T dto);
 
   T create(T dto);
 

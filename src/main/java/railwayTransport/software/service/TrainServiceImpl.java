@@ -2,12 +2,8 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
-import javax.persistence.EntityNotFoundException;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TrainRepository;
-import railwayTransport.software.dto.CarriageDto;
 import railwayTransport.software.dto.TrainDto;
 import railwayTransport.software.dto.mapper.TrainMapper;
 import railwayTransport.software.entity.train.Train;
@@ -33,35 +29,21 @@ public class TrainServiceImpl implements TrainService {
   @Override
   public TrainDto findById(long id) {
     Train train = trainRepository.findFirstById(id);
-    if (train == null){
-      throw new EntityNotFoundException("train not found");
-    }
+//    if (train == null) {
+//      throw new EntityNotFoundException("train not found");
+//    }
     return mapper.trainToTrainDto(train);
   }
 
   @Override
-  public boolean deleteById(long id) {
-    boolean flag = false;
-    try {
-      trainRepository.deleteById(id);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+  public void deleteById(long id) {
+    trainRepository.deleteById(id);
   }
 
   @Override
-  public boolean delete(TrainDto dto) {
-    boolean flag = false;
+  public void delete(TrainDto dto) {
     Train train = mapper.trainDtoToTrain(dto);
-    try {
-      trainRepository.delete(train);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+    trainRepository.delete(train);
   }
 
   @Override

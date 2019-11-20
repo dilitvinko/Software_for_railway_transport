@@ -11,17 +11,19 @@ import railwayTransport.software.entity.train.Carriage;
 public interface CarriageMapper {
 
   @Mappings({
-      @Mapping(target="trainId", source="entity.train.id")
+      @Mapping(target = "trainId", source = "entity.train.id")
 
   })
   CarriageDto carriageToCarriageDto(Carriage entity);
+
   @Mappings({
-      @Mapping(target="train.id", source="dto.trainId")
+      @Mapping(target = "train.id", source = "dto.trainId")
 
   })
   Carriage carriageDtoToCarriage(CarriageDto dto);
 
   List<CarriageDto> listCarriageToListCarriageDto(List<Carriage> entities);
+
   List<Carriage> listCarriageDtoToListCarriage(List<CarriageDto> dtos);
 
 }

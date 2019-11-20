@@ -28,34 +28,19 @@ public class CityServiceImpl implements CityService {
 
   @Override
   public CityDto findById(long id) {
-//    return modelMapper.map(cityRepository.getOne(id), new TypeToken<CityDto>() {
-//    }.getType());
     return mapper.cityToCityDto(cityRepository.getOne(id));
   }
 
   @Override
-  public boolean deleteById(long id) {
-    boolean flag = false;
-    try{
-      cityRepository.deleteById(id);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+  public void deleteById(long id) {
+    cityRepository.deleteById(id);
   }
 
+
   @Override
-  public boolean delete(CityDto dto) {
-    boolean flag = false;
+  public void delete(CityDto dto) {
     City city = mapper.cityDtoToCity(dto);
-    try{
-      cityRepository.delete(city);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+    cityRepository.delete(city);
   }
 
   @Override

@@ -42,28 +42,14 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public boolean deleteById(long id) {
-    boolean flag = false;
-    try {
-      scheduleRepository.deleteById(id);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+  public void deleteById(long id) {
+    scheduleRepository.deleteById(id);
   }
 
   @Override
-  public boolean delete(ScheduleDto dto) {
-    boolean flag = false;
+  public void delete(ScheduleDto dto) {
     Schedule schedule = scheduleMapper.scheduleDtoToSchedule(dto);
-    try {
-      scheduleRepository.delete(schedule);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+    scheduleRepository.delete(schedule);
   }
 
   @Override
@@ -94,40 +80,31 @@ public class ScheduleServiceImpl implements ScheduleService {
       e.printStackTrace();
     }
     //TODO как грамотно сделать этот запрос в БД
-    List<Schedule> schedules = scheduleRepository.findSchedulesByCityIdOrCityId(idOutCity, idInCity);
+    List<Schedule> schedules = scheduleRepository
+        .findSchedulesByCityIdOrCityId(idOutCity, idInCity);
     List<PairScheduleDTO> pairScheduleDTOS = new ArrayList<>();
     for (int i = 0; i < schedules.size(); i++) {
-      for (int j = 0; j < schedules.size(); j++) {
+      for (Schedule schedule : schedules) {
         if (idOutCity == schedules.get(i).getCity().getId() &&
-            idInCity == schedules.get(j).getCity().getId() &&
-            schedules.get(i).getTrain().getId() == schedules.get(j).getTrain().getId() &&
-            schedules.get(i).getDrivingOrder() < schedules.get(j).getDrivingOrder()
+            idInCity == schedule.getCity().getId() &&
+            schedules.get(i).getTrain().getId() == schedule.getTrain().getId() &&
+            schedules.get(i).getDrivingOrder() < schedule.getDrivingOrder()
         ) {
           PairScheduleDTO pairScheduleDTO = new PairScheduleDTO();
           pairScheduleDTO.setTrainDto(trainMapper.trainToTrainDto(schedules.get(i).getTrain()));
           pairScheduleDTO.setOutScheduleDto(scheduleMapper.scheduleToScheduleDto(schedules.get(i)));
-          pairScheduleDTO.setInScheduleDto(scheduleMapper.scheduleToScheduleDto(schedules.get(j)));
+          pairScheduleDTO.setInScheduleDto(scheduleMapper.scheduleToScheduleDto(schedule));
           pairScheduleDTOS.add(pairScheduleDTO);
         }
       }
     }
 
-    return pairScheduleDTOS;//new ScheduleDAOImpl().findAllTrainAtDateByCities(dateCitiesDTO.getDate(), dateCitiesDTO.getOutCity(), dateCitiesDTO.getInCity());
+    return pairScheduleDTOS;
   }
 
-  public ScheduleDto findScheduleByTrainIdAndCityId(long trainId, long cityId){
-    return scheduleMapper.scheduleToScheduleDto(scheduleRepository.findScheduleByTrainIdAndCityId(trainId, cityId));
+  public ScheduleDto findScheduleByTrainIdAndCityId(long trainId, long cityId) {
+    return scheduleMapper
+        .scheduleToScheduleDto(scheduleRepository.findScheduleByTrainIdAndCityId(trainId, cityId));
   }
-
-//    public List<Pair<Schedule, Schedule>> findAllTrainAtDateByCities(DateCitiesDTO dateCitiesDTO) {
-//    return  new ScheduleDAOImpl().findAllTrainAtDateByCities(dateCitiesDTO.getDate(), dateCitiesDTO.getOutCity(), dateCitiesDTO.getInCity());
-//    }
-//
-//  public List<PairScheduleDTO> findAllTrainAtDateByCities(DateCitiesDTO dateCitiesDTO) {
-//    List<Pair<Schedule, Schedule>> allTrainAtDateByCities = new ScheduleDAOImpl()
-//        .findAllTrainAtDateByCities(dateCitiesDTO.getDate(), dateCitiesDTO.getOutCity(),
-//            dateCitiesDTO.getInCity());
-//    return PairScheduleDTO.convertFromListPairsShedule(allTrainAtDateByCities);
-//  }
 
 }

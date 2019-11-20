@@ -9,5 +9,6 @@ import railwayTransport.software.entity.ticket.Ticket;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
   Ticket findFirstById(Long id);
+
   List<Ticket> findAllByTrainIdAndCarriageIdAndDate(long trainId, long carriageId, Date date);
 }

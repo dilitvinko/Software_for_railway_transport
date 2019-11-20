@@ -1,7 +1,6 @@
 package railwayTransport.software.service.interfaces;
 
 import railwayTransport.software.dto.PersonDto;
-import railwayTransport.software.entity.person.Person;
 
 public interface PersonService extends Service<PersonDto> {
 

@@ -1,5 +1,7 @@
 package railwayTransport.software;
 
+import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
+
 import org.mapstruct.factory.Mappers;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -13,9 +15,6 @@ import railwayTransport.software.dto.mapper.ScheduleMapper;
 import railwayTransport.software.dto.mapper.TicketMapper;
 import railwayTransport.software.dto.mapper.TrainMapper;
 import railwayTransport.software.dto.mapper.TypeCarriageMapper;
-import railwayTransport.software.entity.train.Carriage;
-
-import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
 
 @SpringBootApplication
 public class Application {
@@ -36,34 +35,39 @@ public class Application {
   }
 
   @Bean
-  public CityMapper cityMapper(){
+  public CityMapper cityMapper() {
     return Mappers.getMapper(CityMapper.class);
   }
+
   @Bean
-  public CarriageMapper carriageMapper(){
+  public CarriageMapper carriageMapper() {
     return Mappers.getMapper(CarriageMapper.class);
   }
+
   @Bean
-  PersonMapper personMapper(){
+  PersonMapper personMapper() {
     return Mappers.getMapper(PersonMapper.class);
   }
+
   @Bean
-  ScheduleMapper scheduleMapper(){
+  ScheduleMapper scheduleMapper() {
     return Mappers.getMapper(ScheduleMapper.class);
   }
+
   @Bean
-  TicketMapper ticketMapper(){
+  TicketMapper ticketMapper() {
     return Mappers.getMapper(TicketMapper.class);
   }
+
   @Bean
-  TrainMapper trainMapper(){
+  TrainMapper trainMapper() {
     return Mappers.getMapper(TrainMapper.class);
   }
+
   @Bean
-  TypeCarriageMapper typeCarriageMapper(){
+  TypeCarriageMapper typeCarriageMapper() {
     return Mappers.getMapper(TypeCarriageMapper.class);
   }
-
 
 
 }

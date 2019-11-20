@@ -9,9 +9,11 @@ import railwayTransport.software.entity.train.TypeCarriage;
 public interface TypeCarriageMapper {
 
   TypeCarriageDto typeCcarriageToTypeCarriageDto(TypeCarriage entity);
+
   TypeCarriage typeCarriageDtoToTypeCarriage(TypeCarriageDto dto);
 
   List<TypeCarriageDto> listTypeCarriageToListTypeCarriageDto(List<TypeCarriage> entities);
+
   List<TypeCarriage> listTypeCarriageDtoToListTypeCarriage(List<TypeCarriageDto> dtos);
 
 }

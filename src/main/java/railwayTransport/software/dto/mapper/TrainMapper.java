@@ -10,9 +10,11 @@ public interface TrainMapper {
 
 
   TrainDto trainToTrainDto(Train entity);
+
   Train trainDtoToTrain(TrainDto dto);
 
   List<TrainDto> listTrainToListTrainDto(List<Train> entities);
+
   List<Train> listTrainDtoToListTrain(List<TrainDto> dtos);
 
 

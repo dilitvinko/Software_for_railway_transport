@@ -9,12 +9,12 @@ import railwayTransport.software.entity.schedule.City;
 public interface CityMapper {
 
   CityDto cityToCityDto(City entity);
+
   City cityDtoToCity(CityDto dto);
 
   List<CityDto> listCityToListCityDto(List<City> entities);
+
   List<City> listCityDtoToListCity(List<CityDto> dtos);
-
-
 
 
 }

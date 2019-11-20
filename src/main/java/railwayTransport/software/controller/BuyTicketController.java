@@ -44,21 +44,16 @@ public class BuyTicketController {
     this.ticketService = ticketService;
   }
 
-  @PostMapping("/test")
-  public TrainDto test(@RequestBody TrainDto trainDto){
-
-    return trainService.findById(7);
-  }
-
   @PostMapping("/schedule")
-  public List<PairScheduleDTO> showScheduleAndTrain(@RequestBody DateCitiesDTO dateCitiesDTO, HttpServletResponse response){
+  public List<PairScheduleDTO> showScheduleAndTrain(@RequestBody DateCitiesDTO dateCitiesDTO,
+      HttpServletResponse response) {
 
-    List<PairScheduleDTO> pairScheduleDTOS = scheduleService.findAllTrainAtDateByCities(dateCitiesDTO);
-
+    List<PairScheduleDTO> pairScheduleDTOS = scheduleService
+        .findAllTrainAtDateByCities(dateCitiesDTO);
 
     long idOutCity = 0;
     long idInCity = 0;
-    if(!pairScheduleDTOS.isEmpty()){
+    if (!pairScheduleDTOS.isEmpty()) {
       idOutCity = pairScheduleDTOS.get(0).getOutScheduleDto().getCity().getId();
       idInCity = pairScheduleDTOS.get(0).getInScheduleDto().getCity().getId();
     }
@@ -70,22 +65,19 @@ public class BuyTicketController {
   }
 
   @PostMapping("/carriages")
-  public List<CarriageDto> showCarriagesFromSelectedTrain(@RequestBody TrainDto trainDto, HttpServletResponse response, HttpServletRequest request){
-    //TODO закинуть в  idTrain, ?idInSchedule,? idOutSchedule (уже есть idOutCity, idInCity,  Date)
+  public List<CarriageDto> showCarriagesFromSelectedTrain(@RequestBody TrainDto trainDto,
+      HttpServletResponse response) {
     long idTrain = trainDto.getId();
     response.addCookie(new Cookie("idTrain", String.valueOf(idTrain)));
 
     //TODO показывать цены в ваганоах относительно длины пути
     trainDto = trainService.findById(trainDto.getId());
-    List<CarriageDto> carriageDtos = new ArrayList<>();
-    carriageDtos.addAll(trainDto.getCarriages());
-    return carriageDtos;
+    return new ArrayList<>(trainDto.getCarriages());
   }
 
   @PostMapping("/freeSeats")
-  public List<Integer> showFreeSeatsFromSelectedCarriage(@RequestBody CarriageDto carriageDto, HttpServletRequest request, HttpServletResponse response){
-
-
+  public List<Integer> showFreeSeatsFromSelectedCarriage(@RequestBody CarriageDto carriageDto,
+      HttpServletRequest request, HttpServletResponse response) {
 
     Cookie[] cookies = request.getCookies();
     long idOutCity = CookieManager.getIdValueOfCookie(cookies, "idOutCity");
@@ -103,14 +95,12 @@ public class BuyTicketController {
     response.addCookie(new Cookie("idOutSchedule", String.valueOf(scheduleOutDto.getId())));
     response.addCookie(new Cookie("idInSchedule", String.valueOf(scheduleInDto.getId())));
 
-    List<Integer> seats = new ArrayList<>();
-    seats.addAll(ticketService.freeSeatsInCarriage(carriageDto, scheduleOutDto, scheduleInDto, date));
-
-    return seats;
+    return new ArrayList<>(
+        ticketService.freeSeatsInCarriage(carriageDto, scheduleOutDto, scheduleInDto, date));
   }
 
   @PostMapping("/buyTicket")
-  public TicketDto buyTicket(@RequestBody Integer numberSeat, HttpServletRequest request, HttpServletResponse response){
+  public TicketDto buyTicket(@RequestBody Integer numberSeat, HttpServletRequest request) {
 
     Cookie[] cookies = request.getCookies();
     long idOutSchedule = CookieManager.getIdValueOfCookie(cookies, "idOutSchedule");
@@ -129,7 +119,6 @@ public class BuyTicketController {
 
     return ticketService.create(ticketDto);
   }
-
 
 
 }

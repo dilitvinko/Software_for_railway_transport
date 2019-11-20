@@ -1,7 +1,6 @@
 package railwayTransport.software.service;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -20,7 +19,7 @@ import railwayTransport.software.entity.train.Carriage;
 import railwayTransport.software.service.interfaces.TicketService;
 
 @Service
-public class TicketServiceImpl  implements TicketService {
+public class TicketServiceImpl implements TicketService {
 
   private final TicketRepository ticketRepository;
   private final TicketMapper mapper;
@@ -51,28 +50,14 @@ public class TicketServiceImpl  implements TicketService {
   }
 
   @Override
-  public boolean deleteById(long id) {
-    boolean flag = false;
-    try{
-      ticketRepository.deleteById(id);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+  public void deleteById(long id) {
+    ticketRepository.deleteById(id);
   }
 
   @Override
-  public boolean delete(TicketDto dto) {
-    boolean flag = false;
+  public void delete(TicketDto dto) {
     Ticket ticket = mapper.ticketDtotoTicket(dto);
-    try{
-      ticketRepository.delete(ticket);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+    ticketRepository.delete(ticket);
   }
 
   @Override
@@ -91,10 +76,11 @@ public class TicketServiceImpl  implements TicketService {
     return dto;
   }
 
-  public Set<Integer> freeSeatsInCarriage(CarriageDto carriageDto, ScheduleDto scheduleOutDto, ScheduleDto scheduleInDto, Date date) {
+  public Set<Integer> freeSeatsInCarriage(CarriageDto carriageDto, ScheduleDto scheduleOutDto,
+      ScheduleDto scheduleInDto, Date date) {
     carriageDto = carriageService.findById(carriageDto.getId());
-    List<Ticket> reservedTickets = ticketRepository.findAllByTrainIdAndCarriageIdAndDate(carriageDto.getTrainId(), carriageDto.getId(), date);
-
+    List<Ticket> reservedTickets = ticketRepository
+        .findAllByTrainIdAndCarriageIdAndDate(carriageDto.getTrainId(), carriageDto.getId(), date);
 
     Set<Integer> seats = new HashSet<>();
     for (int i = 1; i <= carriageDto.getTypeCarriage().getAmountSeats(); i++) {
@@ -105,15 +91,17 @@ public class TicketServiceImpl  implements TicketService {
     int idOrderInCity = scheduleInDto.getDrivingOrder();
     for (Ticket ticket :
         reservedTickets) {
-      if (!((idOrderOutCity >= ticket.getInSchedule().getId() && idOrderOutCity >= ticket.getInSchedule().getId()) ||
-          (idOrderOutCity <= ticket.getOutSchedule().getId() && idOrderInCity <= ticket.getOutSchedule().getId()))) {
+      if (!((idOrderOutCity >= ticket.getInSchedule().getId() && idOrderOutCity >= ticket
+          .getInSchedule().getId()) ||
+          (idOrderOutCity <= ticket.getOutSchedule().getId() && idOrderInCity <= ticket
+              .getOutSchedule().getId()))) {
         seats.remove(ticket.getNumberSeat());
       }
     }
     return seats;
   }
 
-  public double calculatePrice(long idOutScheduleDto, long idInScheduleDto, long idCarriageDto){
+  public double calculatePrice(long idOutScheduleDto, long idInScheduleDto, long idCarriageDto) {
 
     LocalTime outTime = scheduleRepository.getOne(idOutScheduleDto).getTime().toLocalTime();
     LocalTime inTime = scheduleRepository.getOne(idInScheduleDto).getTime().toLocalTime();

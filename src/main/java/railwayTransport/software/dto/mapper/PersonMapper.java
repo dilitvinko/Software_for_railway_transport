@@ -7,10 +7,13 @@ import railwayTransport.software.entity.person.Person;
 
 @Mapper
 public interface PersonMapper {
+
   PersonDto personToPersonDto(Person entity);
+
   Person personDtoToPerson(PersonDto dto);
 
   List<PersonDto> listPersonToListPersonDto(List<Person> entities);
+
   List<Person> listPersonDtoToListPerson(List<PersonDto> dtos);
 
 }

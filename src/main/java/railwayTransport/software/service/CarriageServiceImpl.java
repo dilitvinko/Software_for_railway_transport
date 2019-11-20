@@ -2,8 +2,6 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CarriageRepository;
 import railwayTransport.software.dto.CarriageDto;
@@ -14,8 +12,8 @@ import railwayTransport.software.service.interfaces.CarriageService;
 @Service
 public class CarriageServiceImpl implements CarriageService {
 
- private final CarriageRepository carriageRepository;
- private final CarriageMapper mapper;
+  private final CarriageRepository carriageRepository;
+  private final CarriageMapper mapper;
 
   public CarriageServiceImpl(
       CarriageRepository carriageRepository, CarriageMapper mapper) {
@@ -35,28 +33,14 @@ public class CarriageServiceImpl implements CarriageService {
   }
 
   @Override
-  public boolean deleteById(long id) {
-    boolean flag = false;
-    try{
-      carriageRepository.deleteById(id);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+  public void deleteById(long id) {
+    carriageRepository.deleteById(id);
   }
 
   @Override
-  public boolean delete(CarriageDto dto) {
-    boolean flag = false;
+  public void delete(CarriageDto dto) {
     Carriage carriage = mapper.carriageDtoToCarriage(dto);
-    try{
-      carriageRepository.delete(carriage);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+    carriageRepository.delete(carriage);
   }
 
   @Override

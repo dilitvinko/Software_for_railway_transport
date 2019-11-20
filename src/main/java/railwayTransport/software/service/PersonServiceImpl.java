@@ -1,8 +1,6 @@
 package railwayTransport.software.service;
 
 import java.util.List;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.PersonRepository;
 import railwayTransport.software.dto.PersonDto;
@@ -33,28 +31,14 @@ public class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public boolean deleteById(long id) {
-    boolean flag = false;
-    try{
-      personRepository.deleteById(id);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+  public void deleteById(long id) {
+    personRepository.deleteById(id);
   }
 
   @Override
-  public boolean delete(PersonDto dto) {
-    boolean flag = false;
+  public void delete(PersonDto dto) {
     Person person = mapper.personDtoToPerson(dto);
-    try{
-      personRepository.delete(person);
-      flag = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return flag;
+    personRepository.delete(person);
   }
 
   @Override

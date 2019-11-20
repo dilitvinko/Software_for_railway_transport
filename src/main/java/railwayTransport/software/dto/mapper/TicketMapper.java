@@ -9,9 +9,11 @@ import railwayTransport.software.entity.ticket.Ticket;
 public interface TicketMapper {
 
   TicketDto ticketToTicketDto(Ticket entity);
+
   Ticket ticketDtotoTicket(TicketDto dto);
 
   List<TicketDto> listTicketToListTicketDto(List<Ticket> entities);
+
   List<Ticket> listTicketDtoToListTicket(List<TicketDto> dtos);
 
 }
