@@ -26,7 +26,7 @@ public class ExceptionFilter implements Filter {
     } catch (Exception e) {
       HttpServletResponse res = (HttpServletResponse) servletResponse;
       res.setHeader("exception", e.getCause().getMessage());
-      res.setStatus(HttpServletResponse.SC_CONFLICT);
+      res.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
   }

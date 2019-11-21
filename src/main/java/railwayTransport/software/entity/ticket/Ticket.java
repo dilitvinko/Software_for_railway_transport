@@ -1,5 +1,6 @@
 package railwayTransport.software.entity.ticket;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.sql.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -40,7 +41,8 @@ public class Ticket extends BaseEntity {
   private Schedule outSchedule;
   private Date date;
   private double price;
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JsonBackReference(value = "person-ticket")
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "person_id")
   private Person person;
 

@@ -18,7 +18,7 @@ import railwayTransport.software.service.CityServiceImpl;
 @Log4j
 
 @RestController
-@RequestMapping("/city")
+@RequestMapping("/cities")
 public class CityController {
 
   //TODO логирование
@@ -31,7 +31,7 @@ public class CityController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public List<CityDto> findAllCities() {
     log.info("Get List<Dto> ");
     return cityService.findAll();

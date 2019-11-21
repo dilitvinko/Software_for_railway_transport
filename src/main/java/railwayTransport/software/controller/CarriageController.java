@@ -18,7 +18,7 @@ import railwayTransport.software.service.CarriageServiceImpl;
 @Log4j
 
 @RestController
-@RequestMapping("/carriage")
+@RequestMapping("/carriages")
 public class CarriageController {
 
   private final CarriageServiceImpl carriageService;
@@ -28,7 +28,7 @@ public class CarriageController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public List<CarriageDto> findAllCarriages() {
     log.info("Get List<Dto> ");
     return carriageService.findAll();

@@ -17,7 +17,7 @@ import railwayTransport.software.service.TrainServiceImpl;
 
 @Log4j
 @RestController
-@RequestMapping("/train")
+@RequestMapping("/trains")
 public class TrainController {
 
   private final TrainServiceImpl trainService;
@@ -27,7 +27,7 @@ public class TrainController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public List<TrainDto> findAllTrains() {
     return trainService.findAll();
   }

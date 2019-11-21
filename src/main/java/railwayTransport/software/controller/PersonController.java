@@ -17,7 +17,7 @@ import railwayTransport.software.service.PersonServiceImpl;
 
 @Log4j
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/persons")
 public class PersonController {
 
   private final PersonServiceImpl personService;
@@ -27,7 +27,7 @@ public class PersonController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public List<PersonDto> findAllPersons() {
     log.info("Get List<Dto> ");
     return personService.findAll();

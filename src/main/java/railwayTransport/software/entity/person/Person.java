@@ -1,5 +1,6 @@
 package railwayTransport.software.entity.person;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -34,6 +35,7 @@ public class Person extends BaseEntity {
   @CollectionTable(name = "person_role", joinColumns = @JoinColumn(name = "person_id"))
   @Enumerated(EnumType.STRING)
   private Set<Role> roles;
+  @JsonManagedReference(value = "person-ticket")
   @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Ticket> tickets;
   private int experience;

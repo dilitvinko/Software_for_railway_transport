@@ -1,6 +1,5 @@
 package railwayTransport.software.service;
 
-import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -11,6 +10,7 @@ import railwayTransport.software.daoJPA.repository.CarriageRepository;
 import railwayTransport.software.daoJPA.repository.ScheduleRepository;
 import railwayTransport.software.daoJPA.repository.TicketRepository;
 import railwayTransport.software.dto.CarriageDto;
+import railwayTransport.software.dto.CarriageTrainCitiesDateDto;
 import railwayTransport.software.dto.ScheduleDto;
 import railwayTransport.software.dto.TicketDto;
 import railwayTransport.software.dto.mapper.TicketMapper;
@@ -76,11 +76,13 @@ public class TicketServiceImpl implements TicketService {
     return dto;
   }
 
-  public Set<Integer> freeSeatsInCarriage(CarriageDto carriageDto, ScheduleDto scheduleOutDto,
-      ScheduleDto scheduleInDto, Date date) {
-    carriageDto = carriageService.findById(carriageDto.getId());
+  public Set<Integer> freeSeatsInCarriage(CarriageTrainCitiesDateDto carriageTrainCitiesDateDto,
+      ScheduleDto scheduleOutDto,
+      ScheduleDto scheduleInDto) {
+    CarriageDto carriageDto = carriageService.findById(carriageTrainCitiesDateDto.getIdCarriage());
     List<Ticket> reservedTickets = ticketRepository
-        .findAllByTrainIdAndCarriageIdAndDate(carriageDto.getTrainId(), carriageDto.getId(), date);
+        .findAllByTrainIdAndCarriageIdAndDate(carriageDto.getIdTrain(), carriageDto.getId(),
+            carriageTrainCitiesDateDto.getDate());
 
     Set<Integer> seats = new HashSet<>();
     for (int i = 1; i <= carriageDto.getTypeCarriage().getAmountSeats(); i++) {

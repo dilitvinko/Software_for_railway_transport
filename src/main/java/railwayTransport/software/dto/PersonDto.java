@@ -21,7 +21,7 @@ public class PersonDto extends AbstractDto {
   private String login;
   private String password;
   private Set<Role> roles;
-  @JsonManagedReference(value = "person-ticket")
+
   private Set<TicketDto> tickets;
   private int experience;
 

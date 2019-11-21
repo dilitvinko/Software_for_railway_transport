@@ -17,7 +17,7 @@ import railwayTransport.software.service.TicketServiceImpl;
 
 @Log4j
 @RestController
-@RequestMapping("/ticket")
+@RequestMapping("/tickets")
 public class TicketController {
 
   private final TicketServiceImpl ticketService;
@@ -27,7 +27,7 @@ public class TicketController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public List<TicketDto> findAllTickets() {
     log.info("Get List<Dto> ");
     return ticketService.findAll();

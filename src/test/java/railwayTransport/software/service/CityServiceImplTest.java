@@ -38,8 +38,8 @@ public class CityServiceImplTest {
   @Test
   public void findAll() {
     when(cityRepository.findAll())
-        .thenReturn(List.of(City.builder().id(1).name("Moscow").build(),
-            City.builder().id(2).name("Minsk").build()));
+        .thenReturn(List.of(City.builder().id(1L).name("Moscow").build(),
+            City.builder().id(2L).name("Minsk").build()));
     Assert.assertEquals(List.of(CityDto.builder().id(1L).name("Moscow").build(),
         CityDto.builder().id(2L).name("Minsk").build()), cityService.findAll());
     verify(cityRepository, atLeastOnce()).findAll();
@@ -49,7 +49,7 @@ public class CityServiceImplTest {
   @Test
   public void findById() {
     when(cityRepository.getOne(1L))
-        .thenReturn(City.builder().id(1).name("Moscow").build());
+        .thenReturn(City.builder().id(1L).name("Moscow").build());
     Assert.assertEquals(CityDto.builder().id(1L).name("Moscow").build(), cityService.findById(1L));
     verify(cityRepository, atLeastOnce()).getOne(1L);
   }
@@ -79,7 +79,7 @@ public class CityServiceImplTest {
   @Test
   public void update() {
     City city = new City("Moscow");
-    city.setId(1);
+    city.setId(1L);
     when(cityRepository.saveAndFlush(city))
         .thenReturn(City.builder().id(1L).name("Moscow").build());
     Assert.assertEquals(CityDto.builder().id(1L).name("Moscow").build(),

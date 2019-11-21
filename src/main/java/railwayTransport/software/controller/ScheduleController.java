@@ -17,7 +17,7 @@ import railwayTransport.software.service.ScheduleServiceImpl;
 
 @Log4j
 @RestController
-@RequestMapping("/schedule")
+@RequestMapping("/schedules")
 public class ScheduleController {
 
   private final ScheduleServiceImpl scheduleService;
@@ -27,7 +27,7 @@ public class ScheduleController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public List<ScheduleDto> findAllSchedules() {
     log.info("Get List<Dto> ");
     return scheduleService.findAll();

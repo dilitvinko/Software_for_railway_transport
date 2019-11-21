@@ -17,7 +17,7 @@ import railwayTransport.software.service.TypeCarriageServiceImpl;
 
 @Log4j
 @RestController
-@RequestMapping("/typecarriage")
+@RequestMapping("/typecarriages")
 public class TypeCarriageController {
 
   private final TypeCarriageServiceImpl typeCarriageService;
@@ -27,7 +27,7 @@ public class TypeCarriageController {
   }
 
 
-  @GetMapping("/all")
+  @GetMapping
   public List<TypeCarriageDto> findAllTypeCarriages() {
     log.info("Get List<Dto> ");
     return typeCarriageService.findAll();

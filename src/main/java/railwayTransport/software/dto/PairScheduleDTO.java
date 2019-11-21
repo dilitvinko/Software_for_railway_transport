@@ -17,7 +17,5 @@ public class PairScheduleDTO {
   private TrainDto trainDto;
   private ScheduleDto outScheduleDto;
   private ScheduleDto inScheduleDto;
-  private Time outTime;
-  private Time inTime;
 
 }

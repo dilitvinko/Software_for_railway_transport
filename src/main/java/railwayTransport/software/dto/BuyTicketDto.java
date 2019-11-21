@@ -2,25 +2,24 @@ package railwayTransport.software.dto;
 
 import java.sql.Date;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TicketDto extends AbstractDto {
+public class BuyTicketDto {
 
   private int numberSeat;
-  private CarriageDto carriage;
-  private TrainDto train;
-  private ScheduleDto inSchedule;
-  private ScheduleDto outSchedule;
+  private Long idCarriage;
+  private Long idTrain;
+  private Long idOutSchedule;
+  private Long idInSchedule;
   private Date date;
-  private double price;
   private Long idPerson;
 
 }

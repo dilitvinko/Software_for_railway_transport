@@ -1,21 +1,23 @@
 package railwayTransport.software.dto;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-
 
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarriageDto extends AbstractDto {
+public class CarriageTrainCitiesDateDto {
 
-  private int number;
-  private TypeCarriageDto typeCarriage;
+  private Long idCarriage;
   private Long idTrain;
+  private Long idOutCity;
+  private Long idInCity;
+  private Date date;
 
 }
