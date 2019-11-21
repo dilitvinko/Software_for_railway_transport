@@ -7,6 +7,7 @@
     <groupId>Software_for_railway_transport</groupId>
     <artifactId>Software_for_railway_transport</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -128,20 +129,21 @@
     </dependencies>
 
   <build>
+    <finalName>softwareForRailwayTransport</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>softwareForRailwayTransport.Application</mainClass>
+          <mainClass>railwayTransport.software.Application</mainClass>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>9</source>
-          <target>9</target>
+          <source>8</source>
+          <target>8</target>
         </configuration>
       </plugin>
     </plugins>

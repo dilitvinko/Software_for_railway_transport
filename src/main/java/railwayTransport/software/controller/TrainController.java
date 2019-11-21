@@ -23,7 +23,6 @@ public class TrainController {
   private final TrainServiceImpl trainService;
 
   public TrainController(TrainServiceImpl trainService) {
-    log.info("Get List<Dto> ");
     this.trainService = trainService;
   }
 

@@ -16,6 +16,6 @@ public class CarriageDto extends AbstractDto {
 
   private int number;
   private TypeCarriageDto typeCarriage;
-  private long TrainId;
+  private long trainId;
 
 }
