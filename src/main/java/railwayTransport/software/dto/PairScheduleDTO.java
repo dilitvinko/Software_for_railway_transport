@@ -1,6 +1,5 @@
 package railwayTransport.software.dto;
 
-import java.sql.Time;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

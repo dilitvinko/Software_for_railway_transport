@@ -1,6 +1,5 @@
 package railwayTransport.software.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

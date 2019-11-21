@@ -1,6 +1,5 @@
 package railwayTransport.software.service;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

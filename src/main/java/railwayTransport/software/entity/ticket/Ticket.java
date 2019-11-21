@@ -2,7 +2,6 @@ package railwayTransport.software.entity.ticket;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.sql.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
