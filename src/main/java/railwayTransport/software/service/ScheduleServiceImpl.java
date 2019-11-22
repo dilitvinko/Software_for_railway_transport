@@ -91,9 +91,9 @@ public class ScheduleServiceImpl implements ScheduleService {
             schedules.get(i).getDrivingOrder() < schedule.getDrivingOrder()
         ) {
           PairScheduleDTO pairScheduleDTO = new PairScheduleDTO();
-          pairScheduleDTO.setTrainDto(trainMapper.trainToTrainDto(schedules.get(i).getTrain()));
-          pairScheduleDTO.setOutScheduleDto(scheduleMapper.scheduleToScheduleDto(schedules.get(i)));
-          pairScheduleDTO.setInScheduleDto(scheduleMapper.scheduleToScheduleDto(schedule));
+          pairScheduleDTO.setTrain(trainMapper.trainToTrainDto(schedules.get(i).getTrain()));
+          pairScheduleDTO.setOutSchedule(scheduleMapper.scheduleToScheduleDto(schedules.get(i)));
+          pairScheduleDTO.setInSchedule(scheduleMapper.scheduleToScheduleDto(schedule));
           pairScheduleDTOS.add(pairScheduleDTO);
         }
       }

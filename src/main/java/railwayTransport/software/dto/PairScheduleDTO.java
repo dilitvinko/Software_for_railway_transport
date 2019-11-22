@@ -13,8 +13,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class PairScheduleDTO {
 
-  private TrainDto trainDto;
-  private ScheduleDto outScheduleDto;
-  private ScheduleDto inScheduleDto;
+  private TrainDto train;
+  private ScheduleDto outSchedule;
+  private ScheduleDto inSchedule;
 
 }

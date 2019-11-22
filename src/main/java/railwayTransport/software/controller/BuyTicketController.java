@@ -1,11 +1,14 @@
 package railwayTransport.software.controller;
 
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import railwayTransport.software.dto.BuyTicketDto;
 import railwayTransport.software.dto.CarriageDto;
@@ -45,19 +48,20 @@ public class BuyTicketController {
     this.personService = personService;
   }
 
-  @PostMapping("/schedule")
-  public List<PairScheduleDTO> showScheduleAndTrain(@RequestBody DateCitiesDTO dateCitiesDTO) {
+  @GetMapping("/schedule")
+  public List<PairScheduleDTO> showScheduleAndTrain(
+      @RequestParam Date date, @RequestParam String outCity, @RequestParam String inCity) {
 
-    List<PairScheduleDTO> pairScheduleDTOS = scheduleService
-        .findAllTrainAtDateByCities(dateCitiesDTO);
-    return pairScheduleDTOS;
+    return scheduleService.findAllTrainAtDateByCities(
+        DateCitiesDTO.builder().date(date).outCity(outCity).inCity(inCity).build());
   }
 
-  @PostMapping("/carriages")
-  public Set<CarriageDto> showCarriagesFromSelectedTrain(@RequestBody PairScheduleDTO pairScheduleDTO) {
+  @GetMapping("/carriages")
+  public Set<CarriageDto> showCarriagesFromSelectedTrain(
+      @RequestBody PairScheduleDTO pairScheduleDTO) {
 
     //TODO показывать цены в ваганоах относительно длины пути
-    TrainDto trainDto = trainService.findById(pairScheduleDTO.getTrainDto().getId());
+    TrainDto trainDto = trainService.findById(pairScheduleDTO.getTrain().getId());
     return trainDto.getCarriages();
   }
 
