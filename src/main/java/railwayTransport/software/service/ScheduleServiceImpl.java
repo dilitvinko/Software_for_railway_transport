@@ -1,5 +1,6 @@
 package railwayTransport.software.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -68,14 +69,13 @@ public class ScheduleServiceImpl implements ScheduleService {
     return dto;
   }
 
-  public List<PairScheduleDTO> findAllTrainAtDateByCities(
-      DateCitiesDTO dateCitiesDTO) {
+  public List<PairScheduleDTO> findAllTrainAtDateByCities(Date date, String outCity, String inCity) {
     //TODO обработать ошибки если не найдет в базе города
     long idOutCity = 0;
     long idInCity = 0;
     try {
-      idOutCity = cityRepository.findByName(dateCitiesDTO.getOutCity()).getId();
-      idInCity = cityRepository.findByName(dateCitiesDTO.getInCity()).getId();
+      idOutCity = cityRepository.findByName(outCity).getId();
+      idInCity = cityRepository.findByName(inCity).getId();
     } catch (Exception e) {
       e.printStackTrace();
     }
