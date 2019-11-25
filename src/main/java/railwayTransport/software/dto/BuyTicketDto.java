@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Getter
 @Setter
@@ -14,12 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BuyTicketDto {
 
+  private Long idPerson;
   private int numberSeat;
   private Long idCarriage;
   private Long idTrain;
-  private Long idOutSchedule;
-  private Long idInSchedule;
   private Date date;
-  private Long idPerson;
+  private String outCity;
+  private String inCity;
 
 }

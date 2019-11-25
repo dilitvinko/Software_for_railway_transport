@@ -58,4 +58,10 @@ public class CityServiceImpl implements CityService {
     dto = mapper.cityToCityDto(city);
     return dto;
   }
+
+  @Override
+  public CityDto findByName(String nameCity) {
+
+    return mapper.cityToCityDto(cityRepository.findByName(nameCity));
+  }
 }

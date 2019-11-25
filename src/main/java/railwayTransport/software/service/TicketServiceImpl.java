@@ -11,6 +11,7 @@ import railwayTransport.software.daoJPA.repository.CarriageRepository;
 import railwayTransport.software.daoJPA.repository.CityRepository;
 import railwayTransport.software.daoJPA.repository.ScheduleRepository;
 import railwayTransport.software.daoJPA.repository.TicketRepository;
+import railwayTransport.software.dto.FreeSeatsDTO;
 import railwayTransport.software.dto.TicketDto;
 import railwayTransport.software.dto.mapper.TicketMapper;
 import railwayTransport.software.entity.schedule.Schedule;
@@ -24,20 +25,19 @@ public class TicketServiceImpl implements TicketService {
   private final TicketRepository ticketRepository;
   private final TicketMapper mapper;
   private final CarriageRepository carriageRepository;
-  private final CarriageServiceImpl carriageService;
   private final ScheduleRepository scheduleRepository;
   private final CityRepository cityRepository;
+
+  private final static long MINUT_IN_HOUR = 60 * 24;
 
   public TicketServiceImpl(
       TicketRepository ticketRepository, TicketMapper mapper,
       CarriageRepository carriageRepository,
-      CarriageServiceImpl carriageService,
       ScheduleRepository scheduleRepository,
       CityRepository cityRepository) {
     this.ticketRepository = ticketRepository;
     this.mapper = mapper;
     this.carriageRepository = carriageRepository;
-    this.carriageService = carriageService;
     this.scheduleRepository = scheduleRepository;
     this.cityRepository = cityRepository;
   }
@@ -80,8 +80,8 @@ public class TicketServiceImpl implements TicketService {
   }
 
   @Override
-  public Set<Integer> findFreeSeatsInCarriage(Long idCarriage, Long idTrain, Date date, String outCity,
-      String inCity) {
+  public FreeSeatsDTO findFreeSeatsInCarriage(Long idCarriage, Long idTrain, Date date,
+      String outCity, String inCity) {
 
     List<Ticket> reservedTickets = ticketRepository
         .findAllByTrainIdAndCarriageIdAndDate(idTrain, idCarriage, date);
@@ -110,15 +110,16 @@ public class TicketServiceImpl implements TicketService {
         seats.remove(ticket.getNumberSeat());
       }
     }
-    return seats;
+
+    return FreeSeatsDTO.builder().freeSeats(seats).build();
   }
 
   @Override
   public int findAmountFreeSeatsInCarriage(Long idCarriage, Long idTrain, Date date, String outCity,
       String inCity) {
-    Set<Integer> freeSeats = findFreeSeatsInCarriage(idCarriage, idTrain, date, outCity, inCity);
-    int allSeats = carriageRepository.getOne(idCarriage).getTypeCarriage().getAmountSeats();
-    return allSeats - freeSeats.size();
+
+    return findFreeSeatsInCarriage(idCarriage, idTrain, date, outCity, inCity)
+        .getFreeSeats().size();
   }
 
   @Override
@@ -133,6 +134,9 @@ public class TicketServiceImpl implements TicketService {
     LocalTime outTime = outSchedule.getTime().toLocalTime();
     LocalTime inTime = inSchedule.getTime().toLocalTime();
     long minutes = Duration.between(outTime, inTime).toMinutes();
+    if (minutes < 0){
+      minutes += MINUT_IN_HOUR;
+    }
 
     Carriage carriage = carriageRepository.getOne(idCarriage);
 

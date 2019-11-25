@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CityRepository;
 import railwayTransport.software.daoJPA.repository.ScheduleRepository;
-import railwayTransport.software.dto.DateCitiesDTO;
 import railwayTransport.software.dto.PairScheduleDTO;
 import railwayTransport.software.dto.ScheduleDto;
 import railwayTransport.software.dto.mapper.ScheduleMapper;

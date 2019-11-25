@@ -34,7 +34,7 @@ public class TicketController {
   }
 
   @GetMapping("/{id}")
-  public TicketDto getCarriage(@PathVariable Long id) {
+  public TicketDto getSchedule(@PathVariable Long id) {
     log.info("Get Dto by id =  " + id);
     return ticketService.findById(id);
   }

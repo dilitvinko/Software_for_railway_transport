@@ -1,6 +1,7 @@
 package railwayTransport.software.controller;
 
 import java.util.List;
+import java.util.Set;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import railwayTransport.software.dto.PersonDto;
+import railwayTransport.software.dto.TicketDto;
 import railwayTransport.software.service.PersonServiceImpl;
 
 @Log4j
@@ -34,9 +36,15 @@ public class PersonController {
   }
 
   @GetMapping("/{id}")
-  public PersonDto getCarriage(@PathVariable Long id) {
+  public PersonDto getPerson(@PathVariable Long id) {
     log.info("Get Dto by id =  " + id);
     return personService.findById(id);
+  }
+
+  @GetMapping("/{id}/tickets")
+  public Set<TicketDto> getTicketsFromPerson(@PathVariable Long id) {
+    log.info("Get Dto by id =  " + id);
+    return personService.findById(id).getTickets();
   }
 
   @PostMapping

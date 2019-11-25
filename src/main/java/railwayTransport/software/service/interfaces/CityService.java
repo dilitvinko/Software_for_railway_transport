@@ -4,4 +4,6 @@ import railwayTransport.software.dto.CityDto;
 
 public interface CityService extends Service<CityDto> {
 
+  CityDto findByName(String nameCity);
+
 }

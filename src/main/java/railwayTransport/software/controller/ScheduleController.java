@@ -34,7 +34,7 @@ public class ScheduleController {
   }
 
   @GetMapping("/{id}")
-  public ScheduleDto getCarriage(@PathVariable Long id) {
+  public ScheduleDto getSchedule(@PathVariable Long id) {
     log.info("Get Dto by id =  " + id);
     return scheduleService.findById(id);
   }

@@ -1,6 +1,7 @@
 package railwayTransport.software.controller;
 
 import java.util.List;
+import java.util.Set;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import railwayTransport.software.dto.CarriageDto;
 import railwayTransport.software.dto.TrainDto;
 import railwayTransport.software.service.TrainServiceImpl;
 
@@ -36,6 +38,12 @@ public class TrainController {
   public TrainDto getTrain(@PathVariable Long id) {
     log.info("Get Dto by id =  " + id);
     return trainService.findById(id);
+  }
+
+  @GetMapping("/{id}/carriages")
+  public Set<CarriageDto> getCarriagesFromTrain(@PathVariable Long id) {
+    log.info("Get Dto by id =  " + id);
+    return trainService.findById(id).getCarriages();
   }
 
   @PostMapping
