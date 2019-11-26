@@ -1,15 +1,21 @@
 package railwayTransport.software.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.PersonRepository;
 import railwayTransport.software.dto.PersonDto;
 import railwayTransport.software.dto.mapper.PersonMapper;
 import railwayTransport.software.entity.person.Person;
+import railwayTransport.software.entity.person.Role;
 import railwayTransport.software.service.interfaces.PersonService;
 
 @Service
-public class PersonServiceImpl implements PersonService {
+public class PersonServiceImpl implements PersonService, UserDetailsService {
 
   private final PersonRepository personRepository;
   private final PersonMapper mapper;
@@ -55,5 +61,11 @@ public class PersonServiceImpl implements PersonService {
     personRepository.saveAndFlush(person);
     dto = mapper.personToPersonDto(person);
     return dto;
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+
+    return personRepository.findUserByLogin(s);
   }
 }

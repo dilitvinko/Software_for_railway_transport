@@ -1,7 +1,10 @@
 package railwayTransport.software.entity.person;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -16,6 +19,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import railwayTransport.software.entity.BaseEntity;
 import railwayTransport.software.entity.ticket.Ticket;
 
@@ -25,7 +31,7 @@ import railwayTransport.software.entity.ticket.Ticket;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person extends BaseEntity {
+public class Person extends BaseEntity implements UserDetails {
 
   private String name;
   private String surname;
@@ -41,4 +47,46 @@ public class Person extends BaseEntity {
   private int experience;
 
 
+  //private boolean active;
+
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return roles.stream()
+        .map(role ->
+            new SimpleGrantedAuthority(role.name())
+        ).collect(Collectors.toList());
+  }
+
+  private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> userRoles) {
+    return userRoles.stream()
+        .map(role ->
+            new SimpleGrantedAuthority(role.name())
+        ).collect(Collectors.toList());
+  }
+
+  @Override
+  public String getUsername() {
+    return login;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 }

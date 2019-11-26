@@ -1,7 +1,14 @@
 package railwayTransport.software.entity.person;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
   USER,
   ADMIN,
-  CREATERTIMETABLES
+  CREATERTIMETABLES;
+
+  @Override
+  public String getAuthority() {
+    return name();
+  }
 }
