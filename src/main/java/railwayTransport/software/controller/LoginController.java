@@ -15,10 +15,10 @@ import railwayTransport.software.service.PersonServiceImpl;
 public class LoginController {
 
   @Autowired
-  AuthenticationManager authenticationManager;
+  private AuthenticationManager authenticationManager;
 
   @Autowired
-  PersonServiceImpl personService;
+  private PersonServiceImpl personService;
 
   @GetMapping("/")
   public String helloPage() {

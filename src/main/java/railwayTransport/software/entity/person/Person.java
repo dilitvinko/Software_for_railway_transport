@@ -34,7 +34,7 @@ import railwayTransport.software.entity.ticket.Ticket;
 @AllArgsConstructor
 public class Person extends BaseEntity implements UserDetails {
 
-  
+
   private String name;
   private String surname;
   private String login;

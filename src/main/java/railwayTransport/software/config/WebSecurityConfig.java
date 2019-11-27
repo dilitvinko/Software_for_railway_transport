@@ -16,7 +16,7 @@ import railwayTransport.software.service.PersonServiceImpl;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
-  PersonServiceImpl personService;
+  private PersonServiceImpl personService;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
