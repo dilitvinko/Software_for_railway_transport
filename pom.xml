@@ -136,7 +136,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>Application</mainClass>
+          <mainClass>railwayTransport.software.Application</mainClass>
         </configuration>
       </plugin>
       <plugin>

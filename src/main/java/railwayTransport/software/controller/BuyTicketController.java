@@ -3,6 +3,7 @@ package railwayTransport.software.controller;
 
 import java.sql.Date;
 import java.util.List;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,10 +64,12 @@ public class BuyTicketController {
   }
 
   @PostMapping("/buyTicket")
-  public TicketDto buyTicket(@RequestBody BuyTicketDto buyTicketDto) {
+  public TicketDto buyTicket(@RequestBody @Validated BuyTicketDto buyTicketDto) {
 
     return buyTicketService.buyTicket(buyTicketDto);
   }
+
+
 
 
 }

@@ -3,6 +3,7 @@ package railwayTransport.software.controller;
 import java.util.List;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,14 +45,14 @@ public class CityController {
   }
 
   @PostMapping
-  public CityDto createCity(@RequestBody CityDto cityDto) {
+  public CityDto createCity(@RequestBody @Validated CityDto cityDto) {
     log.info("Create Dto");
     return cityService.create(cityDto);
   }
 
   @DeleteMapping
   public @ResponseBody
-  Response deleteCity(@RequestBody CityDto cityDto) {
+  Response deleteCity(@RequestBody @Validated CityDto cityDto) {
     log.info("Delete Dto by dto");
     cityService.delete(cityDto);
     return Response.status(Response.Status.OK.getStatusCode()).build();
@@ -59,14 +60,14 @@ public class CityController {
 
   @DeleteMapping("/{id}")
   public @ResponseBody
-  Response deleteByIdCity(@PathVariable Long id) {
+  Response deleteByIdCity(@PathVariable @Validated Long id) {
     log.info("Delete Dto by id = " + id);
     cityService.deleteById(id);
     return Response.status(Response.Status.OK.getStatusCode()).build();
   }
 
   @PutMapping
-  public CityDto updateCity(@RequestBody CityDto cityDto) {
+  public CityDto updateCity(@RequestBody @Validated CityDto cityDto) {
     log.info("Update Dto by dto");
     return cityService.update(cityDto);
   }

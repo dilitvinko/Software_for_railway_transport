@@ -29,6 +29,7 @@ public class TicketServiceImpl implements TicketService {
   private final CityRepository cityRepository;
 
   private final static long MINUT_IN_HOUR = 60 * 24;
+  private final static long START_PRICE = 60;
 
   public TicketServiceImpl(
       TicketRepository ticketRepository, TicketMapper mapper,
@@ -140,10 +141,10 @@ public class TicketServiceImpl implements TicketService {
 
     Carriage carriage = carriageRepository.getOne(idCarriage);
 
-    double price = carriage.getTypeCarriage().getCooffPrise() * minutes;
+    double price = START_PRICE;
+    price += carriage.getTypeCarriage().getCooffPrise() * minutes;
 
     return price;
-
   }
 //  WITH
 //  t1 AS (SELECT time FROM schedule where id =104),

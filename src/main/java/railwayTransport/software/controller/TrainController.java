@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,14 +48,14 @@ public class TrainController {
   }
 
   @PostMapping
-  public TrainDto createTrain(@RequestBody TrainDto trainDto) {
+  public TrainDto createTrain(@RequestBody @Validated TrainDto trainDto) {
     log.info("Create Dto");
     return trainService.create(trainDto);
   }
 
   @DeleteMapping
   public @ResponseBody
-  Response deleteTrain(@RequestBody TrainDto trainDto) {
+  Response deleteTrain(@RequestBody @Validated TrainDto trainDto) {
     log.info("Delete Dto by dto");
     trainService.delete(trainDto);
     return Response.status(Response.Status.OK.getStatusCode()).build();
@@ -69,7 +70,7 @@ public class TrainController {
   }
 
   @PutMapping
-  public TrainDto updateTrain(@RequestBody TrainDto trainDto) {
+  public TrainDto updateTrain(@RequestBody @Validated TrainDto trainDto) {
     log.info("Update Dto by dto");
     return trainService.update(trainDto);
   }

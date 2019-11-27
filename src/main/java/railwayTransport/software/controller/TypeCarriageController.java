@@ -3,6 +3,7 @@ package railwayTransport.software.controller;
 import java.util.List;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,14 +41,14 @@ public class TypeCarriageController {
   }
 
   @PostMapping
-  public TypeCarriageDto createTypeCarriage(@RequestBody TypeCarriageDto typeCarriageDto) {
+  public TypeCarriageDto createTypeCarriage(@RequestBody @Validated TypeCarriageDto typeCarriageDto) {
     log.info("Create Dto");
     return typeCarriageService.create(typeCarriageDto);
   }
 
   @DeleteMapping
   public @ResponseBody
-  Response deleteTypeCarriage(@RequestBody TypeCarriageDto typeCarriageDto) {
+  Response deleteTypeCarriage(@RequestBody @Validated TypeCarriageDto typeCarriageDto) {
     log.info("Delete Dto by dto");
     typeCarriageService.delete(typeCarriageDto);
     return Response.status(Response.Status.OK.getStatusCode()).build();
@@ -62,7 +63,7 @@ public class TypeCarriageController {
   }
 
   @PutMapping
-  public TypeCarriageDto updateTypeCarriage(@RequestBody TypeCarriageDto typeCarriageDto) {
+  public TypeCarriageDto updateTypeCarriage(@RequestBody @Validated TypeCarriageDto typeCarriageDto) {
     log.info("Update Dto by dto");
     return typeCarriageService.update(typeCarriageDto);
   }

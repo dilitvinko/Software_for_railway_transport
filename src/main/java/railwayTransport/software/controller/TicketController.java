@@ -3,6 +3,7 @@ package railwayTransport.software.controller;
 import java.util.List;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,14 +41,14 @@ public class TicketController {
   }
 
   @PostMapping
-  public TicketDto createTicket(@RequestBody TicketDto ticketDto) {
+  public TicketDto createTicket(@RequestBody @Validated TicketDto ticketDto) {
     log.info("Create Dto");
     return ticketService.create(ticketDto);
   }
 
   @DeleteMapping
   public @ResponseBody
-  Response deleteTicket(@RequestBody TicketDto ticketDto) {
+  Response deleteTicket(@RequestBody @Validated TicketDto ticketDto) {
     log.info("Delete Dto by dto");
     ticketService.delete(ticketDto);
     return Response.status(Response.Status.OK.getStatusCode()).build();
@@ -62,7 +63,7 @@ public class TicketController {
   }
 
   @PutMapping
-  public TicketDto updateTicket(@RequestBody TicketDto ticketDto) {
+  public TicketDto updateTicket(@RequestBody @Validated TicketDto ticketDto) {
     log.info("Update Dto by dto");
     return ticketService.update(ticketDto);
   }

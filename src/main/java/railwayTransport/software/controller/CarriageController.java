@@ -3,6 +3,7 @@ package railwayTransport.software.controller;
 import java.util.List;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +42,7 @@ public class CarriageController {
   }
 
   @PostMapping
-  public CarriageDto createCarriages(@RequestBody CarriageDto carriageDto) {
+  public CarriageDto createCarriages(@RequestBody @Validated CarriageDto carriageDto) {
     log.info("Create Dto");
     return carriageService.create(carriageDto);
   }

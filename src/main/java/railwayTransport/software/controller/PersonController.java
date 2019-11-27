@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,14 +49,14 @@ public class PersonController {
   }
 
   @PostMapping
-  public PersonDto createPerson(@RequestBody PersonDto personDto) {
+  public PersonDto createPerson(@RequestBody @Validated PersonDto personDto) {
     log.info("Create Dto");
     return personService.create(personDto);
   }
 
   @DeleteMapping
   public @ResponseBody
-  Response deletePerson(@RequestBody PersonDto personDto) {
+  Response deletePerson(@RequestBody @Validated PersonDto personDto) {
     log.info("Delete Dto by dto");
     personService.delete(personDto);
     return Response.status(Response.Status.OK.getStatusCode()).build();
@@ -70,7 +71,7 @@ public class PersonController {
   }
 
   @PutMapping
-  public PersonDto updatePerson(@RequestBody PersonDto personDto) {
+  public PersonDto updatePerson(@RequestBody @Validated PersonDto personDto) {
     log.info("Update Dto by dto");
     return personService.update(personDto);
   }

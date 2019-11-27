@@ -65,7 +65,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-
-    return personRepository.findUserByLogin(s);
+    UserDetails userDetails = personRepository.findUserByLogin(s);
+    return userDetails;
   }
 }
