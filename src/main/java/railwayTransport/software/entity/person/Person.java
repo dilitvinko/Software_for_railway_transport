@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,6 +34,7 @@ import railwayTransport.software.entity.ticket.Ticket;
 @AllArgsConstructor
 public class Person extends BaseEntity implements UserDetails {
 
+  
   private String name;
   private String surname;
   private String login;
