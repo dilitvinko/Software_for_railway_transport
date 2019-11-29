@@ -20,16 +20,20 @@ public class LoginController {
   @Autowired
   private PersonServiceImpl personService;
 
-  @GetMapping("/")
-  public String helloPage() {
-    return "Hello";
+//  @GetMapping("/")
+//  public String helloPage() {
+//    return "Hello";
+//  }
+
+  @GetMapping("/log")
+  public String loginPage(){
+    return "You are log in";
   }
 
   @GetMapping("/main")
   public String mainPage() {
     return "Get Main";
   }
-
 
   @PostMapping("/login")
   public String loginPost(@RequestBody Person person) {
