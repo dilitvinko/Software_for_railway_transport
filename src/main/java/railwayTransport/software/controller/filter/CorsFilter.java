@@ -10,37 +10,26 @@
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 //import java.io.IOException;
+//import org.springframework.web.filter.OncePerRequestFilter;
 //
 //import static com.google.common.net.HttpHeaders.*;
 //import static javax.ws.rs.HttpMethod.*;
 //
-//@Component
-//@Order(Ordered.HIGHEST_PRECEDENCE)
-//public class CorsFilter implements Filter {
-//  private static final String DELIMITER = ", ";
-//  private static final String ACCESS_AGE = "3600";
-//  private static final String ALLOW_ORIGIN = "http://localhost:8082";
-//  private final Environment environment;
 //
-//  @Autowired
-//  public CorsFilter(Environment environment) {
-//    this.environment = environment;
-//  }
+//@Component
+//public class CorsFilter extends OncePerRequestFilter {
 //
 //  @Override
-//  public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-//    HttpServletResponse response = (HttpServletResponse) res;
-//    HttpServletRequest request = (HttpServletRequest) req;
-//    response.setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, ALLOW_ORIGIN);
-//    response.setHeader(ACCESS_CONTROL_ALLOW_METHODS, String.join(DELIMITER, POST, GET, PUT, OPTIONS, DELETE));
-//    response.setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString());
-//    response.setHeader(ACCESS_CONTROL_MAX_AGE, ACCESS_AGE);
-//    response.setHeader(ACCESS_CONTROL_ALLOW_HEADERS, String.join(DELIMITER, ORIGIN, AUTHORIZATION, X_REQUESTED_WITH, CONTENT_TYPE, ACCEPT));
-//
-//    if (OPTIONS.equalsIgnoreCase(request.getMethod())) {
+//  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+//    response.setHeader("Access-Control-Allow-Origin", "*");
+//    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//    response.setHeader("Access-Control-Max-Age", "3600");
+//    response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token");
+//    response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+//    if ("OPTIONS".equals(request.getMethod())) {
 //      response.setStatus(HttpServletResponse.SC_OK);
 //    } else {
-//      chain.doFilter(req, res);
+//      filterChain.doFilter(request, response);
 //    }
 //  }
 //}

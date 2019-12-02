@@ -27,8 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http
         .httpBasic()
         .and()
-        .cors()
-        .and()
         .csrf().disable()
         .authorizeRequests()
         .antMatchers("/trains/**").hasAnyAuthority("ADMIN", "CREATERTIMETABLES")
@@ -57,15 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return super.authenticationManagerBean();
   }
 
-  @Bean
-  CorsConfigurationSource corsConfigurationSource()
-  {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8082"));
-    configuration.setAllowedMethods(Arrays.asList("GET","POST", "DELETE", "PUT"));
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
-    return source;
-  }
+
+
+
 
 }
