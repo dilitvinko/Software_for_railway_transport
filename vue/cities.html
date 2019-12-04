@@ -56,7 +56,7 @@
 </div>
 
 <script>
-  var aut = 'Basic ' + btoa('admin:admin');
+  let aut = 'Basic ' + btoa('admin:admin');
 
   $( document ).ready(function() {
     $("#btn").click(
@@ -85,7 +85,7 @@
         alert('НЕ добавлено');
       }
     });
-  };
+  }
 
   function edit_but(obj) {
     alert(obj.id);
@@ -100,7 +100,7 @@
       }
     });
 
-  };
+  }
 
   $(document).ready (get_data());
 
@@ -111,7 +111,7 @@
         "Authorization": aut
       },
       success: function (response) {
-        var items = [];
+        let items = [];
 
         $.each(response, function (key, val) {
           items.push(
@@ -144,7 +144,7 @@
         get_data();
       }
     })
-  };
+  }
 
 
 

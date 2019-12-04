@@ -63,7 +63,7 @@
     </thead>
   </table>
   <script>
-    var aut = 'Basic ' + btoa('admin:admin');
+    let aut = window.localStorage.getItem('token');
 
     function edit_but(obj){
       alert(obj.id);
@@ -131,18 +131,18 @@
 
 
 
-<script>
-  var aut = 'Basic ' + btoa('admin:admin');
-  $.ajax({
-    url: 'http://localhost:8080/test',
-    headers: {
-      "Authorization": aut
-    },
-    success: function (data) {
-      $('.results').html(data);
-    }
-  });
-</script>
+<!--<script>-->
+<!--  //var aut = 'Basic ' + btoa('admin:admin');-->
+<!--  $.ajax({-->
+<!--    url: 'http://localhost:8080/test',-->
+<!--    headers: {-->
+<!--      "Authorization": aut-->
+<!--    },-->
+<!--    success: function (data) {-->
+<!--      $('.results').html(data);-->
+<!--    }-->
+<!--  });-->
+<!--</script>-->
 
 
 <!--<h3>Software for Railway Header test 1</h3>-->
