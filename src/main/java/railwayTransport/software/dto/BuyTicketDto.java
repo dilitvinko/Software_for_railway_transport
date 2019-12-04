@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @AllArgsConstructor
 public class BuyTicketDto {
 
-  @NotNull
+
   private Long idPerson;
   @DecimalMax("100")
   @DecimalMin("1")
@@ -31,7 +31,7 @@ public class BuyTicketDto {
   @NotNull
   private Long idTrain;
   @NotNull
-  @Future
+  //@Future
   private Date date;
   @NotEmpty
   private String outCity;

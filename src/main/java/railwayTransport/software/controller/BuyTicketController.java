@@ -68,7 +68,7 @@ public class BuyTicketController {
   }
 
   @PostMapping("/buyTicket")
-  public TicketDto buyTicket(@RequestBody @Validated BuyTicketDto buyTicketDto) {
+  public TicketDto buyTicket(@Validated BuyTicketDto buyTicketDto) {
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Person currentPrincipal = (Person) authentication.getPrincipal();

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Buy tickets</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body id="body">
+
+<div id="navbar"></div>
+
+<script>
+  $('#navbar').load('/navbar.html nav');
+</script>
+
+<div class="container">
+
+  <div class="starter-template">
+    <h1>Choose shcedule</h1>
+    <p class="lead"> You can </p>
+  </div>
+</div>
+
+<div class="container" id="choosen">
+  <p>Choose</p>
+  <form method="get" id="ajax_form" action="" >
+    <input type="text" name="outCity" placeholder="outCITY" value="Minsk" /><br>
+    <input type="text" name="inCity" placeholder="inCITY" value="Brest" /><br>
+    <input type="text" name="date" placeholder="Date" value="2019-10-20"/><br>
+    <div id="idNewField"></div>
+    <div></div>
+    <input type="button" id="btn" value="Выбрать" onclick="sendAjaxForm()" />
+
+  </form>
+</div>
+
+
+<div class="container" id="data">
+
+
+
+
+</div>
+
+<script>
+  var aut = 'Basic ' + btoa('admin:admin');
+
+  function sendAjaxForm() {
+    $.ajax({
+      url:     'http://localhost:8080/schedule/choose',
+      type:     "GET", //метод отправки
+      data: $('#ajax_form').serialize(),
+      headers: {
+        "Authorization": aut
+      },
+      success: function(response) {
+
+      $('<div/>', {
+        html: '<table class="table table-bordered table-hover" id="table_data">\n'
+          + '          <thead>\n'
+          + '          <tr class="active">\n'
+          + '          <th>idTrain</th>\n'
+          + '          <th>outTime</th>\n'
+          + '          <th>inTime</th>\n'
+          + '          <th>actions</th>\n'
+          + '          </tr>\n'
+          + '          </thead>\n'
+          + '          </table>'
+      }).appendTo('#data')
+
+        var items = [];
+        $('tbody').remove();
+
+        $.each(response, function (key, val) {
+          items.push(
+            '<tr id="' + val.train.id + '">' +
+            '<td>' + val.train.id + '</td>' +
+            '<td>' + val.outSchedule.time + '</td>' +
+            '<td>' + val.inSchedule.time + '</td>' +
+            '<td>' + '<button onclick="choose_train(this)" id="' + val.train.id + '">choose</button>' + '</td>' +
+            '</tr>');
+        });
+        $('<tbody/>', {
+          html: items.join('')
+        }).appendTo('table');
+      },
+      error: function(response) {
+        alert('НЕ добавлено');
+      }
+    });
+  };
+
+  function choose_train(obj) {
+    $.ajax({
+      url:     'http://localhost:8080/carriage/choose',
+      type:     "GET",
+      data: $('#ajax_form').serialize() + '&idTrain=' + obj.id,
+      headers: {
+        "Authorization": aut
+      },
+      success: function(response) {
+        $('table').remove();
+        console.log(response);
+        $('<div/>', {
+          html: '<input type="text" name="idTrain" placeholder="'+obj.id+'" value="'+obj.id+'" readonly="readonly" />Choosen idTrain<br>'
+        }).appendTo('#idNewField')
+
+        $('<div/>', {
+          html: '<table class="table table-bordered table-hover" id="table_data">\n'
+            + '          <thead>\n'
+            + '          <tr class="active">\n'
+            + '          <th>idCarriage</th>\n'
+            + '          <th>CarriageType</th>\n'
+            + '          <th>FreeSeats</th>\n'
+            + '          <th>Price</th>\n'
+            + '          <th>actions</th>\n'
+            + '          </tr>\n'
+            + '          </thead>\n'
+            + '          </table>'
+        }).appendTo('#data')
+
+        var items = [];
+        $('tbody').remove();
+
+        $.each(response, function (key, val) {
+          items.push(
+            '<tr id="' + val.carriage.id + '">' +
+            '<td>' + val.carriage.id + '</td>' +
+            '<td>' + val.carriage.typeCarriage.type + '</td>' +
+            '<td>' + val.amountFreeSeats + '</td>' +
+            '<td>' + val.price + '</td>' +
+            '<td>' + '<button onclick="choose_carriage(this)" id="' + val.carriage.id + '">choose</button>' + '</td>' +
+            '</tr>');
+        });
+        $('<tbody/>', {
+          html: items.join('')
+        }).appendTo('table');
+      },
+      error: function(response) {
+        alert('НЕ добавлено');
+      }
+    });
+  };
+
+  function choose_carriage(obj){
+
+    $.ajax({
+      url:     'http://localhost:8080/freeSeat/choose',
+      type:     "GET",
+      data: $('#ajax_form').serialize() + '&idCarriage=' + obj.id,
+      headers: {
+        "Authorization": aut
+      },
+      success: function(response) {
+        $('table').remove();
+        console.log(response);
+        console.log(response.freeSeats);
+        $('<div/>', {
+          html: '<input type="text" name="idCarriage" placeholder="'+obj.id+'" value="'+obj.id+'" readonly="readonly"  />Choosen idCarriage<br>'
+        }).appendTo('#idNewField')
+
+        $('<div/>', {
+          html: '<table class="table table-bordered table-hover" id="table_data">\n'
+            + '          <thead>\n'
+            + '          <tr class="active">\n'
+            + '          <th>FreeSeats</th>\n'
+            + '          <th>Action</th>\n'
+            + '          </tr>\n'
+            + '          </thead>\n'
+            + '          </table>'
+        }).appendTo('#data')
+
+        var items = [];
+        $('tbody').remove();
+
+        $.each(response.freeSeats, function (key, val) {
+          console.log(val);
+          items.push(
+            '<tr id="' + val + '">' +
+            '<td>' + val + '</td>' +
+
+            '<td>' + '<button onclick="buy_ticket(this)" id="' + val+ '">buy Ticket</button>' + '</td>' +
+            '</tr>');
+        });
+        $('<tbody/>', {
+          html: items.join('')
+        }).appendTo('table');
+      },
+      error: function(response) {
+        alert('НЕ добавлено');
+      }
+    });
+
+  };
+
+  function buy_ticket(obj){
+
+    $('<div/>', {
+      html: '<input type="text" name="numberSeat" placeholder="'+obj.id+'" value="'+obj.id+'" readonly="readonly"  />Choosen Seat<br>'
+    }).appendTo('#idNewField')
+
+    $.ajax({
+      url:     'http://localhost:8080/buyTicket',
+      type:     "POST",
+      data: $('#ajax_form').serialize(),
+      headers: {
+        "Authorization": aut
+      },
+      success: function(response) {
+        $('table').remove();
+        console.log(response);
+
+
+
+
+      },
+      error: function(response) {
+        alert('НЕ добавлено');
+      }
+    });
+
+  };
+
+
+
+
+
+
+</script>
+
+<script src="src/main.js"></script>
+</body>
+</html>

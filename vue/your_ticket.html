@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cities</title>
+  <title>Your Tickets</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link rel="stylesheet"
@@ -26,13 +26,13 @@
 <div class="container">
 
   <div class="starter-template">
-    <h1>All Railway Cities</h1>
-    <p class="lead"> You can add, edit, delete its</p>
+    <h1>All You tickets</h1>
+    <p class="lead"> Your tickets</p>
   </div>
 </div>
 
 <div class="container">
-<p>add city</p>
+  <p>add city</p>
   <form method="post" id="ajax_form" action="" >
     <input type="text" name="name" placeholder="NAME CITY" /><br>
     <input type="button" id="btn" value="Добавить" />
@@ -46,7 +46,14 @@
     <thead>
     <tr class="active">
       <th>id</th>
-      <th>name</th>
+      <th>numberSeat</th>
+      <th>numberCarriage</th>
+      <th>idTrain</th>
+      <th>outCity</th>
+      <th>inCity</th>
+      <th>date</th>
+      <th>outTime</th>
+      <th>inTime</th>
       <th>actions</th>
     </tr>
     </thead>
@@ -69,19 +76,19 @@
 
   function sendAjaxForm(ajax_form) {
     $.ajax({
-      url:     'http://localhost:8080/cities/', //url страницы (action_ajax_form.php)
-      type:     "POST", //метод отправки
+      url:     'http://localhost:8080/persons/tickets',
+      type:     "GET",
       headers: {
         "Authorization": aut
       },
       data: $('#ajax_form').serialize(),
-      dataType: 'json',  // Сеарилизуем объект
-      success: function(response) { //Данные отправлены успешно
+      dataType: 'json',
+      success: function(response) {
         alert('добавлено');
         $('tbody').remove();
         get_data();
       },
-      error: function(response) { // Данные не отправлены
+      error: function(response) {
         alert('НЕ добавлено');
       }
     });
@@ -106,18 +113,26 @@
 
   function get_data() {
     $.ajax({
-      url: 'http://localhost:8080/cities',
+      url: 'http://localhost:8080/persons/tickets',
       headers: {
         "Authorization": aut
       },
       success: function (response) {
         var items = [];
+        console.log(response);
 
         $.each(response, function (key, val) {
           items.push(
             '<tr id="' + val.id + '">' +
             '<td>' + val.id + '</td>' +
-            '<td>' + val.name + '</td>' +
+            '<td>' + val.numberSeat + '</td>' +
+            '<td>' + val.carriage.number + '</td>' +
+            '<td>' + val.train.id + '</td>' +
+            '<td>' + val.outSchedule.city.name + '</td>' +
+            '<td>' + val.inSchedule.city.name + '</td>' +
+            '<td>' + val.date + '</td>' +
+            '<td>' + val.outSchedule.time + '</td>' +
+            '<td>' + val.inSchedule.time + '</td>' +
             '<td>' + '<button onclick="edit_but(this)" id="' + val.id + '">edit</button>' +
             '<button onclick="delete_but(this)" id="' + val.id + '">delete</button>' + '</td>' +
             '</tr>');
