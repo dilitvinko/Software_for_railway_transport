@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cities</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body id="body">
+
+<div id="navbar"></div>
+
+<script>
+  $('#navbar').load('/navbar.html nav');
+</script>
+
+<div class="container">
+
+  <div class="starter-template">
+    <h1>All Railway Cities</h1>
+    <p class="lead"> You can add, edit, delete its</p>
+  </div>
+</div>
+
+<div class="container">
+<p>add city</p>
+  <form method="post" id="ajax_form" action="" >
+    <input type="text" name="name" placeholder="NAME CITY" /><br>
+    <input type="button" id="btn" value="Добавить" />
+  </form>
+</div>
+
+
+<div class="container" id="data">
+
+  <table class="table table-bordered table-hover" id="table_data">
+    <thead>
+    <tr class="active">
+      <th>id</th>
+      <th>name</th>
+      <th>actions</th>
+    </tr>
+    </thead>
+  </table>
+
+
+</div>
+
+<script>
+  var aut = 'Basic ' + btoa('admin:admin');
+
+  $( document ).ready(function() {
+    $("#btn").click(
+      function(){
+        sendAjaxForm('ajax_form');
+
+      }
+    );
+  });
+
+  function sendAjaxForm(ajax_form) {
+    $.ajax({
+      url:     'http://localhost:8080/cities/', //url страницы (action_ajax_form.php)
+      type:     "POST", //метод отправки
+      headers: {
+        "Authorization": aut
+      },
+      data: $('#ajax_form').serialize(),
+      dataType: 'json',  // Сеарилизуем объект
+      success: function(response) { //Данные отправлены успешно
+        alert('добавлено');
+        $('tbody').remove();
+        get_data();
+      },
+      error: function(response) { // Данные не отправлены
+        alert('НЕ добавлено');
+      }
+    });
+  };
+
+  function edit_but(obj) {
+    alert(obj.id);
+    $.ajax({
+      method: "GET",
+      url: 'http://localhost:8080/cities/' + obj.id,
+      headers: {
+        "Authorization": aut
+      },
+      success: function (response) {
+        alert(response.name);
+      }
+    });
+
+  };
+
+  $(document).ready (get_data());
+
+  function get_data() {
+    $.ajax({
+      url: 'http://localhost:8080/cities',
+      headers: {
+        "Authorization": aut
+      },
+      success: function (response) {
+        var items = [];
+
+        $.each(response, function (key, val) {
+          items.push(
+            '<tr id="' + val.id + '">' +
+            '<td>' + val.id + '</td>' +
+            '<td>' + val.name + '</td>' +
+            '<td>' + '<button onclick="edit_but(this)" id="' + val.id + '">edit</button>' +
+            '<button onclick="delete_but(this)" id="' + val.id + '">delete</button>' + '</td>' +
+            '</tr>');
+        });
+
+        $('<tbody/>', {
+          //TODO нормально сделать обновление
+          html: items.join('')
+        }).appendTo('table');
+      }
+    })
+  }
+
+  function delete_but(obj) {
+    $.ajax({
+      method: "DELETE",
+      url: 'http://localhost:8080/cities/' + obj.id,
+      headers: {
+        "Authorization": aut
+      },
+      success: function () {
+        $('tbody').remove();
+        get_data();
+      }
+    })
+  };
+
+
+
+
+</script>
+
+<script src="src/main.js"></script>
+</body>
+</html>
