@@ -45,7 +45,7 @@ public class CityController {
   }
 
   @PostMapping
-  public CityDto createCity(@RequestBody @Validated CityDto cityDto) {
+  public CityDto createCity(@Validated CityDto cityDto) {
     log.info("Create Dto");
     return cityService.create(cityDto);
   }
