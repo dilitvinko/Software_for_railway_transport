@@ -63,7 +63,7 @@
 </div>
 
 <script>
-  var aut = 'Basic ' + btoa('admin:admin');
+  let aut = window.localStorage.getItem('token');
 
   $( document ).ready(function() {
     $("#btn").click(
@@ -76,7 +76,7 @@
 
   function sendAjaxForm(ajax_form) {
     $.ajax({
-      url:     'http://localhost:8080/persons/tickets',
+      url:     'http://localhost:8080/you/tickets',
       type:     "GET",
       headers: {
         "Authorization": aut
@@ -113,7 +113,7 @@
 
   function get_data() {
     $.ajax({
-      url: 'http://localhost:8080/persons/tickets',
+      url: 'http://localhost:8080/you/tickets',
       headers: {
         "Authorization": aut
       },

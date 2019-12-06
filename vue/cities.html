@@ -56,7 +56,7 @@
 </div>
 
 <script>
-  let aut = 'Basic ' + btoa('admin:admin');
+  let aut = window.localStorage.getItem('token');
 
   $( document ).ready(function() {
     $("#btn").click(
@@ -69,19 +69,19 @@
 
   function sendAjaxForm(ajax_form) {
     $.ajax({
-      url:     'http://localhost:8080/cities/', //url страницы (action_ajax_form.php)
-      type:     "POST", //метод отправки
+      url:     'http://localhost:8080/cities/',
+      type:     "POST",
       headers: {
         "Authorization": aut
       },
       data: $('#ajax_form').serialize(),
-      dataType: 'json',  // Сеарилизуем объект
-      success: function(response) { //Данные отправлены успешно
+      dataType: 'json',
+      success: function(response) {
         alert('добавлено');
         $('tbody').remove();
         get_data();
       },
-      error: function(response) { // Данные не отправлены
+      error: function(response) {
         alert('НЕ добавлено');
       }
     });

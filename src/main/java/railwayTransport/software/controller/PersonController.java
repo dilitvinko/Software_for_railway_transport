@@ -45,13 +45,7 @@ public class PersonController {
     return personService.findById(id);
   }
 
-  @GetMapping("/tickets")
-  public Set<TicketDto> getTicketsFromPerson() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Person currentPrincipal = (Person) authentication.getPrincipal();
-    log.info("Get Dto by id =  " + currentPrincipal.getId());
-    return personService.findById(currentPrincipal.getId()).getTickets();
-  }
+
 
   @PostMapping
   public PersonDto createPerson(@RequestBody @Validated PersonDto personDto) {

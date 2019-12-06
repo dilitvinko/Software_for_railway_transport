@@ -53,7 +53,7 @@
 </div>
 
 <script>
-  var aut = 'Basic ' + btoa('admin:admin');
+  let aut = window.localStorage.getItem('token');
 
   function sendAjaxForm() {
     $.ajax({
