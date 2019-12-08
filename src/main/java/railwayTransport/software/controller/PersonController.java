@@ -53,18 +53,16 @@ public class PersonController {
     return personService.create(personDto);
   }
 
-  @DeleteMapping
-  public @ResponseBody
-  Response deletePerson(@RequestBody @Validated PersonDto personDto) {
-    log.info("Delete Dto by dto");
-    personService.delete(personDto);
-    return Response.status(Response.Status.OK.getStatusCode()).build();
-  }
-
   @DeleteMapping("/{id}")
   public @ResponseBody
   Response deleteByIdPerson(@PathVariable Long id) {
     log.info("Delete Dto by id = " + id);
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Person currentPrincipal = (Person) authentication.getPrincipal();
+    if (id == currentPrincipal.getId()){
+      //TODO норально обработать
+      throw new IllegalArgumentException();
+    }
     personService.deleteById(id);
     return Response.status(Response.Status.OK.getStatusCode()).build();
   }

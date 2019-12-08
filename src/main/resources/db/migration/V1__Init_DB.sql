@@ -28,3 +28,5 @@ drop table if exists carriage;
      alter table ticket add constraint FKfrrjhxr4lv05yk41yw7ikoglb foreign key (out_schedule_id) references schedule (id);
      alter table ticket add constraint FKova7mpgrn7uwci6ixwhdmblnv foreign key (person_id) references person (id);
      alter table ticket add constraint FK86c20t7sdlfvrwskmig4xqd4u foreign key (train_id) references train (id);
+
+     ALTER TABLE ticket ADD UNIQUE (date, number_seat, carriage_id, train_id, in_schedule_id, out_schedule_id);
