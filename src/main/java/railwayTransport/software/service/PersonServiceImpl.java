@@ -3,6 +3,7 @@ package railwayTransport.software.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -49,6 +50,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
   @Override
   public PersonDto create(PersonDto dto) {
+    dto.setId(null);
     Person person = mapper.personDtoToPerson(dto);
     personRepository.saveAndFlush(person);
     dto = mapper.personToPersonDto(person);
@@ -58,6 +60,9 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
   @Override
   public PersonDto update(PersonDto dto) {
     Person person = mapper.personDtoToPerson(dto);
+    if (null == personRepository.getOne(person.getId())){
+      throw new EntityNotFoundException();
+    }
     personRepository.saveAndFlush(person);
     dto = mapper.personToPersonDto(person);
     return dto;

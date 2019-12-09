@@ -27,7 +27,7 @@ public class Carriage extends BaseEntity {
   @JoinColumn(name = "type_carriage_id")
   private TypeCarriage typeCarriage;
   @JsonBackReference(value = "train-carriage")
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "train_id")
   private Train train;
 

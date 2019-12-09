@@ -10,4 +10,8 @@ INSERT INTO `schedule` (id, city_id, driving_order, time, train_id)  VALUES (1,1
 
 INSERT INTO `ticket` (`id`, `number_seat`, `carriage_id`, `train_id`, `out_schedule_id`, `in_schedule_id`,  `date`,  `price`) VALUES (1,4,1,1,1,3,'2019-10-20',5),(2,3,1,1,2,4,'2019-10-20',4),(3,5,2,1,3,4,'2019-10-20',3),(4,5,3,2,6,8,'2019-10-20',7),(5,3,1,1,1,2,'2019-10-20',2),(6,1,1,1,2,4,'2019-10-20',34),(7,6,1,1,3,4,'2019-10-20',42),(8,4,1,1,1,4,'2019-10-20',12),(9,9,1,1,1,3,'2019-10-20',3),(11,10,1,1,1,3,'2019-10-21',12),(43,6,1,1,1,3,'2019-10-20',999);
 
-INSERT INTO `person` (`id`, `experience`, `login`, `name`, `password`, `surname`) VALUES ('1', '5', 'qwe123', 'Vova', 'vovan321', 'Petrov');
+INSERT INTO `person` (`id`, `experience`, `login`, `name`, `password`, `surname`) VALUES ('1', '1', 'admin', 'admin', 'admin', 'admin');
+INSERT INTO `person` (`id`, `experience`, `login`, `name`, `password`, `surname`) VALUES ('2', '0', 'user', 'user', '123', 'user');
+INSERT INTO `person_role` (`person_id`, `roles`) VALUES ('1', 'USER');
+INSERT INTO `person_role` (`person_id`, `roles`) VALUES ('1', 'ADMIN');
+INSERT INTO `person_role` (`person_id`, `roles`) VALUES ('2', 'USER');

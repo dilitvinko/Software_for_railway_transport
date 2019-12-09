@@ -34,9 +34,9 @@
 <div class="container" id="choosen">
   <p>Choose</p>
   <form method="get" id="ajax_form" action="" >
-    <input type="text" name="outCity" placeholder="outCITY" value="Minsk" /><br>
-    <input type="text" name="inCity" placeholder="inCITY" value="Brest" /><br>
-    <input type="text" name="date" placeholder="Date" value="2019-10-20"/><br>
+    <input id="idOutCity" type="text" name="outCity" placeholder="outCITY" value="Minsk" /><br>
+    <input id="idInCity" type="text" name="inCity" placeholder="inCITY" value="Brest" /><br>
+    <input id="idDate" type="text" name="date" placeholder="Date" value="2019-10-20"/><br>
     <div id="idNewField"></div>
     <div></div>
     <input type="button" id="btn" value="Выбрать" onclick="sendAjaxForm()" />
@@ -55,6 +55,13 @@
 <script>
   let aut = window.localStorage.getItem('token');
 
+  let idOutCity = $('#idOutCity');
+  let idInCity = $('#idInCity');
+  let idDate = $('#idDate');
+  console.log(idOutCity.prop('readonly'));
+  console.log(idInCity.prop('readonly'));
+  console.log(idDate.prop('readonly'));
+
   function sendAjaxForm() {
     $.ajax({
       url:     'http://localhost:8080/schedule/choose',
@@ -64,6 +71,10 @@
         "Authorization": aut
       },
       success: function(response) {
+
+        idOutCity.prop('readonly', 'readonly');
+        idInCity.prop('readonly', 'readonly');
+        idDate.prop('readonly', 'readonly');
 
       $('<div/>', {
         html: '<table class="table table-bordered table-hover" id="table_data">\n'
@@ -109,6 +120,9 @@
         "Authorization": aut
       },
       success: function(response) {
+
+
+
         $('table').remove();
         console.log(response);
         $('<div/>', {

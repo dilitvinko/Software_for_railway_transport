@@ -2,6 +2,7 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TypeCarriageRepository;
 import railwayTransport.software.dto.TypeCarriageDto;
@@ -45,6 +46,7 @@ public class TypeCarriageServiceImpl implements TypeCarriageService {
 
   @Override
   public TypeCarriageDto create(TypeCarriageDto dto) {
+    dto.setId(null);
     TypeCarriage typeCarriage = mapper.typeCarriageDtoToTypeCarriage(dto);
     typeCarriageRepository.saveAndFlush(typeCarriage);
     dto = mapper.typeCcarriageToTypeCarriageDto(typeCarriage);
@@ -54,6 +56,9 @@ public class TypeCarriageServiceImpl implements TypeCarriageService {
   @Override
   public TypeCarriageDto update(TypeCarriageDto dto) {
     TypeCarriage typeCarriage = mapper.typeCarriageDtoToTypeCarriage(dto);
+    if (null == typeCarriageRepository.getOne(typeCarriage.getId())){
+      throw new EntityNotFoundException();
+    }
     typeCarriageRepository.saveAndFlush(typeCarriage);
     dto = mapper.typeCcarriageToTypeCarriageDto(typeCarriage);
     return dto;

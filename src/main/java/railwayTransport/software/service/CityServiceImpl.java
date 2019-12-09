@@ -2,6 +2,7 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CityRepository;
 import railwayTransport.software.dto.CityDto;
@@ -45,6 +46,7 @@ public class CityServiceImpl implements CityService {
 
   @Override
   public CityDto create(CityDto dto) {
+    dto.setId(null);
     City city = mapper.cityDtoToCity(dto);
     cityRepository.saveAndFlush(city);
     dto = mapper.cityToCityDto(city);
@@ -54,6 +56,9 @@ public class CityServiceImpl implements CityService {
   @Override
   public CityDto update(CityDto dto) {
     City city = mapper.cityDtoToCity(dto);
+    if (null == cityRepository.getOne(city.getId())){
+      throw new EntityNotFoundException();
+    }
     cityRepository.saveAndFlush(city);
     dto = mapper.cityToCityDto(city);
     return dto;
@@ -61,7 +66,6 @@ public class CityServiceImpl implements CityService {
 
   @Override
   public CityDto findByName(String nameCity) {
-
     return mapper.cityToCityDto(cityRepository.findByName(nameCity));
   }
 }

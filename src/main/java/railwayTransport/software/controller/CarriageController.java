@@ -20,7 +20,8 @@ import railwayTransport.software.service.CarriageServiceImpl;
 
 @RestController
 @RequestMapping("/carriages")
-public class CarriageController {
+public class
+CarriageController {
 
   private final CarriageServiceImpl carriageService;
 

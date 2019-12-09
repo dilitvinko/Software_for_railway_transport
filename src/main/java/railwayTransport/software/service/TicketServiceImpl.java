@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CarriageRepository;
 import railwayTransport.software.daoJPA.repository.CityRepository;
@@ -17,6 +18,7 @@ import railwayTransport.software.dto.mapper.TicketMapper;
 import railwayTransport.software.entity.schedule.Schedule;
 import railwayTransport.software.entity.ticket.Ticket;
 import railwayTransport.software.entity.train.Carriage;
+import railwayTransport.software.exception.WrongOrderInSchedulesForCalculatePriceException;
 import railwayTransport.software.service.interfaces.TicketService;
 
 @Service
@@ -66,6 +68,7 @@ public class TicketServiceImpl implements TicketService {
 
   @Override
   public TicketDto create(TicketDto dto) {
+    dto.setId(null);
     Ticket ticket = mapper.ticketDtotoTicket(dto);
     ticketRepository.saveAndFlush(ticket);
     dto = mapper.ticketToTicketDto(ticket);
@@ -75,6 +78,9 @@ public class TicketServiceImpl implements TicketService {
   @Override
   public TicketDto update(TicketDto dto) {
     Ticket ticket = mapper.ticketDtotoTicket(dto);
+    if (null == ticketRepository.getOne(ticket.getId())){
+      throw new EntityNotFoundException();
+    }
     ticketRepository.saveAndFlush(ticket);
     dto = mapper.ticketToTicketDto(ticket);
     return dto;
@@ -131,6 +137,10 @@ public class TicketServiceImpl implements TicketService {
 
     Schedule outSchedule = scheduleRepository.findScheduleByTrainIdAndCityId(idTrain, idOutCity);
     Schedule inSchedule = scheduleRepository.findScheduleByTrainIdAndCityId(idTrain, idInCity);
+
+    if (!(outSchedule.getDrivingOrder() < inSchedule.getDrivingOrder())){
+      throw new WrongOrderInSchedulesForCalculatePriceException();
+    }
 
     LocalTime outTime = outSchedule.getTime().toLocalTime();
     LocalTime inTime = inSchedule.getTime().toLocalTime();

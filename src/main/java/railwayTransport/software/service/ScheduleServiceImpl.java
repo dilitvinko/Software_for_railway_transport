@@ -3,6 +3,7 @@ package railwayTransport.software.service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CityRepository;
 import railwayTransport.software.daoJPA.repository.ScheduleRepository;
@@ -54,6 +55,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
   @Override
   public ScheduleDto create(ScheduleDto dto) {
+    dto.setId(null);
     Schedule schedule = scheduleMapper.scheduleDtoToSchedule(dto);
     scheduleRepository.saveAndFlush(schedule);
     dto = scheduleMapper.scheduleToScheduleDto(schedule);
@@ -63,6 +65,9 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Override
   public ScheduleDto update(ScheduleDto dto) {
     Schedule schedule = scheduleMapper.scheduleDtoToSchedule(dto);
+    if (null == scheduleRepository.getOne(schedule.getId())){
+      throw new EntityNotFoundException();
+    }
     scheduleRepository.saveAndFlush(schedule);
     dto = scheduleMapper.scheduleToScheduleDto(schedule);
     return dto;

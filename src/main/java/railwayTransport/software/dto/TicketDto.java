@@ -21,15 +21,15 @@ public class TicketDto extends AbstractDto {
   @DecimalMax("100")
   @DecimalMin("1")
   private int numberSeat;
-  @NotEmpty
+  @NotNull
   private CarriageDto carriage;
-  @NotEmpty
+  @NotNull
   private TrainDto train;
-  @NotEmpty
+  @NotNull
   private ScheduleDto inSchedule;
-  @NotEmpty
+  @NotNull
   private ScheduleDto outSchedule;
-  @NotEmpty
+  @NotNull
   private Date date;
   @DecimalMin("0")
   private double price;

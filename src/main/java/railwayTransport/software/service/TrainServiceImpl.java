@@ -2,6 +2,7 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.TrainRepository;
 import railwayTransport.software.dto.TrainDto;
@@ -48,6 +49,7 @@ public class TrainServiceImpl implements TrainService {
 
   @Override
   public TrainDto create(TrainDto dto) {
+    dto.setId(null);
     Train train = mapper.trainDtoToTrain(dto);
     trainRepository.saveAndFlush(train);
     dto = mapper.trainToTrainDto(train);
@@ -57,6 +59,9 @@ public class TrainServiceImpl implements TrainService {
   @Override
   public TrainDto update(TrainDto dto) {
     Train train = mapper.trainDtoToTrain(dto);
+    if (null == trainRepository.getOne(train.getId())){
+      throw new EntityNotFoundException();
+    }
     trainRepository.saveAndFlush(train);
     dto = mapper.trainToTrainDto(train);
     return dto;

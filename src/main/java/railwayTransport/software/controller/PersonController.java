@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import railwayTransport.software.dto.PersonDto;
 import railwayTransport.software.dto.TicketDto;
 import railwayTransport.software.entity.person.Person;
+import railwayTransport.software.exception.DeleteYourselfException;
 import railwayTransport.software.service.PersonServiceImpl;
 
 @Log4j
@@ -61,7 +62,7 @@ public class PersonController {
     Person currentPrincipal = (Person) authentication.getPrincipal();
     if (id == currentPrincipal.getId()){
       //TODO норально обработать
-      throw new IllegalArgumentException();
+      throw new DeleteYourselfException();
     }
     personService.deleteById(id);
     return Response.status(Response.Status.OK.getStatusCode()).build();

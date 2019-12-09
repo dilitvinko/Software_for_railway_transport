@@ -2,6 +2,7 @@ package railwayTransport.software.service;
 
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CarriageRepository;
 import railwayTransport.software.dto.CarriageDto;
@@ -45,6 +46,7 @@ public class CarriageServiceImpl implements CarriageService {
 
   @Override
   public CarriageDto create(CarriageDto dto) {
+    dto.setId(null);
     Carriage carriage = mapper.carriageDtoToCarriage(dto);
     carriageRepository.saveAndFlush(carriage);
     dto = mapper.carriageToCarriageDto(carriage);
@@ -54,6 +56,9 @@ public class CarriageServiceImpl implements CarriageService {
   @Override
   public CarriageDto update(CarriageDto dto) {
     Carriage carriage = mapper.carriageDtoToCarriage(dto);
+    if (null == carriageRepository.getOne(carriage.getId())){
+      throw new EntityNotFoundException();
+    }
     carriageRepository.saveAndFlush(carriage);
     dto = mapper.carriageToCarriageDto(carriage);
     return dto;
