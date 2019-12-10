@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -47,10 +46,6 @@ public class Person extends BaseEntity implements UserDetails {
   @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Ticket> tickets;
   private int experience;
-
-
-  //private boolean active;
-
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

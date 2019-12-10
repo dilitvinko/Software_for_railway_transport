@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import railwayTransport.software.daoJPA.repository.CarriageRepository;
@@ -30,7 +32,7 @@ public class TicketServiceImpl implements TicketService {
   private final ScheduleRepository scheduleRepository;
   private final CityRepository cityRepository;
 
-  private final static long MINUT_IN_HOUR = 60 * 24;
+  private final static long MINUT_IN_DAY = 60 * 24;
   private final static long START_PRICE = 60;
 
   public TicketServiceImpl(
@@ -78,7 +80,7 @@ public class TicketServiceImpl implements TicketService {
   @Override
   public TicketDto update(TicketDto dto) {
     Ticket ticket = mapper.ticketDtotoTicket(dto);
-    if (null == ticketRepository.getOne(ticket.getId())){
+    if (null == ticketRepository.getOne(ticket.getId())) {
       throw new EntityNotFoundException();
     }
     ticketRepository.saveAndFlush(ticket);
@@ -103,10 +105,8 @@ public class TicketServiceImpl implements TicketService {
     int idOrderInCity = inSchedule.getDrivingOrder();
     int amountSeats = carriageRepository.getOne(idCarriage).getTypeCarriage().getAmountSeats();
 
-    Set<Integer> seats = new HashSet<>();
-    for (int i = 1; i <= amountSeats; i++) {
-      seats.add(i);
-    }
+    Set<Integer> seats = IntStream.range(1, amountSeats).boxed().collect(Collectors.toSet());
+
 
     for (Ticket ticket :
         reservedTickets) {
@@ -138,15 +138,15 @@ public class TicketServiceImpl implements TicketService {
     Schedule outSchedule = scheduleRepository.findScheduleByTrainIdAndCityId(idTrain, idOutCity);
     Schedule inSchedule = scheduleRepository.findScheduleByTrainIdAndCityId(idTrain, idInCity);
 
-    if (!(outSchedule.getDrivingOrder() < inSchedule.getDrivingOrder())){
+    if (!(outSchedule.getDrivingOrder() < inSchedule.getDrivingOrder())) {
       throw new WrongOrderInSchedulesForCalculatePriceException();
     }
 
     LocalTime outTime = outSchedule.getTime().toLocalTime();
     LocalTime inTime = inSchedule.getTime().toLocalTime();
     long minutes = Duration.between(outTime, inTime).toMinutes();
-    if (minutes < 0){
-      minutes += MINUT_IN_HOUR;
+    if (minutes < 0) {
+      minutes += MINUT_IN_DAY;
     }
 
     Carriage carriage = carriageRepository.getOne(idCarriage);
@@ -156,10 +156,7 @@ public class TicketServiceImpl implements TicketService {
 
     return price;
   }
-//  WITH
-//  t1 AS (SELECT time FROM schedule where id =104),
-//  t2 AS (SELECT time FROM schedule where id = 103)
-//  SELECT timediff(t1.time, t2.time) from t1,t2;
+
 
 
 }

@@ -69,8 +69,5 @@ public class Application {
     return Mappers.getMapper(TypeCarriageMapper.class);
   }
 
-
-
-
 }
 

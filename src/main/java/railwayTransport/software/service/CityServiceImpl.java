@@ -56,7 +56,7 @@ public class CityServiceImpl implements CityService {
   @Override
   public CityDto update(CityDto dto) {
     City city = mapper.cityDtoToCity(dto);
-    if (null == cityRepository.getOne(city.getId())){
+    if (null == cityRepository.getOne(city.getId())) {
       throw new EntityNotFoundException();
     }
     cityRepository.saveAndFlush(city);

@@ -65,7 +65,7 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Override
   public ScheduleDto update(ScheduleDto dto) {
     Schedule schedule = scheduleMapper.scheduleDtoToSchedule(dto);
-    if (null == scheduleRepository.getOne(schedule.getId())){
+    if (null == scheduleRepository.getOne(schedule.getId())) {
       throw new EntityNotFoundException();
     }
     scheduleRepository.saveAndFlush(schedule);
@@ -73,7 +73,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     return dto;
   }
 
-  public List<PairScheduleDTO> findAllTrainAtDateByCities(Date date, String outCity, String inCity) {
+  public List<PairScheduleDTO> findAllTrainAtDateByCities(Date date, String outCity,
+      String inCity) {
     //TODO обработать ошибки если не найдет в базе города
     long idOutCity = 0;
     long idInCity = 0;

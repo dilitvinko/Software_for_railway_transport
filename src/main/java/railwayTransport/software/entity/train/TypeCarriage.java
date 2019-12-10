@@ -20,5 +20,4 @@ public class TypeCarriage extends BaseEntity {
   private int amountSeats;
   private double cooffPrise;
 
-
 }

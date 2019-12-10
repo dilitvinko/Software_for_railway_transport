@@ -59,7 +59,7 @@ public class TrainServiceImpl implements TrainService {
   @Override
   public TrainDto update(TrainDto dto) {
     Train train = mapper.trainDtoToTrain(dto);
-    if (null == trainRepository.getOne(train.getId())){
+    if (null == trainRepository.getOne(train.getId())) {
       throw new EntityNotFoundException();
     }
     trainRepository.saveAndFlush(train);

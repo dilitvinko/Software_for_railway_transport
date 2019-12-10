@@ -56,7 +56,7 @@ public class CarriageServiceImpl implements CarriageService {
   @Override
   public CarriageDto update(CarriageDto dto) {
     Carriage carriage = mapper.carriageDtoToCarriage(dto);
-    if (null == carriageRepository.getOne(carriage.getId())){
+    if (null == carriageRepository.getOne(carriage.getId())) {
       throw new EntityNotFoundException();
     }
     carriageRepository.saveAndFlush(carriage);

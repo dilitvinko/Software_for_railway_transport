@@ -69,8 +69,10 @@ public class BuyTicketServiceImpl implements BuyTicketService {
     Long idOutCity = cityService.findByName(buyTicketDto.getOutCity()).getId();
     Long idInCity = cityService.findByName(buyTicketDto.getInCity()).getId();
 
-    ScheduleDto outScheduleDto = scheduleService.findScheduleByTrainIdAndCityId(buyTicketDto.getIdTrain(), idOutCity);
-    ScheduleDto inScheduleDto = scheduleService.findScheduleByTrainIdAndCityId(buyTicketDto.getIdTrain(), idInCity);
+    ScheduleDto outScheduleDto = scheduleService
+        .findScheduleByTrainIdAndCityId(buyTicketDto.getIdTrain(), idOutCity);
+    ScheduleDto inScheduleDto = scheduleService
+        .findScheduleByTrainIdAndCityId(buyTicketDto.getIdTrain(), idInCity);
 
     TicketDto ticketDto = TicketDto.builder()
         .numberSeat(buyTicketDto.getNumberSeat())
@@ -80,7 +82,8 @@ public class BuyTicketServiceImpl implements BuyTicketService {
         .inSchedule(inScheduleDto)
         .date(buyTicketDto.getDate())
         .price(ticketService
-            .calculatePrice(buyTicketDto.getIdCarriage(), buyTicketDto.getIdTrain(), buyTicketDto.getOutCity(), buyTicketDto.getInCity()))
+            .calculatePrice(buyTicketDto.getIdCarriage(), buyTicketDto.getIdTrain(),
+                buyTicketDto.getOutCity(), buyTicketDto.getInCity()))
         .idPerson(personService.findById(buyTicketDto.getIdPerson()).getId())
         .build();
 

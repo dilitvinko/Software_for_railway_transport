@@ -1,6 +1,5 @@
 package railwayTransport.software.dto;
 
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

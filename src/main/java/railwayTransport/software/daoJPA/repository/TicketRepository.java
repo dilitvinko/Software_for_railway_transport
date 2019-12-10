@@ -12,9 +12,4 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
   List<Ticket> findAllByTrainIdAndCarriageIdAndDate(long trainId, long carriageId, Date date);
 
-  List<Ticket> findAllByTrainId(long trainId);
-
-  List<Ticket> findAllByCarriageId (long carriageId);
-
-  List<Ticket> findAllByDate (Date date);
 }

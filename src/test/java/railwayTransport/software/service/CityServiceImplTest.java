@@ -81,6 +81,7 @@ public class CityServiceImplTest {
     city.setId(1L);
     when(cityRepository.saveAndFlush(city))
         .thenReturn(City.builder().id(1L).name("Moscow").build());
+    when(cityRepository.getOne(city.getId())).thenReturn(City.builder().id(1L).name("Moscow").build());
     Assert.assertEquals(CityDto.builder().id(1L).name("Moscow").build(),
         cityService.update(CityDto.builder().id(1L).name("Moscow").build()));
     verify(cityRepository, atLeastOnce()).saveAndFlush(city);

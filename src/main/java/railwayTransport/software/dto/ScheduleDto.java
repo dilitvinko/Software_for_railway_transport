@@ -3,7 +3,6 @@ package railwayTransport.software.dto;
 import java.sql.Time;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

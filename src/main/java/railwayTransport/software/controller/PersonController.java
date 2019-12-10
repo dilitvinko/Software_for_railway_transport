@@ -1,7 +1,6 @@
 package railwayTransport.software.controller;
 
 import java.util.List;
-import java.util.Set;
 import javax.ws.rs.core.Response;
 import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.Authentication;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import railwayTransport.software.dto.PersonDto;
-import railwayTransport.software.dto.TicketDto;
 import railwayTransport.software.entity.person.Person;
 import railwayTransport.software.exception.DeleteYourselfException;
 import railwayTransport.software.service.PersonServiceImpl;
@@ -47,7 +45,6 @@ public class PersonController {
   }
 
 
-
   @PostMapping
   public PersonDto createPerson(@RequestBody @Validated PersonDto personDto) {
     log.info("Create Dto");
@@ -60,8 +57,7 @@ public class PersonController {
     log.info("Delete Dto by id = " + id);
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Person currentPrincipal = (Person) authentication.getPrincipal();
-    if (id == currentPrincipal.getId()){
-      //TODO норально обработать
+    if (id.equals(currentPrincipal.getId())) {
       throw new DeleteYourselfException();
     }
     personService.deleteById(id);

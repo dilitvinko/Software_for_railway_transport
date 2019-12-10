@@ -1,4 +1,4 @@
-package railwayTransport.software.dto.exceptionDto;
+package railwayTransport.software.controller.util.exceptionDto;
 
 import java.sql.Timestamp;
 import lombok.AllArgsConstructor;

@@ -41,7 +41,8 @@ public class TypeCarriageController {
   }
 
   @PostMapping
-  public TypeCarriageDto createTypeCarriage(@RequestBody @Validated TypeCarriageDto typeCarriageDto) {
+  public TypeCarriageDto createTypeCarriage(
+      @RequestBody @Validated TypeCarriageDto typeCarriageDto) {
     log.info("Create Dto");
     return typeCarriageService.create(typeCarriageDto);
   }
@@ -63,7 +64,8 @@ public class TypeCarriageController {
   }
 
   @PutMapping
-  public TypeCarriageDto updateTypeCarriage(@RequestBody @Validated TypeCarriageDto typeCarriageDto) {
+  public TypeCarriageDto updateTypeCarriage(
+      @RequestBody @Validated TypeCarriageDto typeCarriageDto) {
     log.info("Update Dto by dto");
     return typeCarriageService.update(typeCarriageDto);
   }

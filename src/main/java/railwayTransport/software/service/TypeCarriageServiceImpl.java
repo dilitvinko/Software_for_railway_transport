@@ -56,7 +56,7 @@ public class TypeCarriageServiceImpl implements TypeCarriageService {
   @Override
   public TypeCarriageDto update(TypeCarriageDto dto) {
     TypeCarriage typeCarriage = mapper.typeCarriageDtoToTypeCarriage(dto);
-    if (null == typeCarriageRepository.getOne(typeCarriage.getId())){
+    if (null == typeCarriageRepository.getOne(typeCarriage.getId())) {
       throw new EntityNotFoundException();
     }
     typeCarriageRepository.saveAndFlush(typeCarriage);

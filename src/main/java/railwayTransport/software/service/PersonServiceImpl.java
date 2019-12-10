@@ -1,8 +1,6 @@
 package railwayTransport.software.service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +10,6 @@ import railwayTransport.software.daoJPA.repository.PersonRepository;
 import railwayTransport.software.dto.PersonDto;
 import railwayTransport.software.dto.mapper.PersonMapper;
 import railwayTransport.software.entity.person.Person;
-import railwayTransport.software.entity.person.Role;
 import railwayTransport.software.service.interfaces.PersonService;
 
 @Service
@@ -60,7 +57,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
   @Override
   public PersonDto update(PersonDto dto) {
     Person person = mapper.personDtoToPerson(dto);
-    if (null == personRepository.getOne(person.getId())){
+    if (null == personRepository.getOne(person.getId())) {
       throw new EntityNotFoundException();
     }
     personRepository.saveAndFlush(person);
