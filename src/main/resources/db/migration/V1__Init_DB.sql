@@ -30,3 +30,15 @@ drop table if exists carriage;
      alter table ticket add constraint FK86c20t7sdlfvrwskmig4xqd4u foreign key (train_id) references train (id);
 
      ALTER TABLE ticket ADD UNIQUE (date, number_seat, carriage_id, train_id, in_schedule_id, out_schedule_id);
+    ALTER TABLE schedule ADD UNIQUE (train_id, city_id, time);
+    ALTER TABLE carriage ADD UNIQUE (train_id, number);
+
+ALTER TABLE `train`
+    ADD UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE;
+;
+ALTER TABLE `person`
+    ADD UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE;
+;
+ALTER TABLE `test_jpa_railway`.`city`
+    ADD UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE;
+;
