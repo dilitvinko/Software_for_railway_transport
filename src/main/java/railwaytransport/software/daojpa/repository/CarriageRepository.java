@@ -5,5 +5,4 @@ import railwaytransport.software.entity.train.Carriage;
 
 public interface CarriageRepository extends JpaRepository<Carriage, Long> {
 
-  Carriage findFirstById(Long id);
 }
