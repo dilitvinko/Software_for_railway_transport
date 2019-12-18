@@ -8,6 +8,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import railwaytransport.software.controller.util.CustomAccessDeniedHandler;
+import railwaytransport.software.controller.util.CustomAuthenticationEntryPoint;
 import railwaytransport.software.service.PersonServiceImpl;
 
 @Configuration
@@ -37,7 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         .antMatchers("/login").permitAll()
         .antMatchers("/registration").permitAll()
-        .anyRequest().authenticated();
+        .anyRequest()
+        .authenticated();
+
+    http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+    http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
   }
 
 
@@ -52,6 +61,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
+  }
+
+  @Bean
+  public AccessDeniedHandler accessDeniedHandler(){
+    return new CustomAccessDeniedHandler();
+  }
+
+  @Bean
+  public AuthenticationEntryPoint authenticationEntryPoint(){
+    return new CustomAuthenticationEntryPoint();
   }
 
 
