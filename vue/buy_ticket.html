@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Buy tickets</title>
 
+
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -27,16 +30,15 @@
 
   <div class="starter-template">
     <h1>Choose shcedule</h1>
-    <p class="lead"> You can </p>
   </div>
 </div>
 
 <div class="container" id="choosen">
-  <p>Choose</p>
   <form method="get" id="ajax_form" action="" >
-    <input id="idOutCity" type="text" name="outCity" placeholder="outCITY" value="Minsk" /><br>
-    <input id="idInCity" type="text" name="inCity" placeholder="inCITY" value="Brest" /><br>
-    <input id="idDate" type="text" name="date" placeholder="Date" value="2019-10-20"/><br>
+    
+    <p>From </p><input id="idOutCity" type="text" name="outCity" placeholder="outCITY" value="Minsk" /><br>
+    <p>To </p><input id="idInCity" type="text" name="inCity" placeholder="inCITY" value="Brest" /><br>
+    <p>Date </p><input id="idDate" type="text" name="date" placeholder="Date" value="2019-10-20"/><br>
     <div id="idNewField"></div>
     <div></div>
     <input type="button" id="btn" value="Выбрать" onclick="sendAjaxForm()" />
@@ -211,7 +213,7 @@
         }).appendTo('table');
       },
       error: function(response) {
-        alert('НЕ добавлено');
+        alert('Ошибка!');
       }
     });
 
@@ -233,10 +235,13 @@
       success: function(response) {
         $('table').remove();
         console.log(response);
+        alert('Билет куплен!');
+        let url = "http://localhost:8081/your_ticket.html";
+        $(location).attr('href',url);
 
       },
       error: function(response) {
-        alert('НЕ добавлено');
+        alert('Билет не куплен!');
       }
     });
 

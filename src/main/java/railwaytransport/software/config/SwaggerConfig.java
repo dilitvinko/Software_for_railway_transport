@@ -22,7 +22,7 @@ public class SwaggerConfig {
   public Docket api() {
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
-        .apis( RequestHandlerSelectors.basePackage( "railwaytransport.software.controller" ) )
+        .apis(RequestHandlerSelectors.basePackage("railwaytransport.software.controller"))
         .paths(PathSelectors.any())
         .build()
         .securityContexts(Collections.singletonList(actuatorSecurityContext()))
