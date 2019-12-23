@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<script>
+  $('#navbar').load('/navbar.html nav');
+</script>
+
+<div class="container">
+  <h1 class="starter-template">Some Error</h1>
+  <p>type:
+    <script>document.write(JSON.parse(localStorage.getItem("errorJson")).type)</script>
+  </p>
+  <p>time:
+    <script>document.write(JSON.parse(localStorage.getItem("errorJson")).timestamp)</script>
+  </p>
+  <p>status:
+    <script>document.write(JSON.parse(localStorage.getItem("errorJson")).status)</script>
+  </p>
+  <p>message:
+    <script>document.write(JSON.parse(localStorage.getItem("errorJson")).message)</script>
+  </p>
+  <p>exception Message:
+    <script>document.write(JSON.parse(localStorage.getItem("errorJson")).exceptionMessage)</script>
+  </p>
+</div>
+</body>
+</html>

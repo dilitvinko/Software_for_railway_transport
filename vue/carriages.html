@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carriages</title>
+  <!-- версия для разработки, отображает полезные предупреждения в консоли -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+  <!--  Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >-->
+  <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>-->
+
+  <link href="css/style.css" rel="stylesheet">
+  <!--  <link rel="import" href="/pages/navbar.html">-->
+
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<script>
+  $('#navbar').load('/navbar.html nav');
+</script>
+
+
+<div class="container">
+
+  <div class="starter-template">
+    <h1>Carriages</h1>
+    <p class="lead"> CRUD</p>
+  </div>
+
+
+</div>
+
+
+<script>
+  $('#ajax').click(function () {
+    alert('ajax');
+  });
+</script>
+
+
+
+<div class="container">
+
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr class="active">
+      <th>id</th>
+      <th>number</th>
+      <th>idTrain</th>
+      <th>typeCarriage</th>
+      <th>actions</th>
+    </tr>
+    </thead>
+  </table>
+  <script>
+    let aut = window.localStorage.getItem('token');
+
+    function edit_but(obj){
+      alert(obj.id);
+      $.ajax({
+        method: "GET",
+        url: 'http://localhost:8080/carriages/'+obj.id,
+        headers: {
+          "Authorization": aut
+        },
+        success: function (response) {
+          alert(response.valueOf().number);
+        },
+        error: function(response) {
+          alert('Error');
+          window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+          let url = "http://localhost:8081/error.html";
+          $(location).attr('href',url);
+        }
+      });
+
+    };
+
+    function delete_but(obj){
+      alert(obj.id);
+      $.ajax({
+        method: "DELETE",
+        url: 'http://localhost:8080/carriages/'+obj.id,
+        headers: {
+          "Authorization": aut
+        },
+        success: function (response) {
+          alert(response.valueOf().number);
+        },
+        error: function(response) {
+          alert('Error');
+          window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+          let url = "http://localhost:8081/error.html";
+          $(location).attr('href',url);
+        }
+      });
+
+    };
+
+
+
+
+    $.ajax({
+      url: 'http://localhost:8080/carriages',
+      headers: {
+        "Authorization": aut
+      },
+      success: function (response) {
+        var items = [];
+
+        $.each(response, function (key, val) {
+          items.push(
+            '<tr id="' + val.id + '">' +
+            '<td>' + val.id + '</td>' +
+            '<td>' + val.number + '</td>' +
+            '<td>' + val.idTrain + '</td>' +
+            '<td>' + val.typeCarriage.type + '</td>' +
+            '<td>' + '<button onclick="edit_but(this)" id="' + val.id + '">edit</button>' +
+            '<button onclick="delete_but(this)" id="' + val.id + '">delete</button>' + '</td>' +
+            '</tr>');
+        });
+
+        $('<tbody/>', {
+          // 'class': 'table table-striped',
+          html: items.join('')
+        }).appendTo('table');
+      },
+      error: function(response) {
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
+      }
+    });
+  </script>
+</div>
+
+
+
+
+
+<!--<script>-->
+<!--  //var aut = 'Basic ' + btoa('admin:admin');-->
+<!--  $.ajax({-->
+<!--    url: 'http://localhost:8080/test',-->
+<!--    headers: {-->
+<!--      "Authorization": aut-->
+<!--    },-->
+<!--    success: function (data) {-->
+<!--      $('.results').html(data);-->
+<!--    }-->
+<!--  });-->
+<!--</script>-->
+
+
+<!--<h3>Software for Railway Header test 1</h3>-->
+<!--<div id="app">-->
+<!--  {{ message }}-->
+<!--</div>-->
+<script src="src/main.js"></script>
+</body>
+</html>
