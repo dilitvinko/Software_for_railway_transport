@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.UnexpectedTypeException;
-import javax.ws.rs.BadRequestException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import railwaytransport.software.controller.util.exceptiondto.ExceptionDTO;
+import railwaytransport.software.exception.CityNotFoundException;
 import railwaytransport.software.exception.DeleteYourselfException;
 import railwaytransport.software.exception.WrongOrderInSchedulesForCalculatePriceException;
 
@@ -87,6 +87,28 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             LocalDateTime.now()), HttpStatus.CONFLICT.value(),
             "DrivingOrder of outSchedule is bigger, then DrivingOrder of inSchedule",
             e.getMessage()), HttpStatus.CONFLICT);
+  }
+
+  @ExceptionHandler(NullPointerException.class)
+  protected ResponseEntity<ExceptionDTO> handleNullPointerException(
+      HttpServletRequest httpServletRequest, Throwable e) {
+    e.printStackTrace();
+    return new ResponseEntity<>(
+        new ExceptionDTO(httpServletRequest.getRequestURL().toString(), Timestamp.valueOf(
+            LocalDateTime.now()), HttpStatus.NOT_FOUND.value(),
+            "NullPointer",
+            e.getMessage()), HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(CityNotFoundException.class)
+  protected ResponseEntity<ExceptionDTO> handleCityNotFound(
+      HttpServletRequest httpServletRequest, Throwable e) {
+    e.printStackTrace();
+    return new ResponseEntity<>(
+        new ExceptionDTO(httpServletRequest.getRequestURL().toString(), Timestamp.valueOf(
+            LocalDateTime.now()), HttpStatus.NOT_FOUND.value(),
+            "City Not Found",
+            e.getMessage()), HttpStatus.NOT_FOUND);
   }
 
   @Override

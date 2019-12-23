@@ -40,6 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/schedules/**").hasAnyAuthority("ADMIN", "CREATERTIMETABLES")
         .antMatchers("/persons/**").hasAuthority("ADMIN")
         .antMatchers("/registration").permitAll()
+        .antMatchers("/schedule/choose").permitAll()
+        .antMatchers("/carriage/choose").permitAll()
+        .antMatchers("/freeSeat/choose").permitAll()
         .anyRequest()
         .authenticated();
 

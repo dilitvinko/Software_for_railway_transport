@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -86,4 +87,18 @@ public class CityServiceImplTest {
     verify(cityRepository, atLeastOnce()).saveAndFlush(city);
 
   }
+
+  @Test(expected = NullPointerException.class)
+  public void findByIdNeg() {
+    cityService.findById(100L).getName();
+  }
+
+
+  @Test(expected = NullPointerException.class)
+  public void findByNameNeg() {
+    cityService.findByName("asd").getName();
+  }
+
+
+
 }

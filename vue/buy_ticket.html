@@ -108,7 +108,10 @@
         }).appendTo('table');
       },
       error: function(response) {
-        alert('НЕ добавлено');
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     });
   };
@@ -163,7 +166,10 @@
         }).appendTo('table');
       },
       error: function(response) {
-        alert('НЕ добавлено');
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     });
   };
@@ -213,7 +219,10 @@
         }).appendTo('table');
       },
       error: function(response) {
-        alert('Ошибка!');
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     });
 
@@ -242,6 +251,9 @@
       },
       error: function(response) {
         alert('Билет не куплен!');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     });
 

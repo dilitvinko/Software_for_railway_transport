@@ -12,6 +12,7 @@ import railwaytransport.software.dto.ScheduleDto;
 import railwaytransport.software.dto.mapper.ScheduleMapper;
 import railwaytransport.software.dto.mapper.TrainMapper;
 import railwaytransport.software.entity.schedule.Schedule;
+import railwaytransport.software.exception.CityNotFoundException;
 import railwaytransport.software.service.interfaces.ScheduleService;
 
 @Service
@@ -76,14 +77,14 @@ public class ScheduleServiceImpl implements ScheduleService {
   public List<PairScheduleDTO> findAllTrainAtDateByCities(Date date, String outCity,
       String inCity) {
     //TODO обработать ошибки если не найдет в базе города
-    long idOutCity = 0;
-    long idInCity = 0;
-    try {
-      idOutCity = cityRepository.findByName(outCity).getId();
-      idInCity = cityRepository.findByName(inCity).getId();
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (cityRepository.findByName(outCity) == null || cityRepository.findByName(inCity) == null){
+      throw new CityNotFoundException();
     }
+
+
+    long idOutCity = cityRepository.findByName(outCity).getId();
+    long idInCity = cityRepository.findByName(inCity).getId();
+
     //TODO как грамотно сделать этот запрос в БД
     List<Schedule> schedules = scheduleRepository
         .findSchedulesByCityIdOrCityId(idOutCity, idInCity);

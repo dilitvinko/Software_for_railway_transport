@@ -82,7 +82,10 @@
         get_data();
       },
       error: function(response) {
-        alert('НЕ добавлено');
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     });
   }
@@ -97,6 +100,12 @@
       },
       success: function (response) {
         alert(response.name);
+      },
+      error: function(response) {
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     });
 
@@ -127,6 +136,12 @@
 
           html: items.join('')
         }).appendTo('table');
+      },
+      error: function(response) {
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     })
   }
@@ -142,6 +157,12 @@
         //TODO нормально сделать обновление
         $('tbody').remove();
         get_data();
+      },
+      error: function(response) {
+        alert('Error');
+        window.localStorage.setItem('errorJson', JSON.stringify(response.responseJSON));
+        let url = "http://localhost:8081/error.html";
+        $(location).attr('href',url);
       }
     })
   }
